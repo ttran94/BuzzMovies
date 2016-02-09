@@ -13,8 +13,15 @@ public class UserManager implements UserAuthentication, UserManagement{
         return userList.get(userId);
     }
 
-    public void addUser(String name, String password) {
-        User user = new User(name, password);
+    public void addUser(String email, String name, String password) {
+        if(userList.containsKey(name)) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+        if(!email.contains("@") || !email.contains(".")) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+        User user = new User(email, name, password);
+        userList.put(name, user);
     }
     public boolean loginRequest(String username, String password) {
         User user = userId(username);
@@ -22,13 +29,6 @@ public class UserManager implements UserAuthentication, UserManagement{
             return false;
         }
         return user.passwordHandler(password);
-    }
-
-    public boolean registerRequest(String username) {
-        if(userList.containsKey(username)) {
-            return false;
-        }
-        return true;
     }
 
 }

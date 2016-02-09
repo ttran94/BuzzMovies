@@ -6,10 +6,12 @@ package com.example.taitran.buzzmovie.model;
 public class User {
     String username;
     String password;
+    String email;
 
-    public User(String username,String password) {
+    public User(String email, String username,String password) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public boolean passwordHandler(String password) {
