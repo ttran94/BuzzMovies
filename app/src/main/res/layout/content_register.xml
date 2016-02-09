@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292929">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buzz Movies"
+        android:textColor="#ddb41e"
+        android:textSize="50sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:inputType="textEmailAddress"
+        android:ems="15"
+        android:id="@+id/regEmail"
+        android:background="@android:drawable/editbox_background_normal"
+        android:layout_marginTop="150sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="E-mail"
+        />
+
+    <EditText
+        android:id="@+id/regUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:inputType="text"
+        android:hint="Username"
+        android:ems="15"
+        android:background="@android:drawable/editbox_background_normal"
+        android:layout_below="@+id/regEmail"
+        android:layout_marginTop="10sp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/regPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:ems="15"
+        android:background="@android:drawable/editbox_background_normal"
+        android:layout_below="@+id/regUserName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
+        android:textColor="#ffffff"
+        android:background="#585759"
+        android:layout_below="@+id/regPass"
+        android:layout_marginTop="40sp"
+        android:text="Register"
+        android:onClick="registerButtonPressed"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

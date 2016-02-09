@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.taitran.buzzmovie.controller.WelcomeActivity"
     tools:showIn="@layout/activity_welcome"
-    android:background="#000000">
+    android:background="#292929">
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_alignParentRight="false"
         android:layout_centerVertical="true"
         android:textSize="30dp"
-        android:background="#e0bb1d" />
+        android:background="#ddb41e" />
 
     <Button
         android:layout_width="match_parent"
@@ -49,8 +49,9 @@
         android:text="REGISTER"
         android:id="@+id/welcomeRegisterBtn"
         android:layout_alignWithParentIfMissing="false"
+        android:onClick="onRegisterButtonClicked"
         android:textSize="30dp"
-        android:background="#e0bb1f"
+        android:background="#ddb41e"
         android:layout_below="@+id/welcomeLoginBtn"
         android:layout_alignParentStart="true"
         android:layout_marginTop="39dp" />

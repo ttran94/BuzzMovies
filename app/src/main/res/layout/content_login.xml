@@ -18,11 +18,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buzz-Movie"
-        android:textColor="#4E95E6"
+        android:text="Buzz Movies"
+        android:textColor="#ddb41e"
         android:textSize="50sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:textStyle="bold"
+        android:layout_marginTop="40dp" />
 
     <EditText
         android:id="@+id/userName"
@@ -91,13 +92,4 @@
             android:onClick="cancelButtonPressed"
             />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register?"
-        android:textSize="20dp"
-        android:textColor="#87CEFA"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@id/buttontwo"/>
 </RelativeLayout>

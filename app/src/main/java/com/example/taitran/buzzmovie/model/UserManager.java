@@ -24,5 +24,12 @@ public class UserManager implements UserAuthentication, UserManagement{
         return user.passwordHandler(password);
     }
 
+    public boolean registerRequest(String username) {
+        if(userList.containsKey(username)) {
+            return false;
+        }
+        return true;
+    }
+
 }
 
