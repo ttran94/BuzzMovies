@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.taitran.buzzmovie.model.UserAuthentication;
+import com.example.taitran.buzzmovie.model.UserManagement;
+import com.example.taitran.buzzmovie.model.UserManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,7 +30,12 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UserAuthentication logUser = new UserManager();
         setContentView(R.layout.activity_welcome);
+        UserManagement activeUser = new UserManager();
+        if (logUser.isEmpty()) {
+            activeUser.addUser("sally@gatech.edu", "Sally", "password");
+        }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 

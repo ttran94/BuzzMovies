@@ -8,7 +8,6 @@ import java.util.Map;
 public class UserManager implements UserAuthentication, UserManagement{
     private static Map<String, User> userList = new HashMap<>();
 
-
     public User userId(String userId) {
         return userList.get(userId);
     }
@@ -23,6 +22,11 @@ public class UserManager implements UserAuthentication, UserManagement{
         User user = new User(email, name, password);
         userList.put(name, user);
     }
+
+    public boolean isEmpty() {
+        return userList.isEmpty();
+    }
+
     public boolean loginRequest(String username, String password) {
         User user = userId(username);
         if (user == null) {
@@ -32,4 +36,3 @@ public class UserManager implements UserAuthentication, UserManagement{
     }
 
 }
-

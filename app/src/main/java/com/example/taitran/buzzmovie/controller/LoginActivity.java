@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.content.Context;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManager;
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UserAuthentication logUser = new UserManager();
     }
 
     public void loginButtonPressed(View v) {
@@ -31,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if(user.loginRequest(username.getText().toString(), password.getText().toString())) {
             text = "Login Success";
+            Intent dashboard = new Intent(this, Dashboard.class);
+            startActivity(dashboard);
         } else {
             text = "Login Failed";
         }
@@ -44,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("Login Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.userName)).setText("");
         ((EditText) findViewById(R.id.Pass)).setText((""));
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
     }
 
 }
