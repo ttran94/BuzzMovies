@@ -50,6 +50,11 @@ public class LoginActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.Pass)).setText((""));
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
+        CharSequence text = "Canceled";
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast message = Toast.makeText(context, text, duration);
+        message.show();
     }
 
 }
