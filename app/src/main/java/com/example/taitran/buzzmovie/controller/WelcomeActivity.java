@@ -34,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         UserManagement activeUser = new UserManager();
         if (logUser.isEmpty()) {
-            activeUser.addUser("sally@gatech.edu", "Sally", "password");
+            activeUser.addUser("sally@gatech.edu", "user", "pass");
         }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
@@ -49,6 +49,15 @@ public class WelcomeActivity extends AppCompatActivity {
         Log.d("**MYAPP**", "Register button pressed!");
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -90,4 +99,6 @@ public class WelcomeActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
+
 }
