@@ -7,6 +7,7 @@ import java.util.Map;
  */
 public class UserManager implements UserAuthentication, UserManagement{
     private static Map<String, User> userList = new HashMap<>();
+    private static User activeUser;
 
     public User userId(String userId) {
         return userList.get(userId);
@@ -27,16 +28,19 @@ public class UserManager implements UserAuthentication, UserManagement{
         return userList.isEmpty();
     }
 
-    public User loginRequest(String username, String password) {
+    public void loginRequest(String username, String password) {
         User user = userId(username);
-
-        if (user == null) {
+        if (user == null) { //userId method couldn't find matching username
             throw new IllegalArgumentException("Username does not exist.");
         }
         if (!user.passwordHandler(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
-        return user;
+        activeUser = user;
+    }
+
+    public User getActiveUser() {
+        return activeUser;
     }
 
 }

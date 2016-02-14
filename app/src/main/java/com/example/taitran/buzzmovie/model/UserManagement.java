@@ -6,4 +6,5 @@ package com.example.taitran.buzzmovie.model;
 public interface UserManagement {
     void addUser(String email, String username, String password);
     User userId(String id);
+    User getActiveUser();
 }

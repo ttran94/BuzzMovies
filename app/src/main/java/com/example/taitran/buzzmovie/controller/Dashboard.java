@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taitran.buzzmovie.model.UserAuthentication;
@@ -21,6 +23,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         UserManagement userMan = new UserManager();
+        ((TextView) findViewById(R.id.welcomeText)).setText(("Welcome, " + userMan.getActiveUser().getUsername()));
     }
 
     public void logoutButtonPressed(View v) {

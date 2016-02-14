@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         text = "Login Success";
 
         try {
-            User active = user.loginRequest(username.getText().toString(), password.getText().toString());
+            user.loginRequest(username.getText().toString(), password.getText().toString());
             Intent dashboard = new Intent(this, Dashboard.class);
             startActivity(dashboard);
         } catch (IllegalArgumentException e) {
