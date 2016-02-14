@@ -27,12 +27,16 @@ public class UserManager implements UserAuthentication, UserManagement{
         return userList.isEmpty();
     }
 
-    public boolean loginRequest(String username, String password) {
+    public User loginRequest(String username, String password) {
         User user = userId(username);
+
         if (user == null) {
-            return false;
+            throw new IllegalArgumentException("Username does not exist.");
         }
-        return user.passwordHandler(password);
+        if (!user.passwordHandler(password)) {
+            throw new IllegalArgumentException("Incorrect password");
+        }
+        return user;
     }
 
 }

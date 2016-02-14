@@ -12,6 +12,7 @@ import android.content.Context;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.example.taitran.buzzmovie.model.User;
 import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManager;
 
@@ -31,12 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.Pass);
         CharSequence text;
 
-        if(user.loginRequest(username.getText().toString(), password.getText().toString())) {
-            text = "Login Success";
+        text = "Login Success";
+
+        try {
+            User active = user.loginRequest(username.getText().toString(), password.getText().toString());
             Intent dashboard = new Intent(this, Dashboard.class);
             startActivity(dashboard);
-        } else {
-            text = "Login Failed";
+        } catch (IllegalArgumentException e) {
+            text = e.getMessage();
+            //this is where you would increment an attempted login
+            //if the message is "incorrect password"
+            //see UserManager -> loginRequest for more
         }
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

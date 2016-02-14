@@ -15,15 +15,15 @@ import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
 public class Dashboard extends AppCompatActivity {
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        UserManagement userMan = new UserManager();
     }
 
-    public void logoutButtonPressed(View V) {
-        UserManagement logOut = new UserManager();
+    public void logoutButtonPressed(View v) {
         Intent welcomePage = new Intent(this, WelcomeActivity.class);
         startActivity(welcomePage);
         CharSequence text = "Successfully Logged Out";
@@ -31,6 +31,10 @@ public class Dashboard extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast message = Toast.makeText(context, text, duration);
         message.show();
+    }
+
+    public void editProfileButtonPressed(View v) {
+
     }
 
 }
