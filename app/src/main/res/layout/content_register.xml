@@ -84,7 +84,7 @@
         android:textColor="#ffffff"
         android:background="#585759"
         android:text="Cancel"
-        android:onClick="registerButtonPressed"
+        android:onClick="regCancelButtonPressed"
         android:layout_alignTop="@+id/registerBtn"
         android:layout_alignEnd="@+id/regPass" />
 

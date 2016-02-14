@@ -1,5 +1,6 @@
 package com.example.taitran.buzzmovie.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     public void registerButtonPressed(View w) {
-        Log.d("Login Activity", "Register button pressed");
+        Log.d("Register Activity", "Register button pressed");
         UserManagement manager = new UserManager();
         EditText username = (EditText) findViewById(R.id.regUserName);
         EditText password = (EditText) findViewById(R.id.regPass);
@@ -40,6 +41,20 @@ public class RegisterActivity extends AppCompatActivity{
         } catch (IllegalArgumentException e) {
             text = e.getMessage();
         }
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast message = Toast.makeText(context, text, duration);
+        message.show();
+    }
+
+    public void regCancelButtonPressed (View w) {
+        Log.d("Register Activity", "Cancel button pressed");
+        ((EditText) findViewById(R.id.regUserName)).setText("");
+        ((EditText) findViewById(R.id.regPass)).setText((""));
+        ((EditText) findViewById(R.id.regEmail)).setText((""));
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+        CharSequence text = "Canceled";
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast message = Toast.makeText(context, text, duration);
