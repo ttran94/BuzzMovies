@@ -25,4 +25,11 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String s) {
+        if(!s.contains("@") || !s.contains(".")) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+        email = s;
+    }
 }

@@ -38,9 +38,17 @@ public class RegisterActivity extends AppCompatActivity{
 
         try {
             manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString());
+
+            UserAuthentication user = new UserManager();
+            user.loginRequest(username.getText().toString(), password.getText().toString());
+            Intent dashboard = new Intent(this, Dashboard.class);
+            startActivity(dashboard);
         } catch (IllegalArgumentException e) {
             text = e.getMessage();
         }
+
+
+
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast message = Toast.makeText(context, text, duration);

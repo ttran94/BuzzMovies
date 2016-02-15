@@ -23,6 +23,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         if(!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("Invalid email address");
         }
+
         User user = new User(email, name, password);
         userList.put(name, user);
     }
