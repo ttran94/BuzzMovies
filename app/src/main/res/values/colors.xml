@@ -4,13 +4,11 @@
     <color name="colorPrimaryDark">#2d2c28</color>
     <color name="colorAccent">#FF4081</color>
 
-
     <color name="primaryBackground">#0B1D21</color>
     <color name="primaryText">#386346</color>
     <color name="primaryButton">#609674</color>
     <color name="accentLight">#997A82</color>
     <color name="accentDark">#995159</color>
-
 
     <!--
     <color name="primaryBackground">#000000</color>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_register"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:hint="E-mail"
-        />
+        style="@style/HelloDarknessEditText" />
 
     <EditText
         android:id="@+id/regUserName"
@@ -37,7 +40,7 @@
         android:layout_below="@+id/regEmail"
         android:layout_marginTop="10sp"
         android:layout_centerHorizontal="true"
-        />
+        style="@style/HelloDarknessEditText" />
 
     <EditText
         android:id="@+id/regPass"
@@ -50,7 +53,8 @@
         android:layout_below="@+id/regUserName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10sp"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        style="@style/HelloDarknessEditText" />
 
     <Button
         android:id="@+id/registerBtn"
