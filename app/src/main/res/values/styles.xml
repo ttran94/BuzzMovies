@@ -17,4 +17,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="HelloDarknessButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/primaryButton</item>
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
+
+    <style name="HelloDarkness" parent="AppTheme">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:buttonStyle">@style/HelloDarknessButton</item>
+        <item name="android:background">@color/primaryBackground</item>
+    </style>
+
 </resources>
