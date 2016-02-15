@@ -41,13 +41,13 @@ public class EditProfileActivity extends AppCompatActivity {
         emailEditText.setText(userMan.getActiveUser().getEmail());
 
         editEmailButton = (Button) findViewById(R.id.editEmailBtn);
-        editEmailButton.setText("EDIT");
+        editEmailButton.setText("Edit");
     }
 
     public void editEmailButtonPressed(View v) {
         Button b = (Button) v;
-        if(b.getText().toString() == "EDIT") {
-            b.setText("SET ");
+        if(b.getText().toString() == "Edit") {
+            b.setText("Set ");
             emailEditText.setText(emailTextView.getText().toString());
             emailTextView.setVisibility(View.INVISIBLE);
             emailEditText.setVisibility(View.VISIBLE);
@@ -71,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
             emailTextView.setText(userMan.getActiveUser().getEmail());
             emailEditText.setVisibility(View.INVISIBLE);
             emailTextView.setVisibility(View.VISIBLE);
-            b.setText("EDIT");
+            b.setText("Edit");
         }
 
     }
