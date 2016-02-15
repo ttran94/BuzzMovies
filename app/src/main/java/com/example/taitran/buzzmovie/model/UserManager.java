@@ -17,6 +17,9 @@ public class UserManager implements UserAuthentication, UserManagement{
         if(userList.containsKey(name)) {
             throw new IllegalArgumentException("Username already exists");
         }
+        if (name.length() > 16) {
+            throw new IllegalArgumentException("Username is too long.");
+        }
         if(!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("Invalid email address");
         }
@@ -41,6 +44,10 @@ public class UserManager implements UserAuthentication, UserManagement{
 
     public User getActiveUser() {
         return activeUser;
+    }
+
+    public void logOut() {
+        activeUser = null;
     }
 
 }
