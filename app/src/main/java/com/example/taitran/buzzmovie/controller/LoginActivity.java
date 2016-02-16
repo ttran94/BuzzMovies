@@ -25,6 +25,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginButtonPressed(View v) {
+            Log.d("Edit Profile Activity", "edit password button pressed");
+            Intent intent = new Intent(this, EditPasswordActivity.class);
+            startActivity(intent);
+        }
+        /*
         Log.d("Login Activity", "Login button pressed");
         UserAuthentication user = new UserManager();
         EditText username = (EditText) findViewById(R.id.userName);
@@ -48,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast message = Toast.makeText(context, text, duration);
         message.show();
     }
+    */
 
     public void cancelButtonPressed(View V) {
         Log.d("Login Activity", "Cancel button pressed");

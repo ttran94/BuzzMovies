@@ -1,17 +1,16 @@
 package com.example.taitran.buzzmovie.controller;
 
-import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.taitran.buzzmovie.controller.R;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
@@ -31,13 +30,13 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         userMan = new UserManager();
 
-        usernameTextView = (TextView) findViewById(R.id.displayUsernameText);
+        usernameTextView = (TextView) findViewById(R.id.displayOriginalPasswordText);
         usernameTextView.setText(userMan.getActiveUser().getUsername());
 
         emailTextView = (TextView) findViewById(R.id.displayEmailText);
         emailTextView.setText(userMan.getActiveUser().getEmail());
 
-        emailEditText = (EditText) findViewById(R.id.editEmailText);
+        emailEditText = (EditText) findViewById(R.id.editOldPasswordVerifyText);
         emailEditText.setText(userMan.getActiveUser().getEmail());
 
         editEmailButton = (Button) findViewById(R.id.editEmailBtn);
@@ -46,20 +45,18 @@ public class EditProfileActivity extends AppCompatActivity {
 
     public void editEmailButtonPressed(View v) {
         Button b = (Button) v;
-        if(b.getText().toString() == "EDIT") {
+        if (b.getText().toString() == "EDIT") {
             b.setText("SET ");
             emailEditText.setText(emailTextView.getText().toString());
             emailTextView.setVisibility(View.INVISIBLE);
             emailEditText.setVisibility(View.VISIBLE);
             emailEditText.requestFocus();
-        } else
-        {
+        } else {
             CharSequence text = "Email Changed";
 
             try {
                 userMan.getActiveUser().setEmail(emailEditText.getText().toString());
-            } catch (IllegalArgumentException e)
-            {
+            } catch (IllegalArgumentException e) {
                 text = e.getMessage();
             }
 
@@ -73,7 +70,12 @@ public class EditProfileActivity extends AppCompatActivity {
             emailTextView.setVisibility(View.VISIBLE);
             b.setText("EDIT");
         }
+    }
 
+    public void editPasswordButtonPressed(View V) {
+        Log.d("Edit Profile Activity", "edit password button pressed");
+        Intent intent = new Intent(this, EditPasswordActivity.class);
+        startActivity(intent);
     }
 
 
