@@ -20,6 +20,7 @@
 
     <style name="HelloDarknessEditText" parent="@android:style/Widget.EditText">
         <item name="android:background">@color/primaryText</item>
+        <item name="android:textColor">@color/primaryBackground</item>
     </style>
 
     <style name="HelloDarkness" parent="AppTheme">

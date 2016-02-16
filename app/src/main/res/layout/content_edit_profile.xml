@@ -82,12 +82,12 @@
             <Button
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:text="Edit"
                 android:id="@+id/editEmailBtn"
                 android:onClick="editEmailButtonPressed"
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:text="Edit" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -125,7 +125,6 @@
         <TextView
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
             android:textSize="22sp"
             android:text="Major: "
             android:id="@+id/displayMajor"
@@ -143,15 +142,13 @@
             android:layout_marginStart="74dp"
             android:layout_toStartOf="@+id/editMajorBtn"
             android:layout_alignParentBottom="true"
-            android:background="#ffffff"
             android:spinnerMode="dropdown"
             android:touchscreenBlocksFocus="false"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:text="Edit"
             android:id="@+id/editMajorBtn"
             android:onClick="editMajorButtonPressed"
@@ -163,13 +160,12 @@
     <RelativeLayout
         android:id="@+id/bioLayout"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@id/MajorLayout"
         android:layout_alignStart="@+id/MajorLayout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:textColor="#ffffff"
             android:textSize="22sp"
             android:text="Bio: "
             android:id="@+id/bio"
@@ -180,36 +176,36 @@
             android:layout_width="230dp"
             android:layout_height="fill_parent"
             android:text=""
-            android:textColor="#ffffff"
             android:textSize="22sp"
             android:layout_toRightOf="@+id/bio"
             android:layout_centerVertical="true"
             android:layout_marginTop="2dp"
             android:visibility="invisible"
             android:id="@+id/editBioText"
-            />
+            style="@style/HelloDarknessEditText"
+            android:padding="5dp"
+            android:gravity="top" />
 
         <TextView
-            android:layout_width="230dp"
+            android:layout_width="240dp"
             android:layout_height="fill_parent"
             android:text=""
-            android:textColor="#ffffff"
             android:textSize="22sp"
             android:layout_toRightOf="@+id/bio"
             android:layout_centerVertical="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:visibility="invisible"
             android:id="@+id/displayBioText"
-            />
+            android:layout_margin="0dp"
+            android:autoText="false" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:text="Edit"
             android:id="@+id/editBioBtn"
             android:onClick="editBioButtonPressed"
-            android:layout_alignBottom="@+id/bio"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
 
     </RelativeLayout>

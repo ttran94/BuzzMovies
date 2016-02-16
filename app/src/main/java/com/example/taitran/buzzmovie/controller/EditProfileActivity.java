@@ -29,10 +29,14 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     private TextView emailTextView;
     private EditText emailEditText;
     private Button editEmailButton;
+    private boolean editingEmail = false;
     private TextView majorTextView;
     private Spinner spinner;
+    private boolean editingMajor = false;
+
     private TextView bioTextView;
     private EditText bioEditText;
+    private boolean editingBio = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +55,19 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
         editEmailButton = (Button) findViewById(R.id.editEmailBtn);
 
-        editEmailButton.setText("EDIT");
+        editEmailButton.setText(R.string.edit);
 
         majorTextView = (TextView) findViewById(R.id.displayMajor);
         majorTextView.setText("Major: " + userMan.getActiveUser().getMajor());
 
-        ((Button) findViewById(R.id.editMajorBtn)).setText("EDIT");
+        ((Button) findViewById(R.id.editMajorBtn)).setText(R.string.edit);
 
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, userMan.getMajors());
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        ((Button) findViewById(R.id.editBioBtn)).setText("EDIT");
+        ((Button) findViewById(R.id.editBioBtn)).setText(R.string.edit);
 
         bioTextView = (TextView) findViewById(R.id.displayBioText);
         bioTextView.setText(userMan.getActiveUser().getBio());
@@ -76,13 +80,16 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     public void editEmailButtonPressed(View v) {
         Button b = (Button) v;
 
-        if (b.getText().toString().equals("EDIT")) {
-            b.setText("SET ");
+        if (!editingEmail) {
+            b.setText(R.string.set);
+            editingEmail = true;
 
             emailEditText.setText(emailTextView.getText().toString());
             emailTextView.setVisibility(View.INVISIBLE);
             emailEditText.setVisibility(View.VISIBLE);
             emailEditText.requestFocus();
+
+
         } else {
             CharSequence text = "Email Changed";
 
@@ -100,7 +107,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             emailTextView.setText(userMan.getActiveUser().getEmail());
             emailEditText.setVisibility(View.INVISIBLE);
             emailTextView.setVisibility(View.VISIBLE);
-            b.setText("Edit");
+            b.setText(R.string.edit);
+            editingEmail = false;
         }
     }
 
@@ -112,14 +120,16 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     public void editMajorButtonPressed(View v) {
         Button b = (Button) v;
-        if (b.getText().toString().equals("EDIT")) {
+        if (!editingMajor) {
             majorTextView.setText("Major: ");
             spinner.setVisibility(View.VISIBLE);
-            b.setText("SET ");
+            b.setText(R.string.set);
+            editingMajor = true;
         } else {
             majorTextView.setText("Major: " + userMan.getActiveUser().getMajor());
             spinner.setVisibility(View.GONE);
-            b.setText("EDIT");
+            b.setText(R.string.edit);
+            editingMajor = false;
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
             Toast message = Toast.makeText(context, "Major Changed", duration);
@@ -144,8 +154,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     public void editBioButtonPressed(View v) {
         Button b = (Button) v;
-        if (b.getText().toString().equals("EDIT")) {
-            b.setText("SET ");
+        if (!editingBio) {
+            b.setText(R.string.set);
+            editingBio = true;
             bioTextView.setVisibility(View.INVISIBLE);
             bioEditText.setVisibility(View.VISIBLE);
             bioEditText.requestFocus();
@@ -161,7 +172,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             bioTextView.setText(userMan.getActiveUser().getBio());
             bioEditText.setVisibility(View.INVISIBLE);
             bioTextView.setVisibility(View.VISIBLE);
-            b.setText("EDIT");
+            b.setText(R.string.edit);
+            editingBio = false;
         }
     }
 

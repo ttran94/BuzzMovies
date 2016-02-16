@@ -41,7 +41,7 @@
         android:paddingBottom="20dp"
         android:paddingRight="40dp"
         android:paddingLeft="40dp"
-        android:text="EDIT PROFILE"
+        android:text="Edit Profile"
         android:onClick="editProfileButtonPressed"
         android:id="@+id/editProfileBtn"
         android:layout_below="@+id/logoutBtn"

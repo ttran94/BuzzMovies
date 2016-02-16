@@ -28,7 +28,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     public void cancelButtonPressed(View v) {
         Log.d("Edit Password Activity", "Cancel button pressed");
-        Intent dashboard = new Intent(this, Dashboard.class);
+        Intent dashboard = new Intent(this, EditProfileActivity.class);
         startActivity(dashboard);
         CharSequence text = "Canceled";
         Context context = getApplicationContext();
@@ -51,8 +51,8 @@ public class EditPasswordActivity extends AppCompatActivity {
         } else if (!userMan.getActiveUser().setPassword(oldPass, newPass)) {
             text = "Wrong password";
         } else {
-            Intent dashboard = new Intent(this, Dashboard.class);
-            startActivity(dashboard);
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            startActivity(intent);
             text = "Success";
         }
         int duration = Toast.LENGTH_SHORT;
