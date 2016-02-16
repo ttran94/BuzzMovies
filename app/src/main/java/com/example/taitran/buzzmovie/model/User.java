@@ -4,9 +4,9 @@ package com.example.taitran.buzzmovie.model;
  * Created by taitr on 2/6/2016.
  */
 public class User {
-    String username;
-    String password;
-    String email;
+    private String username;
+    private String password;
+    private String email;
 
     public User(String email, String username,String password) {
         this.username = username;
@@ -31,5 +31,13 @@ public class User {
             throw new IllegalArgumentException("Invalid email address");
         }
         email = s;
+    }
+
+    public boolean setPassword(String oldPass, String newPass) {
+        if (passwordHandler(oldPass)) {
+            password = newPass;
+            return true;
+        }
+        return false;
     }
 }

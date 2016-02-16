@@ -24,16 +24,39 @@ public class EditPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_password);
-
     }
 
-    public void cancelButtonPressed(View V) {
+    public void cancelButtonPressed(View v) {
         Log.d("Edit Password Activity", "Cancel button pressed");
         Intent dashboard = new Intent(this, Dashboard.class);
         startActivity(dashboard);
         CharSequence text = "Canceled";
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
+        Toast message = Toast.makeText(context, text, duration);
+        message.show();
+    }
+
+    public void submitButtonPressed(View v) {
+        Log.d("Edit Password Activity", "Submit button pressed");
+        UserManagement userMan = new UserManager();
+        String oldPass = ((EditText) findViewById(R.id.oldPassText)).getText().toString();
+        String newPass = ((EditText) findViewById(R.id.newPassText)).getText().toString();
+        String newPassVerify = ((EditText) findViewById(R.id.newPassVerifyText)).getText().toString();
+
+        CharSequence text;
+
+        if (!newPass.equals(newPassVerify)) {
+            text = "Passwords do not match.";
+        } else if (!userMan.getActiveUser().setPassword(oldPass, newPass)) {
+            text = "Wrong password";
+        } else {
+            Intent dashboard = new Intent(this, Dashboard.class);
+            startActivity(dashboard);
+            text = "Success";
+        }
+        int duration = Toast.LENGTH_SHORT;
+        Context context = getApplicationContext();
         Toast message = Toast.makeText(context, text, duration);
         message.show();
     }
