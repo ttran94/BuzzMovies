@@ -8,4 +8,5 @@ public interface UserManagement {
     User userId(String id);
     User getActiveUser();
     void logOut();
+    String[] getMajors();
 }

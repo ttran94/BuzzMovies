@@ -8,6 +8,8 @@ import java.util.Map;
 public class UserManager implements UserAuthentication, UserManagement{
     private static Map<String, User> userList = new HashMap<>();
     private static User activeUser;
+    private static String[] majors
+            = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
 
     public User userId(String userId) {
         return userList.get(userId);
@@ -49,6 +51,10 @@ public class UserManager implements UserAuthentication, UserManagement{
 
     public void logOut() {
         activeUser = null;
+    }
+
+    public String[] getMajors() {
+        return majors;
     }
 
 }

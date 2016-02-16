@@ -6,6 +6,7 @@
     tools:showIn="@layout/activity_register"
     >
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
         style="@style/HelloDarknessEditText" />
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/submitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
@@ -80,7 +81,7 @@
         android:paddingLeft="40dp"
         android:text="Cancel"
         android:onClick="regCancelButtonPressed"
-        android:layout_alignTop="@+id/registerBtn"
+        android:layout_alignTop="@+id/submitBtn"
         android:layout_alignEnd="@+id/regPass" />
 
 </RelativeLayout>
