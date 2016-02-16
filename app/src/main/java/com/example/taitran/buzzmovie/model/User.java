@@ -3,15 +3,21 @@ package com.example.taitran.buzzmovie.model;
 /**
  * Created by taitr on 2/6/2016.
  */
+
+
 public class User {
-    String username;
-    String password;
-    String email;
+    private String username;
+    private String password;
+    private String email;
+    private String major;
+    private String bio;
 
     public User(String email, String username,String password) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.major = "";
+        this.bio = "";
     }
 
     public boolean passwordHandler(String password) {
@@ -32,4 +38,29 @@ public class User {
         }
         email = s;
     }
+
+    public boolean setPassword(String oldPass, String newPass) {
+        if (passwordHandler(oldPass)) {
+            password = newPass;
+            return true;
+        }
+        return false;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
 }

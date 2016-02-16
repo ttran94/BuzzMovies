@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         message.show();
     }
 
+
     public void cancelButtonPressed(View V) {
         Log.d("Login Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.userName)).setText("");
