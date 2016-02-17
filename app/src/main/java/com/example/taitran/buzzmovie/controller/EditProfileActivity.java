@@ -44,13 +44,13 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_edit_profile);
         userMan = new UserManager();
 
-        usernameTextView = (TextView) findViewById(R.id.displayOriginalPasswordText);
+        usernameTextView = (TextView) findViewById(R.id.displayEmailText);
         usernameTextView.setText(userMan.getActiveUser().getUsername());
 
         emailTextView = (TextView) findViewById(R.id.displayEmailText);
         emailTextView.setText(userMan.getActiveUser().getEmail());
 
-        emailEditText = (EditText) findViewById(R.id.editOldPasswordVerifyText);
+        emailEditText = (EditText) findViewById(R.id.editEmailText);
         emailEditText.setText(userMan.getActiveUser().getEmail());
 
         editEmailButton = (Button) findViewById(R.id.editEmailBtn);
