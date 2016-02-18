@@ -20,11 +20,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Database extends SQLiteOpenHelper{
     private static final String MOVIE_DATABASE = "Movie_Database";
     private static final String USER_TABLE = "User";
-    public static final String username = "username";
-    public static final String password = "password";
-    public static final String email = "email";
-    public static final String major = "major";
-    public static final String bio = "bio";
+    protected static final String username = "username";
+    protected static final String password = "password";
+    protected static final String email = "email";
+    protected static final String major = "major";
+    protected static final String bio = "bio";
 
     //create the database if it doesn't exist;
     //if database exists, then SQLite will know and skip it.
@@ -57,7 +57,7 @@ public class Database extends SQLiteOpenHelper{
     //Select everything(data) from the User table where username is equal to name.
     //Cursor contains a subset table of the User table
     //Close the cursor after retrieve the data to prevent data leak.
-    public boolean IsEmpty(String name) {
+    protected boolean IsEmpty(String name) {
         boolean isEmpty = false;
         SQLiteDatabase data = this.getReadableDatabase();
         Cursor current = data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[] { name });
@@ -70,13 +70,13 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //get the data if username exists
-    public Cursor getData(String name) {
+    protected Cursor getData(String name) {
         SQLiteDatabase data = this.getReadableDatabase();
         return data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[] { name });
     }
 
     //insert data to the User table(register)
-    public void insert(String username, String password, String email) {
+    protected void insert(String username, String password, String email) {
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues columnIndex = new ContentValues();
         columnIndex.put("username", username);
@@ -88,7 +88,7 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //update major info to server
-    public void setMajor(String major, String username) {
+    protected void setMajor(String major, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newMajor = new ContentValues();
@@ -97,7 +97,7 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //update bio info to server
-    public void setBio(String bio, String username) {
+    protected void setBio(String bio, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newBio = new ContentValues();
@@ -106,7 +106,7 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //update password info to server
-    public void setPassword(String password, String username) {
+    protected void setPassword(String password, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newPassword = new ContentValues();
@@ -115,7 +115,7 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //update email info to server
-    public void setEmail(String email, String username) {
+    protected void setEmail(String email, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newEmail = new ContentValues();
