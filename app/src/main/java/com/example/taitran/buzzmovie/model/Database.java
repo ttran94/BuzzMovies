@@ -27,7 +27,7 @@ public class Database extends SQLiteOpenHelper{
     protected static final String bio = "bio";
 
     //create the database if it doesn't exist;
-    //if database exists, then SQLite will know and skip it.
+    //if database exists, then SQLite will know and open it.
     //Database name must be unique in SQLite
     public Database(Context context) {
         super(context, MOVIE_DATABASE, null, 1);
