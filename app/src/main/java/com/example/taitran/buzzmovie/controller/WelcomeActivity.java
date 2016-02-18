@@ -27,10 +27,6 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         UserAuthentication logUser = new UserManager();
         setContentView(R.layout.activity_welcome);
-        UserManagement activeUser = new UserManager();
-        if (logUser.isEmpty()) {
-            activeUser.addUser("sally@gatech.edu", "user", "pass");
-        }
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 

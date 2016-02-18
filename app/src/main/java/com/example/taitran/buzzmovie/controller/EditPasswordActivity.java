@@ -39,7 +39,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     public void submitButtonPressed(View v) {
         Log.d("Edit Password Activity", "Submit button pressed");
-        UserManagement userMan = new UserManager();
+        UserManagement userMan = new UserManager(this);
         String oldPass = ((EditText) findViewById(R.id.oldPassText)).getText().toString();
         String newPass = ((EditText) findViewById(R.id.newPassText)).getText().toString();
         String newPassVerify = ((EditText) findViewById(R.id.newPassVerifyText)).getText().toString();
@@ -48,7 +48,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
         if (!newPass.equals(newPassVerify)) {
             text = "Passwords do not match.";
-        } else if (!userMan.getActiveUser().setPassword(oldPass, newPass)) {
+        } else if (!userMan.updatePassword(oldPass, newPass)) {
             text = "Wrong password";
         } else {
             Intent intent = new Intent(this, EditProfileActivity.class);

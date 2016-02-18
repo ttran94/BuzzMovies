@@ -5,6 +5,4 @@ package com.example.taitran.buzzmovie.model;
  */
 public interface UserAuthentication {
     void loginRequest(String name, String password);
-    boolean isEmpty();
-
 }

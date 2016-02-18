@@ -1,47 +1,77 @@
 package com.example.taitran.buzzmovie.model;
 
+import android.content.Context;
+import android.database.Cursor;
+
 import java.util.HashMap;
 import java.util.Map;
 /**
  * Created by taitr on 2/6/2016.
  */
 public class UserManager implements UserAuthentication, UserManagement{
-    private static Map<String, User> userList = new HashMap<>();
-    private static User activeUser;
     private static String[] majors
             = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    private static User activeUser;
+    private Database db;
 
-    public User userId(String userId) {
-        return userList.get(userId);
+    public UserManager() {
+
     }
 
-    public void addUser(String email, String name, String password) {
-        if(userList.containsKey(name)) {
-            throw new IllegalArgumentException("Username already exists");
-        }
-        if (name.length() > 16) {
-            throw new IllegalArgumentException("Username is too long.");
-        }
+    public UserManager(Context context) {
+        db = new Database(context);
+    }
+
+    public void addUser(String email, String username, String password) {
         if(!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("Invalid email address");
         }
+        if (!db.IsEmpty(username)) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+        if (username.length() > 16) {
+            throw new IllegalArgumentException("Username is too long.");
+        }
+        if(username.length() == 0 || username.length() <= 6) {
+            throw new IllegalArgumentException("Username is too short.");
+        }
+        if(username.contains(" ")) {
+            throw new IllegalArgumentException("Invalid Username");
+        }
+        if (password.length() == 0 || password.length() > 20) {
+            throw new IllegalArgumentException("Invalid password");
+        }
 
-        User user = new User(email, name, password);
-        userList.put(name, user);
+        db.insert(username, password, email);
     }
 
-    public boolean isEmpty() {
-        return userList.isEmpty();
-    }
-
+    //when dealing with Cursor object always check for null to void SQLite EXCEPTION
+    //if only have one row of data, then just move the cursor to that row.
     public void loginRequest(String username, String password) {
-        User user = userId(username);
-        if (user == null) { //userId method couldn't find matching username
+        String name = "";
+        String pass = "";
+        String email = "";
+        String major = "";
+        String bio = "";
+
+        if (db.IsEmpty(username)) { //userId method couldn't find matching username
             throw new IllegalArgumentException("Username does not exist.");
         }
+        Cursor data = db.getData(username);
+        if( data != null && data.moveToFirst() ) {
+            name = data.getString(data.getColumnIndex(db.username));
+            pass = data.getString(data.getColumnIndex(db.password));
+            email = data.getString(data.getColumnIndex(db.email));
+            major = data.getString(data.getColumnIndex(db.major));
+            bio = data.getString(data.getColumnIndex(db.bio));
+            data.close();
+        }
+        User user = new User(email, name, pass);
         if (!user.passwordHandler(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
+        user.setBio(bio);
+        user.setMajor(major);
         activeUser = user;
     }
 
@@ -55,6 +85,31 @@ public class UserManager implements UserAuthentication, UserManagement{
 
     public String[] getMajors() {
         return majors;
+    }
+
+    public boolean updatePassword(String oldPass, String newPass) {
+        boolean passCheck = activeUser.setPassword(activeUser.getPassword(), newPass);
+        if (passCheck) {
+            db.setPassword(newPass, activeUser.getUsername());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void updateEmail(String email) {
+        activeUser.setEmail(email);
+        db.setEmail(email, activeUser.getUsername());
+    }
+
+    public void updateBio(String bio) {
+        activeUser.setBio(bio);
+        db.setBio(bio, activeUser.getUsername());
+    }
+
+    public void updateMajor(String major) {
+        activeUser.setMajor(major);
+        db.setMajor(major, activeUser.getUsername());
     }
 
 }

@@ -194,7 +194,7 @@
             android:layout_toRightOf="@+id/bio"
             android:layout_centerVertical="true"
             android:layout_marginTop="20dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:id="@+id/displayBioText"
             android:autoText="false" />
 

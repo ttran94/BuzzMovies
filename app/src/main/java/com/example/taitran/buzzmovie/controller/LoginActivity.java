@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginButtonPressed(View v) {
         Log.d("Login Activity", "Login button pressed");
-        UserAuthentication user = new UserManager();
+        UserAuthentication user = new UserManager(this);
         EditText username = (EditText) findViewById(R.id.userName);
         EditText password = (EditText) findViewById(R.id.Pass);
         CharSequence text;

@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     public void registerButtonPressed(View w) {
         Log.d("Register Activity", "Register button pressed");
-        UserManagement manager = new UserManager();
+        UserManagement manager = new UserManager(this);
         EditText username = (EditText) findViewById(R.id.regUserName);
         EditText password = (EditText) findViewById(R.id.regPass);
         EditText email = (EditText) findViewById(R.id.regEmail);
@@ -38,11 +38,9 @@ public class RegisterActivity extends AppCompatActivity{
 
         try {
             manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString());
-
-            UserAuthentication user = new UserManager();
-            user.loginRequest(username.getText().toString(), password.getText().toString());
-            Intent dashboard = new Intent(this, Dashboard.class);
-            startActivity(dashboard);
+            UserAuthentication user = new UserManager(this);
+            Intent login = new Intent(this, LoginActivity.class);
+            startActivity(login);
         } catch (IllegalArgumentException e) {
             text = e.getMessage();
         }

@@ -42,9 +42,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        userMan = new UserManager();
+        userMan = new UserManager(this);
 
-        usernameTextView = (TextView) findViewById(R.id.displayEmailText);
+        usernameTextView = (TextView) findViewById(R.id.displayUsernameText);
         usernameTextView.setText(userMan.getActiveUser().getUsername());
 
         emailTextView = (TextView) findViewById(R.id.displayEmailText);
@@ -94,7 +94,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             CharSequence text = "Email Changed";
 
             try {
-                userMan.getActiveUser().setEmail(emailEditText.getText().toString());
+                userMan.updateEmail(emailEditText.getText().toString());
             } catch (IllegalArgumentException e) {
                 text = e.getMessage();
             }
@@ -141,7 +141,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
-        userMan.getActiveUser().setMajor(((TextView)v).getText().toString());
+        userMan.updateMajor(((TextView)v).getText().toString());
     }
 
     @Override
@@ -161,12 +161,15 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             bioEditText.setVisibility(View.VISIBLE);
             bioEditText.requestFocus();
         } else {
-            //TODO check length of bio
-            userMan.getActiveUser().setBio(bioEditText.getText().toString());
-
+            CharSequence text = "Bio Changed";
+            try {
+                userMan.updateBio(bioEditText.getText().toString());
+            } catch (IllegalArgumentException e) {
+                text = e.getMessage();
+            }
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
-            Toast message = Toast.makeText(context, "Bio Changed", duration);
+            Toast message = Toast.makeText(context, text, duration);
             message.show();
 
             bioTextView.setText(userMan.getActiveUser().getBio());

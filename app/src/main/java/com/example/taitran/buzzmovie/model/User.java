@@ -47,6 +47,10 @@ public class User {
         return false;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setMajor(String major) {
         this.major = major;
     }
@@ -56,6 +60,9 @@ public class User {
     }
 
     public void setBio(String bio) {
+        if (bio.length() > 100) {
+            throw new IllegalArgumentException("Too many words");
+        }
         this.bio = bio;
     }
 
