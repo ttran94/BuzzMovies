@@ -16,7 +16,7 @@ import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity{
 
     private UserManagement userMan;
 
@@ -44,4 +44,8 @@ public class Dashboard extends AppCompatActivity {
         startActivity(editProfilePage);
     }
 
+    public void searchButtonPressed(View v) {
+        Intent search = new Intent(this, SearchActivity.class);
+        startActivity(search);
+    }
 }

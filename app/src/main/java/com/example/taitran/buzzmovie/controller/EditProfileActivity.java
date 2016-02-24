@@ -145,12 +145,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast message = Toast.makeText(context, "Clicked out", duration);
-        message.show();
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 
     public void editBioButtonPressed(View v) {
         Button b = (Button) v;
