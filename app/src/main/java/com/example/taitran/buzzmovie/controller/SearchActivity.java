@@ -13,7 +13,7 @@ public class SearchActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchView);
+        //setContentView(R.layout.searchView);
 
         /* Get the intent, verify the action and get the query
         Intent intent = getIntent();
