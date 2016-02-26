@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:layout_marginTop="28dp"
         android:id="@+id/textView4"
-        android:layout_below="@+id/searchView"
+        android:layout_below="@+id/searchBar"
         android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/logoutBtn"
@@ -63,11 +63,32 @@
     <SearchView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView"
+        android:id="@+id/searchBar"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:queryHint="Search"
         android:onClick="searchButtonPressed"
         android:longClickable="false" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/searchBar"
+        android:layout_alignEnd="@+id/searchBar"
+        android:visibility="gone" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:id="@+id/okbutton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:singleLine="false"
+        android:visibility="gone"
+        android:onClick="okButtonPressed"
+        android:nestedScrollingEnabled="true" />
 
 </RelativeLayout>

@@ -26,7 +26,11 @@
 
         <activity
             android:name=".Dashboard"
-            android:label="@string/title_activity_dashboard"/>
+            android:label="@string/title_activity_dashboard" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity" />
+        </activity>
 
         <activity
             android:name=".EditProfileActivity"
@@ -36,9 +40,13 @@
             android:name=".EditPasswordActivity"
             android:label="@string/app_name"/>
 
-        <activity
-            android:name=".SearchActivity"
-            android:label="@string/app_name"/>
+        <activity android:name=".SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

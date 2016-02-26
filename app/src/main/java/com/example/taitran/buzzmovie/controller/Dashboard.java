@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class Dashboard extends AppCompatActivity{
     }
 
     public void searchButtonPressed(View v) {
+        Log.d("Dashboard Activity", "search button pressed");
         Intent search = new Intent(this, SearchActivity.class);
         startActivity(search);
     }
