@@ -42,22 +42,24 @@ public class SearchActivity extends ListActivity {
         // Get the intent, verify the action and get the query
         ListView lView = ((ListView) findViewById(R.id.listView));
         Intent intent = getIntent();
-        String query = intent.getStringExtra(SearchManager.QUERY);
-        Log.d("Search Activity", "Search for " + query);
-        try {
-            JSONObject json = getjsonResults(query);
-            //get title, year, etc. to display in search
-            String [] results = parseJson(json);
-            ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, results);
-            lView.setVisibility(View.VISIBLE);
-            lView.setAdapter(adapter);
-            //lView.setOnItemSelectedListener(this);
-        } catch (Exception e) {
-            CharSequence text = e.getMessage();
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            Toast message = Toast.makeText(context, text, duration);
-            message.show();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            Log.d("Search Activity", "Search for " + query);
+            try {
+                JSONObject json = getjsonResults(query);
+                //get title, year, etc. to display in search
+                String[] results = parseJson(json);
+                ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, results);
+                lView.setVisibility(View.VISIBLE);
+                lView.setAdapter(adapter);
+                //lView.setOnItemSelectedListener(this);
+            } catch (Exception e) {
+                CharSequence text = e.getMessage();
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+                Toast message = Toast.makeText(context, text, duration);
+                message.show();
+            }
         }
 
         //((Button) findViewById(R.id.okbutton)).setVisibility(View.VISIBLE);
