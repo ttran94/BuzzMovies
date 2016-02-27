@@ -17,9 +17,9 @@
         android:text="Dashboard"
         android:textSize="60sp"
         android:textStyle="bold"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="26dp"
         android:id="@+id/textView4"
-        android:layout_below="@+id/searchBar"
+        android:layout_below="@+id/imageButton"
         android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/logoutBtn"
@@ -57,38 +57,18 @@
         android:id="@+id/welcomeText"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:longClickable="true"
-        android:onClick="searchButtonPressed" />
+        android:longClickable="true" />
 
-    <SearchView
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
+        android:src="@drawable/ic_search"
+        android:background="@null"
+        android:id="@+id/imageButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:queryHint="Search"
         android:onClick="searchButtonPressed"
-        android:longClickable="false" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@+id/searchBar"
-        android:layout_alignEnd="@+id/searchBar"
-        android:visibility="gone" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:id="@+id/okbutton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:singleLine="false"
-        android:visibility="gone"
-        android:onClick="okButtonPressed"
         android:nestedScrollingEnabled="true" />
+
 
 </RelativeLayout>
