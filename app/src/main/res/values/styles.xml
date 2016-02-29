@@ -1,8 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light"></style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -31,5 +30,14 @@
         <item name="android:buttonStyle">@style/HelloDarknessButton</item>
         <item name="android:editTextStyle">@style/HelloDarknessEditText</item>
     </style>
+
+    <style name="HelloDarkness.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="HelloDarkness.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="HelloDarkness.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

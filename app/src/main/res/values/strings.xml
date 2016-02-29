@@ -7,4 +7,6 @@
     <string name="old_password">Old Password</string>
     <string name="edit">Edit</string>
     <string name="set">Set</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_search">search</string>
 </resources>
