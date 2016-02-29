@@ -59,7 +59,7 @@ public class VolleySingleton {
     /**
      *
      * @return an ImageLoader object that contains the bitmap of
-     * the image form URL
+     * the image Url
      */
     public ImageLoader getImage() {
         return image;

@@ -78,6 +78,8 @@ public class SearchActivity extends AppCompatActivity {
                         movieList = parseJson(response);
                         //set the movielist for adapter, so that it can passed the info to the layout.
                         myadapter.setMovie(movieList);
+                        //set a new recycler list for every request
+                        viewList.setAdapter(myadapter);
                     }
                 }, new Response.ErrorListener() {
             // this is called if the server doesn't response, response = false
@@ -92,8 +94,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
-        //set a new recycler list for every request
-        viewList.setAdapter(myadapter);
+
     }
 
     /**
