@@ -125,10 +125,9 @@ public class SearchActivity extends AppCompatActivity {
                     movieList.add(info);
                 }
             } catch (JSONException e) {
-                text = "Error Occured, please try again";
+                text = "No Movie Found";
                 Toast message = Toast.makeText(context, text, duration);
                 message.show();
-
             }
         }
         return movieList;
