@@ -19,6 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class Database extends SQLiteOpenHelper{
     private static final String MOVIE_DATABASE = "Movie_Database";
+    private static final String RATINGS_TABLE = "Ratings";
     private static final String USER_TABLE = "User";
     protected static final String username = "username";
     protected static final String password = "password";
@@ -37,8 +38,11 @@ public class Database extends SQLiteOpenHelper{
     //create the User table if it does not exist.
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL("CREATE TABLE " + USER_TABLE +
+        database.execSQL("CREATE TABLE " + USER_TABLE + //TODO should we change bio to TEXT?
                 " (_id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), major VARCHAR(255), bio VARCHAR(255))");
+        //TODO id's based on movie
+        database.execSQL("CREATE TABLE " + RATINGS_TABLE +
+                "movie VARCHAR(255), year INTEGER, type VARCHAR(255), username VARCHAR(255), rating INTEGER, review TEXT");
     }
 
     //automatically update when we make change to the User table
@@ -47,7 +51,8 @@ public class Database extends SQLiteOpenHelper{
     //By default it is 1;
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldV, int newV) {
-        database.execSQL("DROP TABLE IF EXISTS User");
+        database.execSQL("DROP TABLE IF EXISTS" + USER_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS" + RATINGS_TABLE);
         onCreate(database);
     }
 

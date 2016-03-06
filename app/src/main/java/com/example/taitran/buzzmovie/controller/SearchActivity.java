@@ -143,4 +143,5 @@ public class SearchActivity extends AppCompatActivity {
         movieList.clear();
         viewList.setAdapter(myadapter);
     }
+
 }
