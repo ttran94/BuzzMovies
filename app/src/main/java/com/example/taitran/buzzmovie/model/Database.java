@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class Database extends SQLiteOpenHelper{
     private static final String MOVIE_DATABASE = "Movie_Database";
-    private static final String RATINGS_TABLE = "Ratings";
+
     private static final String USER_TABLE = "User";
     protected static final String username = "username";
     protected static final String password = "password";
@@ -27,22 +27,45 @@ public class Database extends SQLiteOpenHelper{
     protected static final String major = "major";
     protected static final String bio = "bio";
 
+    private static final String RATINGS_TABLE = "Ratings";
+    private static final String rating = "rating";
+    private static final String review = "review";
+
+    private static final String MOVIE_TABLE = "Movies";
+    private static final String title = "title";
+    private static final String date = "date";
+    private static final String type = "type";
+
     //create the database if it doesn't exist;
     //if database exists, then SQLite will know and open it.
     //Database name must be unique in SQLite
     public Database(Context context) {
         super(context, MOVIE_DATABASE, null, 1);
-
     }
 
     //create the User table if it does not exist.
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL("CREATE TABLE " + USER_TABLE + //TODO should we change bio to TEXT?
-                " (_id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), password VARCHAR(255), email VARCHAR(255), major VARCHAR(255), bio VARCHAR(255))");
-        //TODO id's based on movie
-        database.execSQL("CREATE TABLE " + RATINGS_TABLE +
-                "movie VARCHAR(255), year INTEGER, type VARCHAR(255), username VARCHAR(255), rating INTEGER, review TEXT");
+        database.execSQL("CREATE TABLE " + USER_TABLE + " (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                username + " VARCHAR(255), " +
+                password + "VARCHAR(255), " +
+                email + " VARCHAR(255), " +
+                major + " VARCHAR(255), " +
+                bio + " VARCHAR(255))"); //TODO should we change bio to TEXT?
+
+        database.execSQL("CREATE TABLE " + MOVIE_TABLE + " (" + //TODO maybe add genre/description
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                title + " VARCHAR(255), " +
+                date + " INTEGER, " +
+                type + " VARCHAR(255)");
+
+        database.execSQL("CREATE TABLE " + RATINGS_TABLE + " (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
+                "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(_id), " + //reference to user
+                rating + " INTEGER, " +
+                review + " TEXT");
     }
 
     //automatically update when we make change to the User table
@@ -51,8 +74,9 @@ public class Database extends SQLiteOpenHelper{
     //By default it is 1;
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldV, int newV) {
-        database.execSQL("DROP TABLE IF EXISTS" + USER_TABLE);
-        database.execSQL("DROP TABLE IF EXISTS" + RATINGS_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + MOVIE_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + RATINGS_TABLE);
         onCreate(database);
     }
 
@@ -128,6 +152,45 @@ public class Database extends SQLiteOpenHelper{
         data.update("User", newEmail, "username =?", selectArgs);
     }
 
+    //TODO make this protected when you make a Rating Object in the model
+    public void addRating(User user, String movie_title, String movie_date,
+                             String movie_type, int movie_rating, String movie_review) {
+        long u_id = -1; //user_id
+        long m_id = -1; //movie_id
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String movieSelectQuery = String.format("SELECT _id FROM %s WHERE (%s = %s AND %s = %s AND %s = %s)",
+                MOVIE_TABLE, title, movie_title, date, movie_date, type, movie_type);
+        Cursor cursor = db.rawQuery(movieSelectQuery, new String[]{user.getUsername()});
+        //TODO maybe a better way to do this
+        while (!cursor.moveToFirst()) { //movie doesnt exist in database
+            ContentValues columnIndex = new ContentValues(); //add new movie
+            columnIndex.put(title, movie_title);
+            columnIndex.put(date, movie_date);
+            columnIndex.put(type, movie_type);
+            db.insert(MOVIE_TABLE, null, columnIndex);
+            //deprecated
+            cursor.requery();
+        }
+        m_id = cursor.getInt(0);
+        cursor.close();
+        String userSelectQuery = String.format("SELECT _id FROM %s WHERE %s = %s",
+                USER_TABLE, username, user.getUsername());
+        cursor = db.rawQuery(userSelectQuery, new String[]{user.getUsername()});
+
+        if(cursor.moveToFirst()) {
+            u_id = cursor.getInt(0);
+        } else {
+            throw new IllegalArgumentException("user is not valid");
+        }
+        cursor.close();
+        ContentValues columnIndex = new ContentValues(); //add rating
+        columnIndex.put("movie_id", m_id);
+        columnIndex.put("user_id", u_id);
+        columnIndex.put(rating, movie_rating);
+        columnIndex.put(review, movie_review);
+        db.insert(RATINGS_TABLE, null, columnIndex);
+    }
 
 
 }

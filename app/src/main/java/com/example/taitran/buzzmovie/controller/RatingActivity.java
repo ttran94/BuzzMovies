@@ -11,27 +11,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.example.taitran.buzzmovie.model.Database;
+import com.example.taitran.buzzmovie.model.UserManagement;
+import com.example.taitran.buzzmovie.model.UserManager;
 import com.example.taitran.buzzmovie.model.VolleySingleton;
 
 /**
  * Created by andie on 3/6/2016.
  */
 public class RatingActivity extends AppCompatActivity {
+    private String title;
+    private String date;
+    private String type;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
-        Log.d("Movie Display", "I am here");
+        //TODO pass extras with movie object instead
         Bundle extras = getIntent().getExtras();
-        String title = (String) extras.get("title");
-        String date = (String) extras.get("date");
-        String type = (String) extras.get("type");
+        title = (String) extras.get("title");
+        date = (String) extras.get("date");
+        type = (String) extras.get("type");
         String poster_url = (String) extras.get("poster_url");
 
         ((TextView)findViewById(R.id.title)).setText(title);
         ((TextView)findViewById(R.id.date)).setText(date);
         ((TextView)findViewById(R.id.type)).setText(type);
-        Log.d("Movie Display", "Something happened");
         //TODO put this in a method somewhere to avoid code re-use
         if(poster_url != null && !poster_url.equals("N/A")) {
             VolleySingleton volleySingleton = VolleySingleton.getInstance(this);
@@ -50,9 +57,18 @@ public class RatingActivity extends AppCompatActivity {
 
     public void submitButtonPressed(View v) {
         String review = ((EditText) findViewById(R.id.review)).getText().toString();
-        float rating = ((RatingBar)findViewById(R.id.ratingBar)).getRating();
+        int rating = ((RatingBar)findViewById(R.id.ratingBar)).getNumStars();
+        Toast message;
         if (rating == 0) {
-            Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
+            message = Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
+        } else {
+            //TODO create a Rating Object to handle this
+            UserManagement userMan = new UserManager(this); //only need this for the active user
+            //TODO make active user a singleton
+            Database db = new Database(this);
+            db.addRating(userMan.getActiveUser(), title, date, type, rating, review);
+            message = Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT);
         }
+        message.show();
     }
 }

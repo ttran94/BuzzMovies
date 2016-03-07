@@ -50,8 +50,9 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MyView>{
     public void onBindViewHolder(MyView holder, int position) {
         Movie currentVIew = movieList.get(position);
         holder.movieTitle.setText(currentVIew.getTitle());
-        holder.movieDate.setText("Year: " + currentVIew.getYear());
-        holder.movieType.setText("Type: " + currentVIew.getType());
+        //TODO make a movie object
+        holder.movieDate.setText(currentVIew.getYear()); //"Year: " + currentVIew.getYear());
+        holder.movieType.setText(currentVIew.getType()); //"Type: " + currentVIew.getType());
         String thumbNail = currentVIew.getPoster();
         holder.moviePosterURL = thumbNail;
         final MyView temp = holder;
@@ -91,6 +92,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MyView>{
                     Context context = v.getContext();
                     Intent rating = new Intent(context, RatingActivity.class);
                     //send data to create the display
+                    //TODO pass extras with movie object instead
                     rating.putExtra("title", movieTitle.getText().toString());
                     rating.putExtra("date", movieDate.getText().toString());
                     rating.putExtra("type", movieType.getText().toString());
