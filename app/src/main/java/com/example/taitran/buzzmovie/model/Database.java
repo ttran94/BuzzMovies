@@ -49,7 +49,7 @@ public class Database extends SQLiteOpenHelper{
         database.execSQL("CREATE TABLE " + USER_TABLE + " (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 username + " VARCHAR(255), " +
-                password + "VARCHAR(255), " +
+                password + " VARCHAR(255), " +
                 email + " VARCHAR(255), " +
                 major + " VARCHAR(255), " +
                 bio + " VARCHAR(255))"); //TODO should we change bio to TEXT?
@@ -58,14 +58,16 @@ public class Database extends SQLiteOpenHelper{
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 title + " VARCHAR(255), " +
                 date + " INTEGER, " +
-                type + " VARCHAR(255)");
+                type + " VARCHAR(255))");
 
         database.execSQL("CREATE TABLE " + RATINGS_TABLE + " (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
-                "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(_id), " + //reference to user
+                "movie_id INTEGER, " +
+                "user_id INTEGER, " +
                 rating + " INTEGER, " +
-                review + " TEXT");
+                review + " TEXT, " +
+                "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
+                "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(_id)) "); //reference to user);
     }
 
     //automatically update when we make change to the User table
@@ -101,7 +103,7 @@ public class Database extends SQLiteOpenHelper{
     //get the data if username exists
     protected Cursor getData(String name) {
         SQLiteDatabase data = this.getReadableDatabase();
-        return data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[] { name });
+        return data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[]{name });
     }
 
     //insert data to the User table(register)
@@ -118,7 +120,7 @@ public class Database extends SQLiteOpenHelper{
 
     //update major info to server
     protected void setMajor(String major, String username) {
-        String[] selectArgs = new String[] {username};
+        String[] selectArgs = new String[]{username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newMajor = new ContentValues();
         newMajor.put("major", major);
@@ -159,9 +161,9 @@ public class Database extends SQLiteOpenHelper{
         long m_id = -1; //movie_id
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String movieSelectQuery = String.format("SELECT _id FROM %s WHERE (%s = %s AND %s = %s AND %s = %s)",
-                MOVIE_TABLE, title, movie_title, date, movie_date, type, movie_type);
-        Cursor cursor = db.rawQuery(movieSelectQuery, new String[]{user.getUsername()});
+        String movieSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ? AND %s = %s AND %s = ?",
+                MOVIE_TABLE, title, date, movie_date, type);
+        Cursor cursor = db.rawQuery(movieSelectQuery, new String[]{movie_title, movie_type});
         //TODO maybe a better way to do this
         while (!cursor.moveToFirst()) { //movie doesnt exist in database
             ContentValues columnIndex = new ContentValues(); //add new movie
@@ -174,8 +176,8 @@ public class Database extends SQLiteOpenHelper{
         }
         m_id = cursor.getInt(0);
         cursor.close();
-        String userSelectQuery = String.format("SELECT _id FROM %s WHERE %s = %s",
-                USER_TABLE, username, user.getUsername());
+        String userSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ?",
+                USER_TABLE, username);
         cursor = db.rawQuery(userSelectQuery, new String[]{user.getUsername()});
 
         if(cursor.moveToFirst()) {
