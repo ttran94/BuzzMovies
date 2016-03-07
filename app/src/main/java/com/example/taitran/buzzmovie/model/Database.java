@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.taitran.buzzmovie.Rating;
+
 /**
  * Created by taitran on 2/15/2016.
  * if you want to see how the user table looks like (easy to debug later on) go to:
@@ -155,9 +157,14 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //TODO make this protected when you make a Rating Object in the model
-    public void addRating(User user, String movie_title, String movie_date, String movie_type, com.example.taitran.buzzmovie.Rating rating) {
+    public void addRating(Rating rating) {
         long u_id = -1; //user_id
         long m_id = -1; //movie_id
+
+        User user = rating.getUser();
+        String movie_title = rating.getMovie().getTitle();
+        String movie_date = rating.getMovie().getYear();
+        String movie_type = rating.getMovie().getType();
 
         int movie_score = rating.getScore();
         String movie_comment = rating.getComment();
@@ -191,8 +198,8 @@ public class Database extends SQLiteOpenHelper{
         ContentValues columnIndex = new ContentValues(); //add rating
         columnIndex.put("movie_id", m_id);
         columnIndex.put("user_id", u_id);
-        columnIndex.put("rating", movie_score);
-        columnIndex.put("review", movie_comment);
+        columnIndex.put(this.rating, movie_score);
+        columnIndex.put(this.review, movie_comment);
         db.insert(RATINGS_TABLE, null, columnIndex);
     }
 

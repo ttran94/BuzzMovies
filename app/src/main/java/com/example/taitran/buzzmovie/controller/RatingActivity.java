@@ -60,17 +60,18 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void submitButtonPressed(View v) {
-
-        Rating rating = new Rating(((RatingBar)findViewById(R.id.ratingBar)).getNumStars(),
+        UserManagement userMan = new UserManager(this); //only need this for the active user
+        Rating rating = new Rating(userMan.getActiveUser(), movie,
+                ((RatingBar)findViewById(R.id.ratingBar)).getNumStars(),
                 ((EditText) findViewById(R.id.review)).getText().toString());
         Toast message;
         if (rating.getScore() == 0) {
             message = Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
         } else {
-            UserManagement userMan = new UserManager(this); //only need this for the active user
+
             //TODO make active user a singleton
             Database db = new Database(this);
-            db.addRating(userMan.getActiveUser(), title, date, type, rating);
+            db.addRating(rating);
             message = Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT);
         }
         message.show();
