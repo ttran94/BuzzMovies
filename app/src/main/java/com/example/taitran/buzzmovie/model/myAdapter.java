@@ -53,9 +53,8 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
     public void onBindViewHolder(MovieView holder, int position) {
         Movie currentView = movieList.get(position);
         holder.movieTitle.setText(currentView.getTitle());
-        //TODO make a movie object
-        holder.movieDate.setText(currentView.getYear()); //"Year: " + currentView.getYear());
-        holder.movieType.setText(currentView.getType()); //"Type: " + currentView.getType());
+        holder.movieDate.setText("Year: " + currentView.getYear());
+        holder.movieType.setText("Type: " + currentView.getType());
         String thumbNail = currentView.getPoster();
         holder.moviePosterURL = thumbNail;
         holder.position = position;

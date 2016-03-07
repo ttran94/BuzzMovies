@@ -2,7 +2,6 @@ package com.example.taitran.buzzmovie.controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.example.taitran.buzzmovie.Rating;
 import com.example.taitran.buzzmovie.model.Database;
 import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.UserManagement;
@@ -60,17 +60,17 @@ public class RatingActivity extends AppCompatActivity {
     }
 
     public void submitButtonPressed(View v) {
-        String review = ((EditText) findViewById(R.id.review)).getText().toString();
-        int rating = ((RatingBar)findViewById(R.id.ratingBar)).getNumStars();
+
+        Rating rating = new Rating(((RatingBar)findViewById(R.id.ratingBar)).getNumStars(),
+                ((EditText) findViewById(R.id.review)).getText().toString());
         Toast message;
-        if (rating == 0) {
+        if (rating.getScore() == 0) {
             message = Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
         } else {
-            //TODO create a Rating Object to handle this
             UserManagement userMan = new UserManager(this); //only need this for the active user
             //TODO make active user a singleton
             Database db = new Database(this);
-            db.addRating(userMan.getActiveUser(), title, date, type, rating, review);
+            db.addRating(userMan.getActiveUser(), title, date, type, rating);
             message = Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT);
         }
         message.show();

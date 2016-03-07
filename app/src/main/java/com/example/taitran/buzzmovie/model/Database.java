@@ -155,10 +155,12 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //TODO make this protected when you make a Rating Object in the model
-    public void addRating(User user, String movie_title, String movie_date,
-                             String movie_type, int movie_rating, String movie_review) {
+    public void addRating(User user, String movie_title, String movie_date, String movie_type, com.example.taitran.buzzmovie.Rating rating) {
         long u_id = -1; //user_id
         long m_id = -1; //movie_id
+
+        int movie_score = rating.getScore();
+        String movie_comment = rating.getComment();
 
         SQLiteDatabase db = this.getReadableDatabase();
         String movieSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ? AND %s = %s AND %s = ?",
@@ -189,8 +191,8 @@ public class Database extends SQLiteOpenHelper{
         ContentValues columnIndex = new ContentValues(); //add rating
         columnIndex.put("movie_id", m_id);
         columnIndex.put("user_id", u_id);
-        columnIndex.put(rating, movie_rating);
-        columnIndex.put(review, movie_review);
+        columnIndex.put("rating", movie_score);
+        columnIndex.put("review", movie_comment);
         db.insert(RATINGS_TABLE, null, columnIndex);
     }
 
