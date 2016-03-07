@@ -161,7 +161,6 @@ public class Database extends SQLiteOpenHelper{
         long u_id = -1; //user_id
         long m_id = -1; //movie_id
 
-        User user = rating.getUser();
         String movie_title = rating.getMovie().getTitle();
         String movie_date = rating.getMovie().getYear();
         String movie_type = rating.getMovie().getType();
@@ -187,7 +186,7 @@ public class Database extends SQLiteOpenHelper{
         cursor.close();
         String userSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ?",
                 USER_TABLE, username);
-        cursor = db.rawQuery(userSelectQuery, new String[]{user.getUsername()});
+        cursor = db.rawQuery(userSelectQuery, new String[]{rating.getUsername()});
 
         if(cursor.moveToFirst()) {
             u_id = cursor.getInt(0);

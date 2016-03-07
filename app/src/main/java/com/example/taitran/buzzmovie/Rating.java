@@ -9,14 +9,14 @@ import com.example.taitran.buzzmovie.model.User;
 public class Rating {
     private int score; //score out of 5
     private String comment;
-    private User user;
+    private String username;
     private Movie movie;
 
-    public Rating(User user, Movie movie, int score, String comment)
+    public Rating(String username, Movie movie, int score, String comment)
     {
         this.score = score;
         this.comment = comment;
-        this.user = user;
+        this.username = username;
         this.movie = movie;
     }
     
@@ -30,9 +30,9 @@ public class Rating {
         return comment;
     }
 
-    public User getUser()
+    public String getUsername()
     {
-        return user;
+        return username;
     }
 
     public Movie getMovie()
