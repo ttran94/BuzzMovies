@@ -8,15 +8,16 @@ public class Movie {
     private String title;
     private String year;
     private String type;
+    /* TODO store as a bitmap instead of querying the URL each time*/
     private String poster;
 
-    /**
-     *
-     * @param title get the movie title
-     * @param year  get the movie year
-     * @param type  get the movie type
-     * @param poster    get the movie poster
-     */
+/**
+*
+* @param title get the movie title
+* @param year  get the movie year
+* @param type  get the movie type
+* @param poster    get the movie poster
+*/
     public Movie(String title, String year, String type, String poster) {
         this.title = title;
         this.year = year;

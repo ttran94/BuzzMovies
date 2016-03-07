@@ -12,14 +12,17 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.taitran.buzzmovie.model.Database;
+import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 import com.example.taitran.buzzmovie.model.VolleySingleton;
+import com.example.taitran.buzzmovie.model.myAdapter;
 
 /**
  * Created by andie on 3/6/2016.
  */
 public class RatingActivity extends AppCompatActivity {
+    private Movie movie;
     private String title;
     private String date;
     private String type;
@@ -29,12 +32,13 @@ public class RatingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
-        //TODO pass extras with movie object instead
+
         Bundle extras = getIntent().getExtras();
-        title = (String) extras.get("title");
-        date = (String) extras.get("date");
-        type = (String) extras.get("type");
-        String poster_url = (String) extras.get("poster_url");
+        movie = myAdapter.getMovieList().get((int) extras.get("position"));
+        title = movie.getTitle();
+        date = movie.getYear();
+        type = movie.getType();
+        String poster_url = movie.getPoster();
 
         ((TextView)findViewById(R.id.title)).setText(title);
         ((TextView)findViewById(R.id.date)).setText(date);

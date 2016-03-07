@@ -23,8 +23,6 @@ import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.VolleySingleton;
 import com.example.taitran.buzzmovie.model.myAdapter;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * Created by andie on 2/24/2016.
  */
@@ -77,7 +75,7 @@ public class SearchActivity extends AppCompatActivity {
                         //once we have the data then send it parseJson to process the info
                         movieList = parseJson(response);
                         //set the movielist for adapter, so that it can passed the info to the layout.
-                        myadapter.setMovie(movieList);
+                        myadapter.setMovieList(movieList);
                         //set a new recycler list for every request
                         viewList.setAdapter(myadapter);
                     }

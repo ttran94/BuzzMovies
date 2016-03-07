@@ -3,7 +3,6 @@ package com.example.taitran.buzzmovie.model;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,12 @@ import java.util.ArrayList;
 /**
  * Created by taitr on 2/28/2016.
  */
-public class myAdapter extends RecyclerView.Adapter<myAdapter.MyView>{
+public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
 
     private ImageLoader image;
     private VolleySingleton volleySingleton;
     private LayoutInflater layout;
-    private ArrayList<Movie> movieList = new ArrayList<>();
+    private static ArrayList<Movie> movieList = new ArrayList<>();
 
     public myAdapter(Context context) {
         layout = LayoutInflater.from(context);
@@ -34,28 +33,33 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MyView>{
     }
 
     @Override
-    public MyView onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieView onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layout.inflate(R.layout.customview, parent, false);
-        MyView viewHolder = new MyView(view);
+        MovieView viewHolder = new MovieView(view);
         return viewHolder;
     }
 
-    public void setMovie(ArrayList<Movie> movie) {
+    public void setMovieList(ArrayList<Movie> movie) {
         this.movieList = movie;
         notifyItemRangeChanged(0, movie.size());
     }
 
+    public static ArrayList<Movie> getMovieList() {
+        return (ArrayList<Movie>) movieList.clone();
+    }
+
 
     @Override
-    public void onBindViewHolder(MyView holder, int position) {
-        Movie currentVIew = movieList.get(position);
-        holder.movieTitle.setText(currentVIew.getTitle());
+    public void onBindViewHolder(MovieView holder, int position) {
+        Movie currentView = movieList.get(position);
+        holder.movieTitle.setText(currentView.getTitle());
         //TODO make a movie object
-        holder.movieDate.setText(currentVIew.getYear()); //"Year: " + currentVIew.getYear());
-        holder.movieType.setText(currentVIew.getType()); //"Type: " + currentVIew.getType());
-        String thumbNail = currentVIew.getPoster();
+        holder.movieDate.setText(currentView.getYear()); //"Year: " + currentView.getYear());
+        holder.movieType.setText(currentView.getType()); //"Type: " + currentView.getType());
+        String thumbNail = currentView.getPoster();
         holder.moviePosterURL = thumbNail;
-        final MyView temp = holder;
+        holder.position = position;
+        final MovieView temp = holder;
         if(thumbNail != null) {
             image.get(thumbNail, new ImageLoader.ImageListener() {
                 @Override
@@ -77,31 +81,25 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MyView>{
         return movieList.size();
     }
 
-    static class MyView extends RecyclerView.ViewHolder{
+    static class MovieView extends RecyclerView.ViewHolder{
         private ImageView moviePoster;
         private TextView movieTitle;
         private TextView movieDate;
         private TextView movieType;
         private String moviePosterURL;
+        private int position;
 
-        public MyView(View itemView) {
+        public MovieView(View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent rating = new Intent(context, RatingActivity.class);
-                    //send data to create the display
-                    //TODO pass extras with movie object instead
-                    rating.putExtra("title", movieTitle.getText().toString());
-                    rating.putExtra("date", movieDate.getText().toString());
-                    rating.putExtra("type", movieType.getText().toString());
-                    /* TODO maybe pass through the bitmap instead of querying the URL again
-                     * there is a limit to how much you can pass through as extra
-                     * see RatingActivity.java */
-                    rating.putExtra("poster_url", moviePosterURL);
+                    Intent ratingPage = new Intent(context, RatingActivity.class);
+                    //send position of the movie in movieList for access in the activity
+                    ratingPage.putExtra("position", position);
 
-                    context.startActivity(rating);
+                    context.startActivity(ratingPage);
                 }
             });
 
