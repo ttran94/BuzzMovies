@@ -7,12 +7,12 @@ import com.example.taitran.buzzmovie.model.User;
  * Created by John on 3/7/2016.
  */
 public class Rating {
-    private int score; //score out of 5
+    private float score; //score out of 5
     private String comment;
     private String username;
     private Movie movie;
 
-    public Rating(String username, Movie movie, int score, String comment)
+    public Rating(String username, Movie movie, float score, String comment)
     {
         this.score = score;
         this.comment = comment;
@@ -20,7 +20,7 @@ public class Rating {
         this.movie = movie;
     }
     
-    public int getScore()
+    public float getScore()
     {
         return score;
     }

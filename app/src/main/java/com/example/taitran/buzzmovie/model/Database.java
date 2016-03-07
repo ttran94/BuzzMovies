@@ -66,7 +66,7 @@ public class Database extends SQLiteOpenHelper{
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "movie_id INTEGER, " +
                 "user_id INTEGER, " +
-                rating + " INTEGER, " +
+                rating + " REAL, " +
                 review + " TEXT, " +
                 "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
                 "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(_id)) "); //reference to user);
@@ -165,7 +165,7 @@ public class Database extends SQLiteOpenHelper{
         String movie_date = rating.getMovie().getYear();
         String movie_type = rating.getMovie().getType();
 
-        int movie_score = rating.getScore();
+        float movie_score = rating.getScore();
         String movie_comment = rating.getComment();
 
         SQLiteDatabase db = this.getReadableDatabase();

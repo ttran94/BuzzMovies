@@ -62,7 +62,7 @@ public class RatingActivity extends AppCompatActivity {
     public void submitButtonPressed(View v) {
         UserManagement userMan = new UserManager(this); //only need this for the active user
         Rating rating = new Rating(userMan.getActiveUser().getUsername(), movie,
-                ((RatingBar)findViewById(R.id.ratingBar)).getNumStars(),
+                ((RatingBar)findViewById(R.id.ratingBar)).getRating(),
                 ((EditText) findViewById(R.id.review)).getText().toString());
         Toast message;
         if (rating.getScore() == 0) {
