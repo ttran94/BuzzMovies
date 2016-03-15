@@ -29,6 +29,10 @@ public class Dashboard extends AppCompatActivity{
         ((TextView) findViewById(R.id.welcomeText)).setText(("Welcome, " + userMan.getActiveUser().getUsername()));
     }
 
+    /**
+     * clear the active user and redirect the user to welcome page
+     * @param v reference to the logout button when press
+     */
     public void logoutButtonPressed(View v) {
         Intent welcomePage = new Intent(this, WelcomeActivity.class);
         startActivity(welcomePage);
@@ -40,14 +44,29 @@ public class Dashboard extends AppCompatActivity{
         message.show();
     }
 
+    /**
+     * redirect the user to edit profile activity
+     * if the button is pressed
+     * @param v reference to edit button
+     */
     public void editProfileButtonPressed(View v) {
         Intent editProfilePage = new Intent(this, EditProfileActivity.class);
         startActivity(editProfilePage);
     }
 
+    /**
+     * redirect the user to search activity
+     * if the button is pressed
+     * @param v
+     */
     public void searchButtonPressed(View v) {
         Log.d("Dashboard Activity", "search button pressed");
         Intent search = new Intent(this, SearchActivity.class);
+        startActivity(search);
+    }
+    public void reOnPressed(View v) {
+        Log.d("Dashboard Activity", "search button pressed");
+        Intent search = new Intent(this, Recommendation.class);
         startActivity(search);
     }
 }

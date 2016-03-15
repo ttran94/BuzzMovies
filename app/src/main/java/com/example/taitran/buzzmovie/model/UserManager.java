@@ -18,6 +18,10 @@ public class UserManager implements UserAuthentication, UserManagement{
 
     }
 
+    /**
+     * take in the activity context and pass it in database class
+     * @param context the activity class
+     */
     public UserManager(Context context) {
         db = new Database(context);
     }
@@ -42,11 +46,17 @@ public class UserManager implements UserAuthentication, UserManagement{
             throw new IllegalArgumentException("Invalid password");
         }
 
-        db.insert(username, password, email);
+        db.addUser(username, password, email);
     }
 
-    //when dealing with Cursor object always check for null to void SQLite EXCEPTION
-    //if only have one row of data, then just move the cursor to that row.
+
+    /**
+     * check whether or not the credential is valid
+     * when dealing with Cursor object always check for null to void SQLite EXCEPTION
+     * if only have one row of data, then just move the cursor to that row.
+     * @param username take in user's username
+     * @param password take in user's password
+     */
     public void loginRequest(String username, String password) {
         String name = "";
         String pass = "";
@@ -57,7 +67,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         if (db.IsEmpty(username)) { //userId method couldn't find matching username
             throw new IllegalArgumentException("Username does not exist.");
         }
-        Cursor data = db.getData(username);
+        Cursor data = db.getUserData(username);
         if( data != null && data.moveToFirst() ) {
             name = data.getString(data.getColumnIndex(db.username));
             pass = data.getString(data.getColumnIndex(db.password));
@@ -75,6 +85,10 @@ public class UserManager implements UserAuthentication, UserManagement{
         activeUser = user;
     }
 
+    /**
+     *
+     * @return the active user after login successfully
+     */
     public User getActiveUser() {
         return activeUser;
     }

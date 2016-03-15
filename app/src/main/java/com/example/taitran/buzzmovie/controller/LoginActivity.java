@@ -24,6 +24,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    /**
+     * check whether or not the username and password
+     * match the username and password that is in the database
+     * @param v reference to the login button
+     */
     public void loginButtonPressed(View v) {
         Log.d("Login Activity", "Login button pressed");
         UserAuthentication user = new UserManager(this);
@@ -49,7 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         message.show();
     }
 
-
+    /**
+     * redirect the user to welcome activity
+     * if the button is pressed
+     * @param V reference to the cancel button
+     */
     public void cancelButtonPressed(View V) {
         Log.d("Login Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.userName)).setText("");

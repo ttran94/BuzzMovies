@@ -77,6 +77,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    /**
+     * edit and change the email for the user in database
+     * @param v reference to the email button
+     */
     public void editEmailButtonPressed(View v) {
         Button b = (Button) v;
 
@@ -112,12 +116,20 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
+    /**
+     * redirect the user to EditPasswordActivity
+     * @param V reference to the password button
+     */
     public void editPasswordButtonPressed(View V) {
         Log.d("Edit Profile Activity", "edit password button pressed");
         Intent intent = new Intent(this, EditPasswordActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * edit and change the major for the user in database
+     * @param v reference to the major button
+     */
     public void editMajorButtonPressed(View v) {
         Button b = (Button) v;
         if (!editingMajor) {
@@ -147,6 +159,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
 
+    /**
+     * edit and change the bio for the user in database
+     * @param v reference to the bio button
+     */
     public void editBioButtonPressed(View v) {
         Button b = (Button) v;
         if (!editingBio) {

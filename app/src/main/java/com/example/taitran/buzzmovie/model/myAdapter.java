@@ -26,6 +26,10 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
     private LayoutInflater layout;
     private static ArrayList<Movie> movieList = new ArrayList<>();
 
+    /**
+     * set up Volleysingleton, image and layout for the activity
+     * @param context get the activity class
+     */
     public myAdapter(Context context) {
         layout = LayoutInflater.from(context);
         volleySingleton = VolleySingleton.getInstance(context);
@@ -39,6 +43,10 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         return viewHolder;
     }
 
+    /**
+     * passed the movie list to the adapter and set up the view.
+     * @param movie take in a list that contains movies
+     */
     public void setMovieList(ArrayList<Movie> movie) {
         this.movieList = movie;
         notifyItemRangeChanged(0, movie.size());

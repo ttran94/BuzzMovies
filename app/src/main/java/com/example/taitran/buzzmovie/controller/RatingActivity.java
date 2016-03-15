@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.example.taitran.buzzmovie.Rating;
+import com.example.taitran.buzzmovie.model.Rating;
 import com.example.taitran.buzzmovie.model.Database;
 import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.UserManagement;
@@ -59,6 +59,11 @@ public class RatingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * store the rating of movies in database
+     * along with the username whose rated that movie.
+     * @param v reference to submit button when pressed
+     */
     public void submitButtonPressed(View v) {
         UserManagement userMan = new UserManager(this); //only need this for the active user
         Rating rating = new Rating(userMan.getActiveUser().getUsername(), movie,

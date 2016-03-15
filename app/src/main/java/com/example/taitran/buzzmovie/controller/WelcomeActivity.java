@@ -36,6 +36,10 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * go to register activity if pressed
+     * @param w reference to register button pressed
+     */
     public void onRegisterButtonClicked(View w) {
         Log.d("**MYAPP**", "Register button pressed!");
         Intent intent = new Intent(this, RegisterActivity.class);

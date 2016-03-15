@@ -1,33 +1,34 @@
 package com.example.taitran.buzzmovie.model;
 
 /**
- * Created by taitr on 2/28/2016.
+ * Created by taitr on 3/14/2016.
  */
-public class Movie {
-
+public class FilterList {
     private String title;
     private String year;
     private String type;
     /* TODO store as a bitmap instead of querying the URL each time*/
     private String poster;
+    private float score;
 
-/**
-*
-* @param title get the movie title
-* @param year  get the movie year
-* @param type  get the movie type
-* @param poster    get the movie poster
-*/
-    public Movie(String title, String year, String type, String poster) {
+    /**
+     *
+     * @param title get the filter title
+     * @param year  get the filter year
+     * @param type  get the filter type
+     * @param poster get the filter poster
+     */
+    public FilterList(String title, String year, String type, String poster, float score) {
         this.title = title;
         this.year = year;
         this.type = type;
         this.poster = poster;
+        this.score = score;
     }
 
     /**
      *
-     * @return Title for the movie object
+     * @return Title for the filter object
      */
     public String getTitle() {
         return title;
@@ -35,7 +36,7 @@ public class Movie {
 
     /**
      *
-     * @return year for the movie object
+     * @return year for the filter object
      */
     public String getYear() {
         return year;
@@ -43,7 +44,7 @@ public class Movie {
 
     /**
      *
-     * @return type for the movie object
+     * @return type for the filter object
      */
     public String getType() {
         return type;
@@ -51,9 +52,13 @@ public class Movie {
 
     /**
      *
-     * @return url thumbnail for the movie object
+     * @return url thumbnail for the filter object
      */
     public String getPoster() {
         return poster;
+    }
+
+    public float getScore() {
+        return score;
     }
 }

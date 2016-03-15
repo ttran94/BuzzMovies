@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.taitran.buzzmovie.controller.WelcomeActivity"
-    tools:showIn="@layout/content_welcome">
+    tools:context="com.example.taitran.buzzmovie.controller.Recommendation">
 
 
-    <include layout="@layout/content_welcome" />
 
+    <include layout="@layout/content_recommendation" />
 
 
 </android.support.design.widget.CoordinatorLayout>
