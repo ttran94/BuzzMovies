@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -34,7 +35,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
 
     @Override
     public MovieView onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layout.inflate(R.layout.customview, parent, false);
+        View view = layout.inflate(R.layout.filtereditem, parent, false);
         MovieView viewHolder = new MovieView(view);
         return viewHolder;
     }
@@ -55,6 +56,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         holder.movieTitle.setText(currentView.getTitle());
         holder.movieDate.setText("Year: " + currentView.getYear());
         holder.movieType.setText("Type: " + currentView.getType());
+        holder.score.setRating(currentView.getScore());
         String thumbNail = currentView.getPoster();
         holder.moviePosterURL = thumbNail;
         holder.position = position;
@@ -86,6 +88,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         private TextView movieDate;
         private TextView movieType;
         private String moviePosterURL;
+        private RatingBar score;
         private int position;
 
         public MovieView(View itemView) {
@@ -94,6 +97,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
             movieTitle = (TextView) itemView.findViewById(R.id.movieTitle);
             movieDate = (TextView) itemView.findViewById(R.id.movieYear);
             movieType = (TextView) itemView.findViewById(R.id.movieType);
+            score = (RatingBar) itemView.findViewById(R.id.MyRating);
         }
 
 
