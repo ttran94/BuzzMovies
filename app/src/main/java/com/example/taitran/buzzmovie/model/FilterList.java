@@ -7,7 +7,6 @@ public class FilterList {
     private String title;
     private String year;
     private String type;
-    /* TODO store as a bitmap instead of querying the URL each time*/
     private String poster;
     private float score;
 

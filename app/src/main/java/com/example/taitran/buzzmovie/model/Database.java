@@ -308,6 +308,7 @@ public class Database extends SQLiteOpenHelper{
                         float avg = avgScore.getInt(0);
                         FilterList selectedMovie = new FilterList(movie_title, movie_date, movie_type, movie_url, avg);
                         movieList.add(selectedMovie);
+                        exist.add(movie_id);
                     }
                     avgScore.close();
                     getMovie.close();

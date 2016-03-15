@@ -30,8 +30,6 @@ public class Recommendation extends AppCompatActivity implements AdapterView.OnI
             = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
     String[] rating
             = new String[] {"Default", "5", "4", "3", "2", "1"};
-    private String selectedMajor;
-    private String selectedRating;
     public RedAdapter myadapter;
     private ArrayList<FilterList> movies;
     private RecyclerView viewList;
@@ -71,7 +69,6 @@ public class Recommendation extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void filterButtonPressed(View v) {
-
         movies = filter.getMovieList();
         myadapter.setMovieList(movies);
         viewList.setAdapter(myadapter);
