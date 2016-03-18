@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,10 @@ public class Dashboard extends AppCompatActivity{
         setContentView(R.layout.activity_dashboard);
         userMan = new UserManager();
         ((TextView) findViewById(R.id.welcomeText)).setText(("Welcome, " + userMan.getActiveUser().getUsername()));
+        //TODO some condition to check if activeUser is admin
+        //if admin {
+        ((Button) findViewById(R.id.userListBtn)).setVisibility(View.VISIBLE);
+        //}
     }
 
     /**
@@ -68,5 +73,11 @@ public class Dashboard extends AppCompatActivity{
         Log.d("Dashboard Activity", "search button pressed");
         Intent search = new Intent(this, Recommendation.class);
         startActivity(search);
+    }
+
+    public void userListButtonPressed(View v) {
+        Log.d("Dashboard Activity", "user list button pressed");
+        Intent userlist = new Intent(this, UsersActivity.class);
+        startActivity(userlist);
     }
 }

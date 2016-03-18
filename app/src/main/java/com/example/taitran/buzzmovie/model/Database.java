@@ -27,9 +27,12 @@ public class Database extends SQLiteOpenHelper{
     protected static final String password = "password";
     protected static final String email = "email";
     protected static final String major = "major";
-    protected static final String mov_id = "movie_id";
-    protected static final String user_ID = "user_id";
     protected static final String bio = "bio";
+    protected static  final String status = "status";
+    //STATUSES
+    protected static  final String unlocked = "unlocked";
+    protected static  final String locked = "locked";
+    protected static  final String banned = "banned";
 
     private static final String RATINGS_TABLE = "Ratings";
     private static final String score = "score";
@@ -56,7 +59,8 @@ public class Database extends SQLiteOpenHelper{
                 password + " VARCHAR(255), " +
                 email + " VARCHAR(255), " +
                 major + " VARCHAR(255), " +
-                bio + " VARCHAR(255))"); //TODO should we change bio to TEXT?
+                bio + " VARCHAR(255), " +
+                status + " VARCHAR(255))"); //unlocked, locked, banned
 
         database.execSQL("CREATE TABLE " + MOVIE_TABLE + " (" + //TODO maybe add genre/description
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -139,6 +143,7 @@ public class Database extends SQLiteOpenHelper{
         columnIndex.put(this.email, email);
         columnIndex.put(this.major, "");
         columnIndex.put(this.bio, "");
+        columnIndex.put(this.status, unlocked);
         data.insert(USER_TABLE, null, columnIndex);
     }
 
@@ -318,5 +323,35 @@ public class Database extends SQLiteOpenHelper{
         return movieList;
     }
 
+    public ArrayList<String> getUserList() {
+        ArrayList<String> userList = new ArrayList<>();
+        String userData = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor users = db.rawQuery("SELECT "
+                + username + ", "
+                + email + ", "
+                + status + " "
+                + "FROM " + USER_TABLE, null);
+        if (users.moveToFirst()) {
+            userData += users.getString(0);
+            userData += " " + users.getString(1);
+            userData += " " + users.getString(2);
+            userList.add(userData);
+            userData = "";
+            while (users.moveToNext()) {
+                userData += users.getString(0);
+                userData += " " + users.getString(1);
+                userData += " " + users.getString(2);
+                userList.add(userData);
+                userData = "";
+            }
+        }
+        return userList;
+    }
+
+
+    public void updateUserStatus(String username, String status) {
+        //TODO implement
+    }
 }
 

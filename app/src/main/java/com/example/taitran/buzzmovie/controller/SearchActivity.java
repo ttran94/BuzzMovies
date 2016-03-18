@@ -58,13 +58,6 @@ public class SearchActivity extends AppCompatActivity {
      * 3 : episode
      */
     public static int searchType;
-    /**
-     * 0 : default
-     * 1 : new releases
-     * 2 : by rating
-     * 3 : by major
-     */
-    public static int searchSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +90,6 @@ public class SearchActivity extends AppCompatActivity {
             case 3: query += "&type=episode";
                 break;
         }
-
-        //TODO sorting...should we add every movie searched for to the db?
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 url + query,

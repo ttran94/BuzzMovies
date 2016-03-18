@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,10 +17,8 @@ import android.widget.TextView;
  * Uses search_dialog.xml layout
  */
 public class MenuDialog extends DialogFragment implements AdapterView.OnItemSelectedListener{
-    private Spinner sortspinner;
-    private Spinner typespinner;
 
-    private static final String[] sortByList = new String[]{"Default", "New Releases", "Rating", "Major Rating"};
+    private Spinner typespinner;
     private static final String[] typeList = new String[]{"All", "Movie", "Series", "Episode"};
 
     @Override
@@ -29,13 +26,7 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.search_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        sortspinner = (Spinner) v.findViewById(R.id.sortspinner);
         typespinner = (Spinner) v.findViewById(R.id.typespinner);
-
-        ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, sortByList);
-        sortspinner.setAdapter(sortAdapter);
-        sortspinner.setOnItemSelectedListener(this);
 
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, typeList);
         typespinner.setAdapter(typeAdapter);
@@ -58,12 +49,6 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
         String text = ((TextView) v).getText().toString();
-
-        for (int i = 0; i < sortByList.length; i++) {
-            if (sortByList[i].equals(text)) {
-                SearchActivity.searchSort = i;
-            }
-        }
 
         for (int i = 0; i < typeList.length; i++) {
             if (typeList[i].equals(text)) {

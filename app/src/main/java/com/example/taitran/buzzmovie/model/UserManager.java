@@ -3,7 +3,9 @@ package com.example.taitran.buzzmovie.model;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * Created by taitr on 2/6/2016.
@@ -63,6 +65,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         String email = "";
         String major = "";
         String bio = "";
+        String status = "";
 
         if (db.IsEmpty(username)) { //userId method couldn't find matching username
             throw new IllegalArgumentException("Username does not exist.");
@@ -74,6 +77,8 @@ public class UserManager implements UserAuthentication, UserManagement{
             email = data.getString(data.getColumnIndex(db.email));
             major = data.getString(data.getColumnIndex(db.major));
             bio = data.getString(data.getColumnIndex(db.bio));
+            status = data.getString(data.getColumnIndex(db.status));
+            //TODO if status = locked/banned...
             data.close();
         }
         User user = new User(email, name, pass);
@@ -124,6 +129,14 @@ public class UserManager implements UserAuthentication, UserManagement{
     public void updateMajor(String major) {
         activeUser.setMajor(major);
         db.setMajor(major, activeUser.getUsername());
+    }
+
+    public ArrayList<String> getUserList() {
+        return db.getUserList();
+    }
+
+    public void updateUserStatus(String username, String status) {
+        //TODO update in db
     }
 
 }
