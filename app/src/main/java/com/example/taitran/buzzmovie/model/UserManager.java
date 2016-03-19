@@ -131,12 +131,22 @@ public class UserManager implements UserAuthentication, UserManagement{
         db.setMajor(major, activeUser.getUsername());
     }
 
-    public ArrayList<String> getUserList() {
-        return db.getUserList();
+    /**
+     * calls the database for a list of users in the system
+     * @param statusFilter Default, Unlocked, Locked, Banned
+     * @return list of user strings filtered by status
+     */
+    public ArrayList<String> getUserList(String statusFilter) {
+        return db.getUserList(statusFilter);
     }
 
+    /**
+     * calls the database to update the status of a user
+     * @param username user to update status for
+     * @param status status to change to
+     */
     public void updateUserStatus(String username, String status) {
-        //TODO update in db
+        db.updateUserStatus(username, status);
     }
 
 }

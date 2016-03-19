@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 import com.example.taitran.buzzmovie.model.UserManager;
 
+import java.util.Arrays;
+
 /**
- * Dialog View for presenting search settings
- * Uses search_dialog.xml layout
+ * Dialog View for presenting user status changes
+ * Uses user_status_dialog.xml layout
  */
 public class UserStatusDialog extends DialogFragment implements AdapterView.OnItemSelectedListener{
 
@@ -30,7 +32,7 @@ public class UserStatusDialog extends DialogFragment implements AdapterView.OnIt
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         statusSpinner = (Spinner) v.findViewById(R.id.statusspinner);
 
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, UsersActivity.statuses);
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Arrays.copyOfRange(UsersActivity.statuses, 1, 4));
         statusSpinner.setAdapter(statusAdapter);
         statusSpinner.setOnItemSelectedListener(this);
 

@@ -26,7 +26,7 @@
             android:layout_marginStart="5dp"
             android:id="@+id/textView5" />
         <Spinner
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="31dp"
             android:id="@+id/status_spinner"
             android:textColor="#000000"

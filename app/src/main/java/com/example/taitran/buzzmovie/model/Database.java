@@ -30,13 +30,14 @@ public class Database extends SQLiteOpenHelper{
     protected static final String bio = "bio";
     protected static  final String status = "status";
     //STATUSES
-    protected static  final String unlocked = "unlocked";
-    protected static  final String locked = "locked";
-    protected static  final String banned = "banned";
+    protected static  final String unlocked = "Unlocked";
+    protected static  final String locked = "Locked";
+    protected static  final String banned = "Banned";
 
     private static final String RATINGS_TABLE = "Ratings";
     private static final String score = "score";
     private static final String comment = "comment";
+    private static final String user_major = "user_major";
 
     private static final String MOVIE_TABLE = "Movies";
     private static final String title = "title";
@@ -72,7 +73,7 @@ public class Database extends SQLiteOpenHelper{
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "movie_id INTEGER, " +
                 "user_id INTEGER, " +
-                "user_major TEXT, " + //add user_major to rating table. It makes life easier xD
+                user_major + " TEXT, " + //add user_major to rating table. It makes life easier xD
                 score + " REAL, " +
                 comment + " TEXT, " +
                 "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
@@ -253,17 +254,17 @@ public class Database extends SQLiteOpenHelper{
         ContentValues columnIndex = new ContentValues(); //add rating
         columnIndex.put("movie_id", m_id);
         columnIndex.put("user_id", u_id);
-        columnIndex.put(this.score, movie_score);
-        columnIndex.put(this.comment, movie_comment);
-        columnIndex.put("user_major", major);
+        columnIndex.put(score, movie_score);
+        columnIndex.put(comment, movie_comment);
+        columnIndex.put(user_major, major);
         if (exist) {
             String[] selectArgs = new String[] {String.valueOf(u_id), String.valueOf(m_id)};
             SQLiteDatabase data = this.getWritableDatabase();
             ContentValues update = new ContentValues();
-            update.put("user_major", major);
-            update.put("score", rating.getScore());
-            update.put("comment", rating.getComment());
-            data.update("Ratings", update, "user_id =? AND movie_id = ?", selectArgs);
+            update.put(user_major, major);
+            update.put(score, rating.getScore());
+            update.put(comment, rating.getComment());
+            data.update(RATINGS_TABLE, update, "user_id =? AND movie_id = ?", selectArgs);
         } else {
             db.insert(RATINGS_TABLE, null, columnIndex);
         }
@@ -323,35 +324,57 @@ public class Database extends SQLiteOpenHelper{
         return movieList;
     }
 
-    public ArrayList<String> getUserList() {
+    /**
+     * Queries the user table with some filter on the status of users to return
+     * @param statusFilter search for users of a certain status
+     *                     - default (all), unlocked, locked, banned
+     * @return list of strings formatted as "username | email | status"
+     */
+    public ArrayList<String> getUserList(String statusFilter) {
         ArrayList<String> userList = new ArrayList<>();
-        String userData = "";
+        String userText = "";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor users = db.rawQuery("SELECT "
-                + username + ", "
-                + email + ", "
-                + status + " "
-                + "FROM " + USER_TABLE, null);
-        if (users.moveToFirst()) {
-            userData += users.getString(0);
-            userData += " " + users.getString(1);
-            userData += " " + users.getString(2);
-            userList.add(userData);
-            userData = "";
-            while (users.moveToNext()) {
-                userData += users.getString(0);
-                userData += " " + users.getString(1);
-                userData += " " + users.getString(2);
-                userList.add(userData);
-                userData = "";
-            }
+        Cursor users;
+        if (statusFilter.equals("Default")) {
+            users = db.rawQuery("SELECT "
+                    + username + ", "
+                    + email + ", "
+                    + status + " "
+                    + "FROM " + USER_TABLE, null);
+        } else {
+            users = db.rawQuery("SELECT "
+                    + username + ", "
+                    + email + ", "
+                    + status
+                    + " FROM " + USER_TABLE
+                    + " WHERE " + status + " = ?", new String[]{statusFilter});
         }
+        while (users.moveToNext()) {
+            String username = users.getString(0);
+            String email = users.getString(1);
+            String status = users.getString(2);
+            userText += username;
+            userText += " | " + email;
+            userText += " | " + status;
+            userList.add(userText);
+            userText = "";
+        }
+
         return userList;
     }
 
 
+    /**
+     * Updates the status of a user in the db
+     * useful for banning/unlocking users
+     * @param username the user to change status for
+     * @param status what status to set (Unlocked, Locked, Banned)
+     */
     public void updateUserStatus(String username, String status) {
-        //TODO implement
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(this.status, status);
+        db.update(USER_TABLE, cv, this.username + " = ?", new String[]{username});
     }
 }
 
