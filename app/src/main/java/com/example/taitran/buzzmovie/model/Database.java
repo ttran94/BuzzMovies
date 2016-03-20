@@ -359,7 +359,7 @@ public class Database extends SQLiteOpenHelper{
             userList.add(userText);
             userText = "";
         }
-
+        users.close();
         return userList;
     }
 
@@ -375,6 +375,85 @@ public class Database extends SQLiteOpenHelper{
         ContentValues cv = new ContentValues();
         cv.put(this.status, status);
         db.update(USER_TABLE, cv, this.username + " = ?", new String[]{username});
+    }
+
+
+    public ArrayList<String> getRatings(Movie movie, String score, String major) {
+        ArrayList<String> ratingList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String u_id;
+        String m_id;
+        Cursor movieCursor = db.rawQuery("SELECT _id FROM " + MOVIE_TABLE
+                + " WHERE "
+                + title + " = ? AND "
+                + date + " = ? AND "
+                + type + " = ?",
+                new String[]{movie.getTitle(), movie.getYear(), movie.getType()});
+
+        if (movieCursor.moveToFirst()) {
+            m_id = movieCursor.getString(0);
+        } else {
+            return ratingList;
+        }
+        movieCursor.close();
+
+
+        String query = "SELECT user_id, "
+                + user_major + ", "
+                + this.score + ", "
+                + comment
+                + " FROM " + RATINGS_TABLE
+                + " WHERE movie_id = ?";
+        String[] selectArgs;
+
+        if (major.equals("Default") && score.equals("Default")) {
+            selectArgs = new String[]{m_id};
+        } else if (major.equals("Default")) {
+            int scoreNumber = Integer.parseInt(score);
+            query += " AND " + this.score
+                    + " >= " + scoreNumber
+                    + " AND " + this.score
+                    + " <= " + (scoreNumber + 0.99); //in range
+            selectArgs = new String[]{m_id};
+        } else if (score.equals("Default")) {
+            query += " AND " + user_major
+                    + " = ?";
+            selectArgs = new String[]{m_id, major};
+        } else {
+            int scoreNumber = Integer.parseInt(score);
+            query += " AND " + this.score
+                    + " >= " + scoreNumber
+                    + " AND " + this.score
+                    + " <= " + (scoreNumber + 0.99)
+                    + " AND " + user_major
+                    + " = ?";
+            selectArgs = new String[]{m_id, major};
+        }
+
+        Cursor ratingCursor = db.rawQuery(query, selectArgs);
+        String ratingText = "";
+
+        while(ratingCursor.moveToNext()) {
+            u_id = ratingCursor.getString(0);
+            Cursor usernameCursor = db.rawQuery("SELECT " + username
+                + " FROM " + USER_TABLE + " WHERE _id = ?", new String[]{u_id});
+            if (usernameCursor.moveToFirst()) {
+                ratingText += usernameCursor.getString(0);
+            }
+            usernameCursor.close();
+            String majorText = ratingCursor.getString(1);
+            if (!majorText.equals(""))
+                ratingText += " | " + majorText; //user_major
+            ratingText += "\n"; //score
+            for (int i = 0; i < Integer.parseInt(ratingCursor.getString(2)); i++)
+                ratingText += "\u2605"; //add stars
+            ratingText += "\n" + ratingCursor.getString(3); //comment
+            ratingList.add(ratingText);
+            ratingText = "";
+        }
+        ratingCursor.close();
+
+        return ratingList;
     }
 }
 

@@ -1,5 +1,7 @@
 package com.example.taitran.buzzmovie.controller;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,7 +28,7 @@ public class RatingActivity extends AppCompatActivity {
     private String title;
     private String date;
     private String type;
-
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,8 @@ public class RatingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rating);
 
         Bundle extras = getIntent().getExtras();
-        movie = myAdapter.getMovieList().get((int) extras.get("position"));
+        position = (int)extras.get("position");
+        movie = myAdapter.getMovieList().get(position);
         title = movie.getTitle();
         date = movie.getYear();
         type = movie.getType();
@@ -73,12 +76,19 @@ public class RatingActivity extends AppCompatActivity {
         if (rating.getScore() == 0) {
             message = Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
         } else {
-
-            //TODO make active user a singleton
             Database db = new Database(this);
             db.addRating(rating);
             message = Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT);
         }
         message.show();
     }
+
+    public void reviewsButtonPressed(View v) {
+        Context context = v.getContext();
+        Intent reviews = new Intent(context, ReviewListActivity.class);
+        //send position of the movie in movieList for access in the activity
+        reviews.putExtra("position", position);
+        context.startActivity(reviews);
+    }
+
 }

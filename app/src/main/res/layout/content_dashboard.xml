@@ -21,22 +21,7 @@
         android:id="@+id/textView4"
         android:layout_below="@+id/imageButton"
         android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingRight="40dp"
-        android:paddingLeft="40dp"
-        android:text="Logout"
-        android:onClick="logoutButtonPressed"
-        android:layout_below="@+id/editProfileBtn"
-        android:layout_marginTop="20dp"
-        android:layout_alignEnd="@+id/imageButton"
-        android:layout_alignParentStart="true"
-        android:textStyle="bold"
-        android:textSize="20dp" />
+
 
     <Button
         android:id="@+id/filter"
@@ -48,29 +33,11 @@
         android:paddingLeft="40dp"
         android:text="Recommendations"
         android:onClick="reOnPressed"
-        android:layout_below="@+id/welcomeText"
-        android:layout_marginTop="10dp"
-        android:layout_alignEnd="@+id/imageButton"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingRight="40dp"
-        android:paddingLeft="40dp"
-        android:text="Edit Profile"
-        android:onClick="editProfileButtonPressed"
-        android:id="@+id/editProfileBtn"
-        android:layout_below="@+id/filter"
-        android:layout_marginTop="20dp"
-        android:layout_alignEnd="@+id/filter"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_alignParentStart="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -82,13 +49,12 @@
         android:text="Users"
         android:onClick="userListButtonPressed"
         android:id="@+id/userListBtn"
-        android:layout_below="@+id/logoutBtn"
-        android:layout_marginTop="20dp"
-        android:layout_alignEnd="@+id/filter"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:visibility="gone"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/filter"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,6 +78,33 @@
         android:nestedScrollingEnabled="true"
         android:tint="@color/primaryText"
         android:tintMode="src_atop" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_profile"
+        android:background="@null"
+        android:onClick="editProfileButtonPressed"
+        android:id="@+id/editProfileBtn"
+        android:nestedScrollingEnabled="true"
+        android:tint="@color/primaryText"
+        android:tintMode="src_atop"
+        android:layout_above="@+id/textView4"
+        android:layout_toEndOf="@+id/logoutBtn"
+        android:layout_marginStart="21dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_power"
+        android:id="@+id/logoutBtn"
+        android:background="@null"
+        android:onClick="logoutButtonPressed"
+        android:nestedScrollingEnabled="true"
+        android:tint="@color/primaryText"
+        android:tintMode="src_atop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

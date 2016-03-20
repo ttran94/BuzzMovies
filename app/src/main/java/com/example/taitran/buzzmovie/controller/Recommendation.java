@@ -26,13 +26,14 @@ public class Recommendation extends AppCompatActivity implements AdapterView.OnI
     private Spinner majorSpinner;
     private Spinner ratingSpinner;
     private FilterMovie filter;
-    String[] majors
+    private static final String[] majors
             = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
-    String[] rating
+    private static final String[] rating
             = new String[] {"Default", "5", "4", "3", "2", "1"};
     public RedAdapter myadapter;
     private ArrayList<FilterList> movies;
     private RecyclerView viewList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

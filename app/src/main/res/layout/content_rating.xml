@@ -41,11 +41,12 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp" />
 
+
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/date"
         android:id="@+id/ratingBar"
-        android:layout_below="@+id/date"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
 
@@ -68,9 +69,25 @@
         android:paddingLeft="20dp"
         android:text="Submit"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:onClick="submitButtonPressed" />
+        android:onClick="submitButtonPressed"
+        android:layout_below="@+id/review"
+        android:layout_marginTop="10dp"
+        android:layout_alignEnd="@+id/review"
+        android:layout_alignStart="@+id/review" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:text="Other Reviews"
+        android:id="@+id/reviewsBtn"
+        android:layout_alignEnd="@+id/review"
+        android:layout_alignStart="@+id/review"
+        android:onClick="reviewsButtonPressed"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
