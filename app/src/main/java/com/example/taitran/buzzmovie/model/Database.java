@@ -279,12 +279,9 @@ public class Database extends SQLiteOpenHelper{
     public ArrayList<FilterList> getMovieList(String major, String rating) {
         ArrayList<FilterList> movieList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        //TODO Select score between range for float
-        // Somehow the query (score BETWEEN + rating + " AND " + rating + "0.9") doesn't work
-        // no clue, but you can try to fix :)
-        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score = ?", new String[] {rating});
+        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score <= ?+0.9", new String[] {rating, rating});
         if(major != "Default" && rating != "Default") {
-            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score = ? AND user_major = ?", new String[]{rating, major});
+            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score <= ?+0.9 AND user_major = ?", new String[]{rating, major});
         } else if (major.equals("Default") && rating.equals("Default")) {
             ratingList = db.rawQuery("SELECT * FROM Ratings", null);
         } else if (major != "Default" && rating == "Default") {

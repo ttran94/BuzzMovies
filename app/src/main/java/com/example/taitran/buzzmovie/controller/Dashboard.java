@@ -40,6 +40,8 @@ public class Dashboard extends AppCompatActivity{
      */
     public void logoutButtonPressed(View v) {
         Intent welcomePage = new Intent(this, WelcomeActivity.class);
+        welcomePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        welcomePage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(welcomePage);
         userMan.logOut();
         CharSequence text = "Successfully Logged Out";
@@ -79,5 +81,13 @@ public class Dashboard extends AppCompatActivity{
         Log.d("Dashboard Activity", "user list button pressed");
         Intent userlist = new Intent(this, UsersActivity.class);
         startActivity(userlist);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.addCategory(Intent.CATEGORY_HOME);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(home);
+
     }
 }

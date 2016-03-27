@@ -28,8 +28,9 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     public void cancelButtonPressed(View v) {
         Log.d("Edit Password Activity", "Cancel button pressed");
-        Intent dashboard = new Intent(this, EditProfileActivity.class);
-        startActivity(dashboard);
+        Intent editActivity = new Intent(this, EditProfileActivity.class);
+        editActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(editActivity);
         CharSequence text = "Canceled";
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

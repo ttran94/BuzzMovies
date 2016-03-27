@@ -36,11 +36,12 @@
 
         <Button
             android:layout_width="60dp"
-            android:layout_height="31dp"
+            android:layout_height="wrap_content"
             android:text="GO"
             android:id="@+id/filter"
             android:onClick="filterButtonPressed"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-10dp"/>
 
     </RelativeLayout>
 

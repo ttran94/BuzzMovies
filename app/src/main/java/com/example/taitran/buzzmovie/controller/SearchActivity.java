@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,6 +43,7 @@ import com.example.taitran.buzzmovie.model.myAdapter;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private static final String SAVED_MOVIE ="movies" ;
     private String url = "http://www.omdbapi.com/?s=";
     private VolleySingleton volleySingleton;
     private RequestQueue queue;
@@ -50,7 +52,6 @@ public class SearchActivity extends AppCompatActivity {
     public myAdapter myadapter;
     private RecyclerView viewList;
     private EditText searchEditText;
-
     /**
      * 0 : all
      * 1 : movies
@@ -70,8 +71,17 @@ public class SearchActivity extends AppCompatActivity {
         searchEditText = (EditText) findViewById(R.id.searchBar);
         myadapter = new myAdapter(this);
         viewList.setLayoutManager(new LinearLayoutManager(this));
+        if (savedInstanceState != null) {
+            movieList = savedInstanceState.getParcelableArrayList(SAVED_MOVIE);
+            myadapter.setMovieList(movieList);
+        }
+        viewList.setAdapter(myadapter);
     }
-
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putParcelableArrayList(SAVED_MOVIE, movieList);
+    }
     /**
      * Send a REST request and expect a JSON response
      * in this case, we will get the JSONObject that contains the search result
@@ -167,6 +177,7 @@ public class SearchActivity extends AppCompatActivity {
         Log.d("Search Activity", "cancel button pressed");
         searchEditText.setText("");
         movieList.clear();
+        myadapter.setMovieList(movieList);
         viewList.setAdapter(myadapter);
     }
 

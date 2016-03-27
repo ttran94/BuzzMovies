@@ -63,8 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("Login Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.userName)).setText("");
         ((EditText) findViewById(R.id.Pass)).setText((""));
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
+        finish();
         CharSequence text = "Canceled";
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
@@ -72,4 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         message.show();
     }
 
+    public void logTextClicked(View v) {
+        finish();
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
 }

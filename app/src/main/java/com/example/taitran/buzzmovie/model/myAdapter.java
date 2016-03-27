@@ -1,11 +1,13 @@
 package com.example.taitran.buzzmovie.model;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +57,20 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
     public static ArrayList<Movie> getMovieList() {
         return (ArrayList<Movie>) movieList.clone();
     }
+    //translation animation
+    //I'm going to leave it here if you want to try it
+    private static void translation(RecyclerView.ViewHolder holder) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationY", -100, 0);
+        animator.setDuration(1000);
+        animator.start();
+    }
 
+    //alpha animation(fade in/out)
+    private void fadeInAnimation(View view) {
+        AlphaAnimation animator = new AlphaAnimation(0.0f, 1.0f);
+        animator.setDuration(1000);
+        view.startAnimation(animator);
+    }
 
     @Override
     public void onBindViewHolder(MovieView holder, int position) {
@@ -64,7 +79,6 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         holder.movieDate.setText("Year: " + currentView.getYear());
         holder.movieType.setText("Type: " + currentView.getType());
         String thumbNail = currentView.getPoster();
-        holder.moviePosterURL = thumbNail;
         holder.position = position;
         final MovieView temp = holder;
         if(thumbNail != null) {
@@ -81,6 +95,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         });
 
         }
+        fadeInAnimation(holder.itemView);
     }
 
     @Override
@@ -93,7 +108,6 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         private TextView movieTitle;
         private TextView movieDate;
         private TextView movieType;
-        private String moviePosterURL;
         private int position;
 
         public MovieView(View itemView) {

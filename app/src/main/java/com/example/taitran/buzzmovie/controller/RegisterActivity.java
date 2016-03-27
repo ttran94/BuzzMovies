@@ -10,6 +10,7 @@ import android.view.View;
 import android.util.Log;
 import android.widget.EditText;
 import android.content.Context;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taitran.buzzmovie.model.UserAuthentication;
@@ -33,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity{
         EditText username = (EditText) findViewById(R.id.regUserName);
         EditText password = (EditText) findViewById(R.id.regPass);
         EditText email = (EditText) findViewById(R.id.regEmail);
-
         CharSequence text = "Registration Success";
 
         try {
@@ -58,12 +58,17 @@ public class RegisterActivity extends AppCompatActivity{
         ((EditText) findViewById(R.id.regUserName)).setText("");
         ((EditText) findViewById(R.id.regPass)).setText((""));
         ((EditText) findViewById(R.id.regEmail)).setText((""));
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
+        finish();
         CharSequence text = "Canceled";
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast message = Toast.makeText(context, text, duration);
         message.show();
+    }
+
+    public void regTextOnClicked(View v) {
+        finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }
