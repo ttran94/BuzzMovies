@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 /**
  * Created by taitr on 2/6/2016.
+ * UserManagerFacde that handles all functionality for the user
  */
 public class UserManager implements UserAuthentication, UserManagement{
     private static String[] majors
@@ -104,14 +105,28 @@ public class UserManager implements UserAuthentication, UserManagement{
         return activeUser;
     }
 
+    /**
+     * set active user to null when the user log out
+     */
     public void logOut() {
         activeUser = null;
     }
 
+    /**
+     * get the majors array
+     * @return the array for major
+     */
     public String[] getMajors() {
         return majors;
     }
 
+    /**
+     * check if password is matched with old password
+     * then update the password with new pass
+     * @param oldPass user's old pass
+     * @param newPass  user's new pass
+     * @return true or false if password is updated sucessfully
+     */
     public boolean updatePassword(String oldPass, String newPass) {
         boolean passCheck = activeUser.setPassword(activeUser.getPassword(), newPass);
         if (passCheck) {
@@ -122,16 +137,28 @@ public class UserManager implements UserAuthentication, UserManagement{
         }
     }
 
+    /**
+     * update user's email
+     * @param email of user
+     */
     public void updateEmail(String email) {
         activeUser.setEmail(email);
         db.setEmail(email, activeUser.getUsername());
     }
 
+    /**
+     * update user's bio
+     * @param bio of user
+     */
     public void updateBio(String bio) {
         activeUser.setBio(bio);
         db.setBio(bio, activeUser.getUsername());
     }
 
+    /**
+     * update user's major
+     * @param major of user
+     */
     public void updateMajor(String major) {
         activeUser.setMajor(major);
         db.setMajor(major, activeUser.getUsername());

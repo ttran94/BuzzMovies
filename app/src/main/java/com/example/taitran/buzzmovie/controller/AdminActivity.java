@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.taitran.buzzmovie.model.FragmentAdapter;
+import com.example.taitran.buzzmovie.model.UserManagement;
+import com.example.taitran.buzzmovie.model.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         myadapter = new FragmentAdapter(getSupportFragmentManager());
+        // add the fragment object to the adapter and attached it to the activity
         myadapter.addFragment(new UsersActivity(), "Users");
         myadapter.addFragment(new AddUser(), "Add Account");
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,7 +44,6 @@ public class AdminActivity extends AppCompatActivity {
         mTab = (TabLayout) findViewById(R.id.tab_layout);
         mpager.setAdapter(myadapter);
         mTab.setupWithViewPager(mpager);
-
     }
 
 
@@ -55,9 +57,12 @@ public class AdminActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.logout) {
+            UserManagement user = new UserManager();
+            user.logOut();
             finish();
             startActivity(new Intent(this, WelcomeActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -57,7 +57,6 @@ public class Dashboard extends AppCompatActivity{
         Intent editProfilePage = new Intent(this, EditProfileActivity.class);
         startActivity(editProfilePage);
     }
-
     /**
      * redirect the user to search activity
      * if the button is pressed
@@ -68,6 +67,7 @@ public class Dashboard extends AppCompatActivity{
         Intent search = new Intent(this, SearchActivity.class);
         startActivity(search);
     }
+
     public void reOnPressed(View v) {
         Log.d("Dashboard Activity", "search button pressed");
         Intent search = new Intent(this, Recommendation.class);

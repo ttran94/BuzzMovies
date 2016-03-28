@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Created by andie on 3/17/2016.
+ * display user list and handle onclicklistener
  */
 public class UsersActivity extends Fragment {
 
