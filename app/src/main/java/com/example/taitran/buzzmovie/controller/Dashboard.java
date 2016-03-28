@@ -29,9 +29,6 @@ public class Dashboard extends AppCompatActivity{
         userMan = new UserManager();
         ((TextView) findViewById(R.id.welcomeText)).setText(("Welcome, " + userMan.getActiveUser().getUsername()));
         //TODO some condition to check if activeUser is admin
-        //if admin {
-        ((Button) findViewById(R.id.userListBtn)).setVisibility(View.VISIBLE);
-        //}
     }
 
     /**
@@ -77,17 +74,11 @@ public class Dashboard extends AppCompatActivity{
         startActivity(search);
     }
 
-    public void userListButtonPressed(View v) {
-        Log.d("Dashboard Activity", "user list button pressed");
-        Intent userlist = new Intent(this, UsersActivity.class);
-        startActivity(userlist);
-    }
     @Override
     public void onBackPressed() {
         Intent home = new Intent(Intent.ACTION_MAIN);
         home.addCategory(Intent.CATEGORY_HOME);
         home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(home);
-
     }
 }

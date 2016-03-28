@@ -28,7 +28,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         db = new Database(context);
     }
 
-    public void addUser(String email, String username, String password) {
+    public void addUser(String email, String username, String password, String type) {
         if(!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("Invalid email address");
         }
@@ -48,7 +48,7 @@ public class UserManager implements UserAuthentication, UserManagement{
             throw new IllegalArgumentException("Invalid password");
         }
 
-        db.addUser(username, password, email);
+        db.addUser(username, password, email, type);
     }
 
 
@@ -66,6 +66,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         String major = "";
         String bio = "";
         String status = "";
+        String type = "";
 
         if (db.IsEmpty(username)) { //userId method couldn't find matching username
             throw new IllegalArgumentException("Username does not exist.");
@@ -78,12 +79,17 @@ public class UserManager implements UserAuthentication, UserManagement{
             major = data.getString(data.getColumnIndex(db.major));
             bio = data.getString(data.getColumnIndex(db.bio));
             status = data.getString(data.getColumnIndex(db.status));
+            type = data.getString(data.getColumnIndex(db.user_type));
             //TODO if status = locked/banned...
             data.close();
         }
-        User user = new User(email, name, pass);
+        User user = new User(email, name, pass, type);
         if (!user.passwordHandler(password)) {
             throw new IllegalArgumentException("Incorrect password");
+        } else if (status.equals(db.locked)) {
+            throw new IllegalArgumentException("Your account has been locked");
+        } else if (status.equals(db.banned)) {
+            throw new IllegalArgumentException("Your account has been banned");
         }
         user.setBio(bio);
         user.setMajor(major);

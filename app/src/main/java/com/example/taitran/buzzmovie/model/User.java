@@ -11,6 +11,8 @@ public class User {
     private String email;
     private String major;
     private String bio;
+    private String status;
+    private String type;
 
     /**
      * a user constructor that will set up the user profile
@@ -19,12 +21,13 @@ public class User {
      * @param username of the user
      * @param password of the user
      */
-    public User(String email, String username,String password) {
+    public User(String email, String username,String password, String type) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.major = "";
         this.bio = "";
+        this.type = type;
     }
 
     /**
@@ -88,6 +91,21 @@ public class User {
     }
 
     /**
+     * get user's type
+     * @return user's type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * set user's type
+     * @param type of user
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+    /**
      * set the user's major
      * @param major get the major
      */
@@ -122,5 +140,7 @@ public class User {
     public String getBio() {
         return bio;
     }
+
+
 
 }

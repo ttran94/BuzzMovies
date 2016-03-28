@@ -10,7 +10,7 @@ public interface UserManagement {
      * @param username user's name
      * @param password user's pass
      */
-    void addUser(String email, String username, String password);
+    void addUser(String email, String username, String password, String type);
 
     /**
      * return active user

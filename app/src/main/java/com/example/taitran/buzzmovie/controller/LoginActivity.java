@@ -14,10 +14,11 @@ import android.content.Intent;
 
 import com.example.taitran.buzzmovie.model.User;
 import com.example.taitran.buzzmovie.model.UserAuthentication;
+import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public void loginButtonPressed(View v) {
         Log.d("Login Activity", "Login button pressed");
         UserAuthentication user = new UserManager(this);
+        UserManagement activeUser = new UserManager();
         EditText username = (EditText) findViewById(R.id.userName);
         EditText password = (EditText) findViewById(R.id.Pass);
         CharSequence text;
@@ -39,9 +41,21 @@ public class LoginActivity extends AppCompatActivity {
         text = "Login Success";
 
         try {
+
             user.loginRequest(username.getText().toString(), password.getText().toString());
-            Intent dashboard = new Intent(this, Dashboard.class);
-            startActivity(dashboard);
+            type = activeUser.getActiveUser().getType();
+            if(type.equals("User")) {
+                Intent intent = new Intent(this, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (type.equals("Admin")) {
+                Intent intent = new Intent(this, AdminActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+
         } catch (IllegalArgumentException e) {
             text = e.getMessage();
             //this is where you would increment an attempted login

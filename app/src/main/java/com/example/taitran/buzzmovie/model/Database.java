@@ -29,6 +29,10 @@ public class Database extends SQLiteOpenHelper{
     protected static final String major = "major";
     protected static final String bio = "bio";
     protected static  final String status = "status";
+    protected static  final String user_type = "type";
+    //User Type
+    protected static  final String normal = "User";
+    protected static  final String admin = "Admin";
     //STATUSES
     protected static  final String unlocked = "Unlocked";
     protected static  final String locked = "Locked";
@@ -61,7 +65,8 @@ public class Database extends SQLiteOpenHelper{
                 email + " VARCHAR(255), " +
                 major + " VARCHAR(255), " +
                 bio + " VARCHAR(255), " +
-                status + " VARCHAR(255))"); //unlocked, locked, banned
+                status + " VARCHAR(255), " + //unlocked, locked, banned
+                user_type + " VARCHAR(255))");
 
         database.execSQL("CREATE TABLE " + MOVIE_TABLE + " (" + //TODO maybe add genre/description
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -136,7 +141,7 @@ public class Database extends SQLiteOpenHelper{
      * @param password password ofr user
      * @param email email of user
      */
-    protected void addUser(String username, String password, String email) {
+    protected void addUser(String username, String password, String email, String type) {
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues columnIndex = new ContentValues();
         columnIndex.put(this.username, username);
@@ -145,6 +150,11 @@ public class Database extends SQLiteOpenHelper{
         columnIndex.put(this.major, "");
         columnIndex.put(this.bio, "");
         columnIndex.put(this.status, unlocked);
+        if (type.equals(normal)) {
+            columnIndex.put(this.user_type, normal);
+        } else {
+            columnIndex.put(this.user_type, admin);
+        }
         data.insert(USER_TABLE, null, columnIndex);
     }
 

@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity{
     }
 
     public void registerButtonPressed(View w) {
+        String type = "User";
         Log.d("Register Activity", "Register button pressed");
         UserManagement manager = new UserManager(this);
         EditText username = (EditText) findViewById(R.id.regUserName);
@@ -37,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity{
         CharSequence text = "Registration Success";
 
         try {
-            manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString());
+            manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString(), type);
             UserAuthentication user = new UserManager(this);
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
