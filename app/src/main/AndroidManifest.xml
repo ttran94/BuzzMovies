@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Blue">
         <activity
-            android:name=".AdminActivity"
-            android:label="Admin Panel"
+            android:name=".WelcomeActivity"
             android:theme="@style/AppTheme.Blue">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".AdminActivity"
+            android:label="Admin Panel"
             android:theme="@style/AppTheme.Blue" />
         <activity
             android:name=".LoginActivity"
