@@ -97,8 +97,16 @@ public class UserManager implements UserAuthentication, UserManagement{
         return activeUser;
     }
 
-   @Override
-    public void setActiveUser(User user) {
+    @Override
+    public void setActiveUser(String email, String name, String pass, String bio, String major, String type) {
+        User user = new User(email, name, pass, type);
+        user.setMajor(major);
+        user.setBio(bio);
+        activeUser = user;
+    }
+
+    @Override
+    public void logOut(User user) {
         activeUser = user;
     }
 

@@ -34,10 +34,16 @@ public interface UserManagement {
     boolean updatePassword(String oldPass,String newPass);
 
     /**
-     * this method sets the active user
-     * @param user's object which contains user's information
+     * this method get the user info from database
+     * and set active user to that user object
+     * @param email's user
+     * @param name's user
+     * @param pass's user
+     * @param bio's user
+     * @param major's user
+     * @param type's user
      */
-    void setActiveUser(User user);
+    void setActiveUser(String email, String name, String pass, String bio, String major, String type);
 
     /**
      * update user's email
@@ -57,5 +63,9 @@ public interface UserManagement {
      */
     void updateBio(String bio);
 
-
+    /**
+     * set activeuser to null and log out
+     * @param user object which contains user information
+     */
+    void logOut(User user);
 }

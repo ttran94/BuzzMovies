@@ -216,11 +216,8 @@ public class Database extends SQLiteOpenHelper{
             major = current.getString(current.getColumnIndex(this.major));
             bio = current.getString(current.getColumnIndex(this.bio));
             type = current.getString(current.getColumnIndex(this.user_type));
-            User loggedUser = new User(email, name, pass, type);
-            loggedUser.setBio(bio);
-            loggedUser.setMajor(major);
             UserManagement setUser = new UserManager();
-            setUser.setActiveUser(loggedUser);
+            setUser.setActiveUser(email, name, pass, bio, major, type);
         }
         data.close();
         return isLoggedIn;
@@ -236,7 +233,7 @@ public class Database extends SQLiteOpenHelper{
         String[] whereArgs = new String[] { user.getUsername() };
         data.delete(ACTIVE_USER, whereClause, whereArgs);
         UserManagement clearUser = new UserManager();
-        clearUser.setActiveUser(null);
+        clearUser.logOut(null);
     }
 
     /**

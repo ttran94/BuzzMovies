@@ -28,6 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_welcome);
         db = new Database(this);
         boolean isLoggedIn = db.isUserLoggedIn();
         if(isLoggedIn) {
@@ -45,7 +46,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-        setContentView(R.layout.activity_welcome);
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
