@@ -18,7 +18,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class WelcomeActivity extends AppCompatActivity {
     private Database db;
-    private UserManagement getActiveUser;
+    private UserManagement getAUser;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -29,11 +29,10 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        db = new Database(this);
-        boolean isLoggedIn = db.isUserLoggedIn();
-        if(isLoggedIn) {
-            getActiveUser = new UserManager();
-            String type = getActiveUser.getActiveUser().getType();
+        getAUser = new UserManager(this);
+        getAUser.setActiveUser();
+        String type = getAUser.getActiveUser().getType();
+        if (type != null) {
             if(type.equals("User")) {
                 Intent intent = new Intent(this, Dashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

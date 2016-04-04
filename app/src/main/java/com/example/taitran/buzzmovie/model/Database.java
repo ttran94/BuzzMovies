@@ -196,31 +196,20 @@ public class Database extends SQLiteOpenHelper{
      * @return true or false if the user is logged in or not
      */
     public boolean isUserLoggedIn() {
-        String name = "";
-        String pass = "";
-        String email = "";
-        String major = "";
-        String bio = "";
-        String type = "";
         boolean isLoggedIn = true;
         SQLiteDatabase data = this.getReadableDatabase();
-        Cursor current = data.rawQuery("Select * from " + ACTIVE_USER , null);
+        Cursor current = data.rawQuery("Select * from " + ACTIVE_USER, null);
         int value = current.getCount();
         if (value <= 0) {
             isLoggedIn = false;
-        } else {
-            current.moveToFirst();
-            name = current.getString(current.getColumnIndex(this.username));
-            pass = current.getString(current.getColumnIndex(this.password));
-            email = current.getString(current.getColumnIndex(this.email));
-            major = current.getString(current.getColumnIndex(this.major));
-            bio = current.getString(current.getColumnIndex(this.bio));
-            type = current.getString(current.getColumnIndex(this.user_type));
-            UserManagement setUser = new UserManager();
-            setUser.setActiveUser(email, name, pass, bio, major, type);
         }
-        data.close();
+        current.close();
         return isLoggedIn;
+    }
+
+    public Cursor getUser() {
+        SQLiteDatabase data = this.getReadableDatabase();
+        return data.rawQuery("Select * from " + ACTIVE_USER , null);
     }
 
     /**

@@ -53,6 +53,11 @@ public class UserManager implements UserAuthentication, UserManagement{
         db.addUser(username, password, email, type);
     }
 
+    @Override
+    public User getActiveUser() {
+        return activeUser;
+    }
+
 
     @Override
     public void loginRequest(String username, String password) {
@@ -92,23 +97,39 @@ public class UserManager implements UserAuthentication, UserManagement{
         db.addActiveUser(activeUser, status);
     }
 
-    @Override
-    public User getActiveUser() {
-        return activeUser;
-    }
+
 
     @Override
-    public void setActiveUser(String email, String name, String pass, String bio, String major, String type) {
-        User user = new User(email, name, pass, type);
-        user.setMajor(major);
-        user.setBio(bio);
-        activeUser = user;
+    public void setActiveUser() {
+        String name = "";
+        String pass = "";
+        String email = "";
+        String major = "";
+        String bio = "";
+        String type = "";
+        if(db.isUserLoggedIn()) {
+            Cursor data = db.getUser();
+            data.moveToFirst();
+            name = data.getString(data.getColumnIndex(db.username));
+            pass = data.getString(data.getColumnIndex(db.password));
+            email = data.getString(data.getColumnIndex(db.email));
+            major = data.getString(data.getColumnIndex(db.major));
+            bio = data.getString(data.getColumnIndex(db.bio));
+            type = data.getString(data.getColumnIndex(db.user_type));
+            data.close();
+        }
+        User newActiveUser = new User(email, name, pass, type);
+        newActiveUser.setBio(bio);
+        newActiveUser.setMajor(major);
+        activeUser = newActiveUser;
     }
 
     @Override
     public void logOut(User user) {
         activeUser = user;
     }
+
+
 
     @Override
     public String[] getMajors() {

@@ -36,14 +36,8 @@ public interface UserManagement {
     /**
      * this method get the user info from database
      * and set active user to that user object
-     * @param email's user
-     * @param name's user
-     * @param pass's user
-     * @param bio's user
-     * @param major's user
-     * @param type's user
      */
-    void setActiveUser(String email, String name, String pass, String bio, String major, String type);
+    void setActiveUser();
 
     /**
      * update user's email
