@@ -304,8 +304,7 @@ public class Database extends SQLiteOpenHelper{
         String movieSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ? AND %s = %s AND %s = ?",
                 MOVIE_TABLE, title, date, movie_date, type);
         Cursor cursor = db.rawQuery(movieSelectQuery, new String[]{movie_title, movie_type});
-        //TODO maybe a better way to do this
-        while (!cursor.moveToFirst()) { //movie doesnt exist in database
+        if (!cursor.moveToFirst()) { //movie doesnt exist in database
             ContentValues columnIndex = new ContentValues(); //add new movie
             columnIndex.put(title, movie_title);
             columnIndex.put(date, movie_date);
@@ -313,24 +312,25 @@ public class Database extends SQLiteOpenHelper{
             columnIndex.put(poster, movie_url);
             db.insert(MOVIE_TABLE, null, columnIndex);
         }
-        m_id = cursor.getInt(0);
         cursor.close();
+        Cursor cursor1 = db.rawQuery(movieSelectQuery, new String[]{movie_title, movie_type});
+        cursor1.moveToFirst();
+        m_id = cursor1.getInt(cursor1.getColumnIndex("_id"));
         String userSelectQuery = String.format("SELECT * FROM %s WHERE %s = ?",
                 USER_TABLE, username);
-        cursor = db.rawQuery(userSelectQuery, new String[]{rating.getUsername()});
-        if(cursor.moveToFirst()) {
-            u_id = Long.parseLong(cursor.getString(cursor.getColumnIndex("_id")));
-            major = cursor.getString(cursor.getColumnIndex("major"));
+        Cursor userTable = db.rawQuery(userSelectQuery, new String[]{rating.getUsername()});
+        if(userTable.moveToFirst()) {
+            u_id = Long.parseLong(userTable.getString(userTable.getColumnIndex("_id")));
+            major = userTable.getString(userTable.getColumnIndex("major"));
         } else {
             throw new IllegalArgumentException("user is not valid");
         }
-        cursor.close();
+        userTable.close();
         //check if the movie is already rated by that same user
         //if yes, then update the score
         //otherwise, add it to the database.
         Cursor check = db.rawQuery("SELECT user_id FROM Ratings WHERE user_id = ? AND movie_id = ?", new String[] {String.valueOf(u_id), String.valueOf(m_id)});
         boolean exist = check.moveToFirst();
-        check.close();
         ContentValues columnIndex = new ContentValues(); //add rating
         columnIndex.put("movie_id", m_id);
         columnIndex.put("user_id", u_id);
@@ -348,6 +348,7 @@ public class Database extends SQLiteOpenHelper{
         } else {
             db.insert(RATINGS_TABLE, null, columnIndex);
         }
+        check.close();
     }
 
     /**

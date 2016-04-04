@@ -129,7 +129,10 @@ public class UserManager implements UserAuthentication, UserManagement{
         activeUser = user;
     }
 
-
+    @Override
+    public void setRating(Rating rating) {
+        db.addRating(rating);
+    }
 
     @Override
     public String[] getMajors() {

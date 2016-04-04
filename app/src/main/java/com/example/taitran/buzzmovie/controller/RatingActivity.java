@@ -29,6 +29,7 @@ public class RatingActivity extends AppCompatActivity {
     private String date;
     private String type;
     private int position;
+    private UserManagement userMan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class RatingActivity extends AppCompatActivity {
         date = movie.getYear();
         type = movie.getType();
         String poster_url = movie.getPoster();
+        userMan = new UserManager(this);
 
         ((TextView)findViewById(R.id.title)).setText(title);
         ((TextView)findViewById(R.id.date)).setText(date);
@@ -68,7 +70,7 @@ public class RatingActivity extends AppCompatActivity {
      * @param v reference to submit button when pressed
      */
     public void submitButtonPressed(View v) {
-        UserManagement userMan = new UserManager(this); //only need this for the active user
+          //only need this for the active user
         Rating rating = new Rating(userMan.getActiveUser().getUsername(), movie,
                 ((RatingBar)findViewById(R.id.ratingBar)).getRating(),
                 ((EditText) findViewById(R.id.review)).getText().toString());
@@ -76,8 +78,7 @@ public class RatingActivity extends AppCompatActivity {
         if (rating.getScore() == 0) {
             message = Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT);
         } else {
-            Database db = new Database(this);
-            db.addRating(rating);
+            userMan.setRating(rating);
             message = Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT);
         }
         message.show();

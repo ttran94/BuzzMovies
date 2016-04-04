@@ -62,4 +62,10 @@ public interface UserManagement {
      * @param user object which contains user information
      */
     void logOut(User user);
+
+    /**
+     * update or set the rating for the movie
+     * @param rating object that contains movie's rating
+     */
+    void setRating(Rating rating);
 }
