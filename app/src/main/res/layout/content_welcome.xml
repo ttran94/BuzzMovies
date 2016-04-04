@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="70dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
@@ -17,26 +17,31 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="60dp"
-            android:layout_gravity="center_horizontal" />
-        <Button
-            android:id="@+id/welcomeLoginBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="15dp"
-            android:padding="12dp"
-            android:onClick="onLoginButtonClicked"
-            android:text="LOGIN"/>
+            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+            <Button
+                android:id="@+id/welcomeLoginBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="15dp"
+                android:padding="20dp"
+                android:onClick="onLoginButtonClicked"
+                android:text="LOGIN"/>
 
-        <Button
-            android:id="@+id/welcomeRegisterBtn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:padding="12dp"
-            android:onClick="onRegisterButtonClicked"
-            android:text="REGISTER"/>
+            <Button
+                android:id="@+id/welcomeRegisterBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="20dp"
+                android:onClick="onRegisterButtonClicked"
+                android:text="REGISTER"/>
 
-
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

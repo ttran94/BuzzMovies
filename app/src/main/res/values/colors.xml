@@ -17,11 +17,11 @@
     <color name="accentLight">#0F6821</color>
     <color name="accentDark">#093F2E</color>
     -->
-    <color name="background_light">#90CAF9</color>
-    <color name="transparent">#42A5F5</color>
-    <color name="primary">#2196F3</color>
+    <color name="background_light">#81D4FA</color>
+    <color name="transparent">#4FC3F7</color>
+    <color name="primary">#03A9F4</color>
     <color name="primary_blue">#0D47A1</color>
-    <color name="primary_darker_blue">#0D47A1</color>
+    <color name="primary_darker_blue">#01579B</color>
     <color name="accent">#FFFFFF</color>
     <color name="iron">#CCCCCC</color>
     <color name="white">#FFFFFF</color>

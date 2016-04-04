@@ -11,7 +11,6 @@ public class User {
     private String email;
     private String major;
     private String bio;
-    private String status;
     private String type;
 
     /**

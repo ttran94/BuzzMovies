@@ -37,6 +37,7 @@ public class Database extends SQLiteOpenHelper{
     protected static  final String unlocked = "Unlocked";
     protected static  final String locked = "Locked";
     protected static  final String banned = "Banned";
+    private static final String ACTIVE_USER = "Active_User";
 
     private static final String RATINGS_TABLE = "Ratings";
     private static final String score = "score";
@@ -83,6 +84,15 @@ public class Database extends SQLiteOpenHelper{
                 comment + " TEXT, " +
                 "FOREIGN KEY(movie_id) REFERENCES " + MOVIE_TABLE + "(_id), " + //reference to the movie in our db
                 "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(_id)) "); //reference to user);
+        database.execSQL("CREATE TABLE " + ACTIVE_USER + " (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                username + " VARCHAR(255), " +
+                password + " VARCHAR(255), " +
+                email + " VARCHAR(255), " +
+                major + " VARCHAR(255), " +
+                bio + " VARCHAR(255), " +
+                status + " VARCHAR(255), " + //unlocked, locked, banned
+                user_type + " VARCHAR(255))");
     }
 
     //automatically update when we make change to the User table
@@ -121,10 +131,9 @@ public class Database extends SQLiteOpenHelper{
         return isEmpty;
     }
 
-    //get the data if username exists
 
     /**
-     * return a sub table of database
+     * get the data if username exists
      * @param name username
      * @return cursor of table
      */
@@ -134,7 +143,6 @@ public class Database extends SQLiteOpenHelper{
     }
 
     //insert data to the User table(register)
-
     /**
      * add user to the database
      * @param username name of user
@@ -158,10 +166,81 @@ public class Database extends SQLiteOpenHelper{
         data.insert(USER_TABLE, null, columnIndex);
     }
 
-    //update major info to server
+    /**
+     * this method adds logged on user for data persistent
+     * when the app is closed
+     * @param user object which contains user's infomation
+     * @param status of the user
+     */
+    protected void addActiveUser(User user, String status) {
+        SQLiteDatabase data = this.getWritableDatabase();
+        ContentValues columnIndex = new ContentValues();
+        columnIndex.put(this.username, user.getUsername());
+        columnIndex.put(this.password, user.getPassword());
+        columnIndex.put(this.email, user.getEmail());
+        columnIndex.put(this.major, user.getMajor());
+        columnIndex.put(this.bio, user.getBio());
+        columnIndex.put(this.status, status);
+        if (user.getType().equals(normal)) {
+            columnIndex.put(this.user_type, normal);
+        } else {
+            columnIndex.put(this.user_type, admin);
+        }
+        data.insert(ACTIVE_USER, null, columnIndex);
+    }
+
 
     /**
-     * update user major
+     * check if the user is already logged in
+     * if yes then set the active user to that user
+     * @return true or false if the user is logged in or not
+     */
+    public boolean isUserLoggedIn() {
+        String name = "";
+        String pass = "";
+        String email = "";
+        String major = "";
+        String bio = "";
+        String type = "";
+        boolean isLoggedIn = true;
+        SQLiteDatabase data = this.getReadableDatabase();
+        Cursor current = data.rawQuery("Select * from " + ACTIVE_USER , null);
+        int value = current.getCount();
+        if (value <= 0) {
+            isLoggedIn = false;
+        } else {
+            current.moveToFirst();
+            name = current.getString(current.getColumnIndex(this.username));
+            pass = current.getString(current.getColumnIndex(this.password));
+            email = current.getString(current.getColumnIndex(this.email));
+            major = current.getString(current.getColumnIndex(this.major));
+            bio = current.getString(current.getColumnIndex(this.bio));
+            type = current.getString(current.getColumnIndex(this.user_type));
+            User loggedUser = new User(email, name, pass, type);
+            loggedUser.setBio(bio);
+            loggedUser.setMajor(major);
+            UserManagement setUser = new UserManager();
+            setUser.setActiveUser(loggedUser);
+        }
+        data.close();
+        return isLoggedIn;
+    }
+
+    /**
+     * set the active user to null and log the user out of the system
+     * @param user object that we want to remove and set to null
+     */
+    public void logUserOut(User user) {
+        SQLiteDatabase data = this.getWritableDatabase();
+        String whereClause = "username" + "=?";
+        String[] whereArgs = new String[] { user.getUsername() };
+        data.delete(ACTIVE_USER, whereClause, whereArgs);
+        UserManagement clearUser = new UserManager();
+        clearUser.setActiveUser(null);
+    }
+
+    /**
+     * update major info to server
      * @param major user's major
      * @param username user's name
      */
@@ -170,12 +249,13 @@ public class Database extends SQLiteOpenHelper{
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newMajor = new ContentValues();
         newMajor.put("major", major);
-        data.update("User", newMajor, "username =?", selectArgs);
-    }
+        data.update(USER_TABLE, newMajor, "username =?", selectArgs);
+        data.update(ACTIVE_USER, newMajor, "username =?", selectArgs);
+}
 
-    //update bio info to server
+
     /**
-     * update user major
+     * update update bio info to server
      * @param bio user's bio
      * @param username user's name
      */
@@ -184,12 +264,12 @@ public class Database extends SQLiteOpenHelper{
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newBio = new ContentValues();
         newBio.put("bio", bio);
-        data.update("User", newBio, "username =?", selectArgs);
+        data.update(USER_TABLE, newBio, "username =?", selectArgs);
+        data.update(ACTIVE_USER, newBio, "username =?", selectArgs);
     }
 
-    //update password info to server
     /**
-     * update user major
+     * update password info to server
      * @param password user's major
      * @param username user's name
      */
@@ -198,16 +278,22 @@ public class Database extends SQLiteOpenHelper{
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newPassword = new ContentValues();
         newPassword.put("password", password);
-        data.update("User", newPassword, "username =?", selectArgs);
+        data.update(USER_TABLE, newPassword, "username =?", selectArgs);
+        data.update(ACTIVE_USER, newPassword, "username =?", selectArgs);
     }
 
-    //update email info to server
+    /**
+     * update email info to server
+     * @param email user's email
+     * @param username user's name
+     */
     protected void setEmail(String email, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newEmail = new ContentValues();
         newEmail.put("email", email);
-        data.update("User", newEmail, "username =?", selectArgs);
+        data.update(USER_TABLE, newEmail, "username =?", selectArgs);
+        data.update(ACTIVE_USER, newEmail, "username =?", selectArgs);
     }
 
     //TODO make this protected when you make a Rating Object in the model
@@ -240,8 +326,6 @@ public class Database extends SQLiteOpenHelper{
             columnIndex.put(type, movie_type);
             columnIndex.put(poster, movie_url);
             db.insert(MOVIE_TABLE, null, columnIndex);
-            //deprecated
-            cursor.requery();
         }
         m_id = cursor.getInt(0);
         cursor.close();
@@ -289,9 +373,9 @@ public class Database extends SQLiteOpenHelper{
     public ArrayList<FilterList> getMovieList(String major, String rating) {
         ArrayList<FilterList> movieList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score <= ?+0.9", new String[] {rating, rating});
+        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1", new String[] {rating, rating});
         if(major != "Default" && rating != "Default") {
-            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score <= ?+0.9 AND user_major = ?", new String[]{rating, major});
+            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1 AND user_major = ?", new String[]{rating, rating, major});
         } else if (major.equals("Default") && rating.equals("Default")) {
             ratingList = db.rawQuery("SELECT * FROM Ratings", null);
         } else if (major != "Default" && rating == "Default") {
@@ -452,7 +536,7 @@ public class Database extends SQLiteOpenHelper{
             if (!majorText.equals(""))
                 ratingText += " | " + majorText; //user_major
             ratingText += "\n"; //score
-            for (int i = 0; i < Integer.parseInt(ratingCursor.getString(2)); i++)
+            for (int i = 0; i < Float.parseFloat(ratingCursor.getString(2)); i++)
                 ratingText += "\u2605"; //add stars
             ratingText += "\n" + ratingCursor.getString(3); //comment
             ratingList.add(ratingText);

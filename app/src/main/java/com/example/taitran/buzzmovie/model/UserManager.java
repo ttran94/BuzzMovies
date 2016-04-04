@@ -29,6 +29,7 @@ public class UserManager implements UserAuthentication, UserManagement{
         db = new Database(context);
     }
 
+    @Override
     public void addUser(String email, String username, String password, String type) {
         if(!email.contains("@") || !email.contains(".")) {
             throw new IllegalArgumentException("Invalid email address");
@@ -53,13 +54,7 @@ public class UserManager implements UserAuthentication, UserManagement{
     }
 
 
-    /**
-     * check whether or not the credential is valid
-     * when dealing with Cursor object always check for null to void SQLite EXCEPTION
-     * if only have one row of data, then just move the cursor to that row.
-     * @param username take in user's username
-     * @param password take in user's password
-     */
+    @Override
     public void loginRequest(String username, String password) {
         String name = "";
         String pass = "";
@@ -81,7 +76,6 @@ public class UserManager implements UserAuthentication, UserManagement{
             bio = data.getString(data.getColumnIndex(db.bio));
             status = data.getString(data.getColumnIndex(db.status));
             type = data.getString(data.getColumnIndex(db.user_type));
-            //TODO if status = locked/banned...
             data.close();
         }
         User user = new User(email, name, pass, type);
@@ -95,38 +89,25 @@ public class UserManager implements UserAuthentication, UserManagement{
         user.setBio(bio);
         user.setMajor(major);
         activeUser = user;
+        db.addActiveUser(activeUser, status);
     }
 
-    /**
-     *
-     * @return the active user after login successfully
-     */
+    @Override
     public User getActiveUser() {
         return activeUser;
     }
 
-    /**
-     * set active user to null when the user log out
-     */
-    public void logOut() {
-        activeUser = null;
+   @Override
+    public void setActiveUser(User user) {
+        activeUser = user;
     }
 
-    /**
-     * get the majors array
-     * @return the array for major
-     */
+    @Override
     public String[] getMajors() {
         return majors;
     }
 
-    /**
-     * check if password is matched with old password
-     * then update the password with new pass
-     * @param oldPass user's old pass
-     * @param newPass  user's new pass
-     * @return true or false if password is updated sucessfully
-     */
+    @Override
     public boolean updatePassword(String oldPass, String newPass) {
         boolean passCheck = activeUser.setPassword(activeUser.getPassword(), newPass);
         if (passCheck) {
@@ -137,28 +118,19 @@ public class UserManager implements UserAuthentication, UserManagement{
         }
     }
 
-    /**
-     * update user's email
-     * @param email of user
-     */
+    @Override
     public void updateEmail(String email) {
         activeUser.setEmail(email);
         db.setEmail(email, activeUser.getUsername());
     }
 
-    /**
-     * update user's bio
-     * @param bio of user
-     */
+    @Override
     public void updateBio(String bio) {
         activeUser.setBio(bio);
         db.setBio(bio, activeUser.getUsername());
     }
 
-    /**
-     * update user's major
-     * @param major of user
-     */
+    @Override
     public void updateMajor(String major) {
         activeUser.setMajor(major);
         db.setMajor(major, activeUser.getUsername());

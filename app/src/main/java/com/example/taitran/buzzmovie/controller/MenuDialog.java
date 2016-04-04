@@ -1,10 +1,11 @@
 package com.example.taitran.buzzmovie.controller;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,13 +26,13 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.search_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AppCompatAlertDialogStyle));
         typespinner = (Spinner) v.findViewById(R.id.typespinner);
 
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, typeList);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, typeList);
         typespinner.setAdapter(typeAdapter);
         typespinner.setOnItemSelectedListener(this);
-
+        builder.setTitle("Type");
         //When the settings are submitted
         builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -42,7 +43,7 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
             @Override
             public void onClick(DialogInterface dialog, int which) {}
         });
-        return builder.create();
+        return builder.show();
     }
 
     //When an ordering is selected to sort results by

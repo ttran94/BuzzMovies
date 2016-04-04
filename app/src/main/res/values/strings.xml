@@ -7,6 +7,8 @@
     <string name="old_password">Old Password</string>
     <string name="edit">Edit</string>
     <string name="set">Set</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_search">search</string>
     <string name="title_activity_recommendation">Recommendation</string>

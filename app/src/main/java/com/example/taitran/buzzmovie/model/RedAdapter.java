@@ -2,6 +2,8 @@ package com.example.taitran.buzzmovie.model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -98,6 +101,8 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
             movieDate = (TextView) itemView.findViewById(R.id.movieYear);
             movieType = (TextView) itemView.findViewById(R.id.movieType);
             score = (RatingBar) itemView.findViewById(R.id.MyRating);
+            Drawable progress = score.getProgressDrawable();
+            DrawableCompat.setTint(progress, Color.parseColor("#03A9F4"));
         }
 
 

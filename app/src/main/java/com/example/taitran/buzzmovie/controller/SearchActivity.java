@@ -130,7 +130,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
-
     }
 
     /**

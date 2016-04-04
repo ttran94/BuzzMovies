@@ -38,7 +38,7 @@
 
     <style name="HelloDarkness.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="HelloDarkness.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Apptheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- current theme -->
     <style name="AppTheme.Blue" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
@@ -57,9 +57,6 @@
     </style>
 
     <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
-        <item name="colorAccent">@color/white</item>
-        <item name="android:textColorPrimary">@color/iron</item>
-        <item name="android:background">@color/primary</item>
     </style>
 
     <style name="HighLight" parent="Theme.AppCompat.NoActionBar">
@@ -69,5 +66,30 @@
         <item name="android:textColorHint">#37474F</item>
         <item name="android:editTextColor">#616161</item>
         <item name="android:textColor">#616161</item>
+    </style>
+
+    <!-- Local copy of android:Theme.Holo.Dialog.Alert -->
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#FFCC00</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:background">#5fa3d0</item>
+    </style>
+
+    <!-- Local copy of android:DialogWindowTitle.Holo -->
+    <style name="DialogWindowTitle_Holo">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Holo.DialogWindowTitle</item>
+    </style>
+
+    <style name="MenuToolBar" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="CodeFont" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 </resources>

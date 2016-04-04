@@ -25,7 +25,6 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:layout_alignTop="@+id/imageURL"
-        android:layout_toRightOf="@+id/imageURL"
         android:layout_toEndOf="@+id/imageURL" />
 
     <TextView

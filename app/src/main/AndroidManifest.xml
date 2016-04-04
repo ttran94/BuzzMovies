@@ -33,9 +33,6 @@
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard" />
         <activity
-            android:name=".EditProfileActivity"
-            android:label="@string/app_name" />
-        <activity
             android:name=".EditPasswordActivity"
             android:label="@string/app_name" />
         <activity

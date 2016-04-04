@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         text = "Login Success";
 
         try {
-
             user.loginRequest(username.getText().toString(), password.getText().toString());
             type = activeUser.getActiveUser().getType();
             if(type.equals("User")) {

@@ -39,7 +39,7 @@ public class ReviewListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommendation);
+        setContentView(R.layout.activity_reviewlayout);
 
         Bundle extras = getIntent().getExtras();
         int position = (int)extras.get("position");
