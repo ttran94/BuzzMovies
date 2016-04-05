@@ -301,8 +301,8 @@ public class Database extends SQLiteOpenHelper{
         String movie_comment = rating.getComment();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String movieSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ? AND %s = %s AND %s = ?",
-                MOVIE_TABLE, title, date, movie_date, type);
+        String movieSelectQuery = String.format("SELECT _id FROM %s WHERE %s = ? AND %s = ?",
+                MOVIE_TABLE, title, type);
         Cursor cursor = db.rawQuery(movieSelectQuery, new String[]{movie_title, movie_type});
         if (!cursor.moveToFirst()) { //movie doesnt exist in database
             ContentValues columnIndex = new ContentValues(); //add new movie
