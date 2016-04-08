@@ -1,11 +1,8 @@
 package com.example.taitran.buzzmovie.controller;
 
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +17,45 @@ import java.util.ArrayList;
 
 /**
  * Created by andie on 3/17/2016.
- * display user list and handle onclicklistener
+ * display user list and handle OnClickListener
  */
 public class UsersActivity extends Fragment {
-
-    public static final String[] statuses
-            = new String[] {"Default", "Unlocked", "Locked", "Banned"};
+    /**
+     * Status of user
+     */
+    public static final String[] statuses = new String[] {"Default", "Unlocked", "Locked", "Banned"};
+    /**
+     * Status spinner
+     */
     Spinner statusSpinner;
+    /**
+     * Selected status
+     */
     String statusSelected;
+    /**
+     * User list
+     */
     ListView usersListView;
+    /**
+     * User manager
+     */
     UserManager userMan;
+    /**
+     * User list
+     */
     ArrayList<String> userList;
+    /**
+     * Filter button
+     */
     Button bFilter;
+    /**
+     * Username selected
+     */
     public static String usernameSelected;
 
+    /**
+     * Empty constructor
+     */
     public UsersActivity() {
 
     }
@@ -49,7 +71,7 @@ public class UsersActivity extends Fragment {
         userMan = new UserManager(getActivity());
         statusSpinner = (Spinner) getActivity().findViewById(R.id.status_spinner);
         bFilter = (Button) getActivity().findViewById(R.id.filter);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, statuses);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, statuses);
         statusSpinner.setAdapter(adapter);
         statusSelected = "Default";
         statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -62,10 +84,9 @@ public class UsersActivity extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
         usersListView = (ListView) getActivity().findViewById(R.id.userView);
         userList = userMan.getUserList(statusSelected);
-        usersListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, userList));
+        usersListView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.list_item, userList));
         usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,7 +101,7 @@ public class UsersActivity extends Fragment {
                 @Override
                 public void onClick(View v) {
                     userList = userMan.getUserList(statusSelected);
-                    usersListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item, userList));
+                    usersListView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.list_item, userList));
                 }
             });
     }

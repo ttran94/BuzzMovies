@@ -2,24 +2,17 @@ package com.example.taitran.buzzmovie.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.util.Log;
 import android.widget.EditText;
 import android.content.Context;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
-/**
- * Created by andie on 2/8/2016.
- */
+
 public class RegisterActivity extends AppCompatActivity{
 
     @Override
@@ -28,6 +21,10 @@ public class RegisterActivity extends AppCompatActivity{
         setContentView(R.layout.activity_register);
     }
 
+    /**
+     * Register button pressed
+     * @param w reference to the register button
+     */
     public void registerButtonPressed(View w) {
         String type = "User";
         Log.d("Register Activity", "Register button pressed");
@@ -39,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity{
 
         try {
             manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString(), type);
-            UserAuthentication user = new UserManager(this);
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         } catch (IllegalArgumentException e) {
@@ -54,6 +50,10 @@ public class RegisterActivity extends AppCompatActivity{
         message.show();
     }
 
+    /**
+     * Cancel button pressed
+     * @param w reference to the cancel button
+     */
     public void regCancelButtonPressed (View w) {
         Log.d("Register Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.regUserName)).setText("");
@@ -67,6 +67,10 @@ public class RegisterActivity extends AppCompatActivity{
         message.show();
     }
 
+    /**
+     * Regulate text clicked
+     * @param v reference to the text
+     */
     public void regTextOnClicked(View v) {
         finish();
         Intent intent = new Intent(this, LoginActivity.class);

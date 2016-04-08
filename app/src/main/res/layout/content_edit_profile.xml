@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -132,7 +131,6 @@
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:id="@+id/editPassBtn"
-                android:onClick="editPasswordButtonPressed"
                 android:layout_marginLeft="5dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true" />
@@ -171,7 +169,6 @@
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:id="@+id/editMajorBtn"
-                android:onClick="editMajorButtonPressed"
                 android:layout_marginLeft="5dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true" />
@@ -226,7 +223,6 @@
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:id="@+id/editBioBtn"
-                android:onClick="editBioButtonPressed"
                 android:layout_alignTop="@+id/editBioText"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp" />

@@ -4,20 +4,23 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 
-/**
- * Created by taitr on 2/27/2016.
- */
 public class VolleySingleton {
-
+    /**
+     * The request queue
+     */
     private RequestQueue requestQueue;
+    /**
+     * The image loader
+     */
     private ImageLoader image;
+    /**
+     * The volley singleton
+     */
     private static VolleySingleton instance;
 
     /**
@@ -30,7 +33,7 @@ public class VolleySingleton {
 
         image = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
 
-            private LruCache<String, Bitmap> cache = new LruCache<String, Bitmap>((4 * 1024 * 1024));
+            private LruCache<String, Bitmap> cache = new LruCache<>((4 * 1024 * 1024));
 
             @Override
             public Bitmap getBitmap(String url) {

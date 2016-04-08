@@ -10,30 +10,52 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.taitran.buzzmovie.model.Database;
-import com.example.taitran.buzzmovie.model.FilterMovie;
 import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.myAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by andie on 3/20/2016.
- */
 
 public class ReviewListActivity extends AppCompatActivity{
-
+    /**
+     * Major spinner
+     */
     private Spinner majorSpinner;
+    /**
+     * Rating spinner
+     */
     private Spinner ratingSpinner;
+    /**
+     * Review list
+     */
     private ListView reviewListView;
-    private FilterMovie filter;
+    /**
+     * Reviews
+     */
     private ArrayList<String> reviews;
-    private static final String[] majors
-            = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
-    private static final String[] rating
-            = new String[] {"Default", "5", "4", "3", "2", "1"};
+    /**
+     * Majors
+     */
+    private static final String[] majors = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    /**
+     * Ratings
+     */
+    private static final String[] rating = new String[] {"Default", "5", "4", "3", "2", "1"};
+    /**
+     * Selected major
+     */
     private String majorSelected;
+    /**
+     * Selected rating
+     */
     private String ratingSelected;
+    /**
+     * Database
+     */
     private Database db;
+    /**
+     * Movie
+     */
     private Movie movie;
 
     @Override
@@ -50,7 +72,7 @@ public class ReviewListActivity extends AppCompatActivity{
 
         majorSpinner = (Spinner) findViewById(R.id.spinner2);
         ratingSpinner = (Spinner) findViewById(R.id.spinner3);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, majors);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, majors);
         majorSpinner.setAdapter(adapter);
         majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -62,7 +84,7 @@ public class ReviewListActivity extends AppCompatActivity{
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, R.layout.spinner_item, rating);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, R.layout.spinner_item, rating);
         ratingSpinner.setAdapter(adapter1);
         ratingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -79,11 +101,15 @@ public class ReviewListActivity extends AppCompatActivity{
         ((RecyclerView) findViewById(R.id.filterList)).setVisibility(View.GONE);
         db = new Database(this);
         reviews = db.getRatings(movie, ratingSelected, majorSelected);
-        reviewListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, reviews));
+        reviewListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, reviews));
     }
 
+    /**
+     * Filter button pressed
+     * @param v reference to the filter button
+     */
     public void filterButtonPressed(View v) {
         reviews = db.getRatings(movie, ratingSelected, majorSelected);
-        reviewListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, reviews));
+        reviewListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, reviews));
     }
 }

@@ -12,31 +12,51 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.taitran.buzzmovie.model.FilterList;
 import com.example.taitran.buzzmovie.model.FilterMovie;
 import com.example.taitran.buzzmovie.model.RedAdapter;
 
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Recommendation extends Fragment implements AdapterView.OnItemSelectedListener, OnClickListener {
-
+    /**
+     * Major spinner
+     */
     private Spinner majorSpinner;
+    /**
+     * Rating spinner
+     */
     private Spinner ratingSpinner;
+    /**
+     * Filter for the movie
+     */
     private FilterMovie filterL;
-    private static final String[] majors
-            = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
-    private static final String[] rating
-            = new String[] {"Default", "5", "4", "3", "2", "1"};
-    public RedAdapter myadapter;
+    /**
+     * String list
+     */
+    private static final String[] majors = new String[] {"Default", "CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    /**
+     * Rating list
+     */
+    private static final String[] rating = new String[] {"Default", "5", "4", "3", "2", "1"};
+    /**
+     * Adapter
+     */
+    public RedAdapter myAdapter;
+    /**
+     * Movie list
+     */
     private ArrayList<FilterList> movies;
+    /**
+     * Recycle view
+     */
     private RecyclerView viewList;
-    private Button filterButton;
 
-
+    /**
+     * Empty constructor
+     */
     public Recommendation() {
         // Required empty public constructor
     }
@@ -53,20 +73,20 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        filterButton = (Button) getActivity().findViewById(R.id.filterB);
+        Button filterButton = (Button) getActivity().findViewById(R.id.filterB);
         filterButton.setOnClickListener(this);
         majorSpinner = (Spinner) getActivity().findViewById(R.id.spinner2);
         ratingSpinner = (Spinner) getActivity().findViewById(R.id.spinner3);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, majors);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, majors);
         majorSpinner.setAdapter(adapter);
         majorSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, rating);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, rating);
         ratingSpinner.setAdapter(adapter1);
         ratingSpinner.setOnItemSelectedListener(this);
         filterL = new FilterMovie(majorSpinner.getSelectedItem().toString(), ratingSpinner.getSelectedItem().toString(), getActivity());
         movies = new ArrayList<>();
         viewList = ((RecyclerView) getActivity().findViewById(R.id.filterList));
-        myadapter = new RedAdapter(this.getContext());
+        myAdapter = new RedAdapter(this.getContext());
         viewList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -91,8 +111,8 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
         switch (v.getId()) {
             case R.id.filterB:
                 movies = filterL.getMovieList();
-                myadapter.setMovieList(movies);
-                viewList.setAdapter(myadapter);
+                myAdapter.setMovieList(movies);
+                viewList.setAdapter(myAdapter);
                 break;
         }
     }

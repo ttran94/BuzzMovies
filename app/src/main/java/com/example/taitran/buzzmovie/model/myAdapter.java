@@ -18,31 +18,34 @@ import com.example.taitran.buzzmovie.controller.RatingActivity;
 
 import java.util.ArrayList;
 
-/**
- * Created by taitr on 2/28/2016.
- */
 public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
-
+    /**
+     * The image loader
+     */
     private ImageLoader image;
-    private VolleySingleton volleySingleton;
+    /**
+     * The layout inflater
+     */
     private LayoutInflater layout;
+    /**
+     * The list of movies
+     */
     private static ArrayList<Movie> movieList = new ArrayList<>();
 
     /**
-     * set up Volleysingleton, image and layout for the activity
+     * set up VolleySingleton, image and layout for the activity
      * @param context get the activity class
      */
     public myAdapter(Context context) {
         layout = LayoutInflater.from(context);
-        volleySingleton = VolleySingleton.getInstance(context);
+        VolleySingleton volleySingleton = VolleySingleton.getInstance(context);
         image = volleySingleton.getImage();
     }
 
     @Override
     public MovieView onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layout.inflate(R.layout.customview, parent, false);
-        MovieView viewHolder = new MovieView(view);
-        return viewHolder;
+        return new MovieView(view);
     }
 
     /**
@@ -54,18 +57,28 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         notifyItemRangeChanged(0, movie.size());
     }
 
+    /**
+     * The array list of movies
+     * @return the movie list
+     */
     public static ArrayList<Movie> getMovieList() {
-        return (ArrayList<Movie>) movieList.clone();
+        return movieList;
     }
-    //translation animation
-    //I'm going to leave it here if you want to try it
+
+    /**
+     * Translation animation.
+     * @param holder The view for the translation.
+     */
     private static void translation(RecyclerView.ViewHolder holder) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationY", -100, 0);
         animator.setDuration(1000);
         animator.start();
     }
 
-    //alpha animation(fade in/out)
+    /**
+     * Fade in animation
+     * @param view the view for the animation
+     */
     private void fadeInAnimation(View view) {
         AlphaAnimation animator = new AlphaAnimation(0.0f, 1.0f);
         animator.setDuration(1000);
@@ -81,19 +94,15 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         String thumbNail = currentView.getPoster();
         holder.position = position;
         final MovieView temp = holder;
-        if(thumbNail != null) {
-            image.get(thumbNail, new ImageLoader.ImageListener() {
+        if(thumbNail != null) {image.get(thumbNail, new ImageLoader.ImageListener() {
                 @Override
-                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    temp.moviePoster.setImageBitmap(response.getBitmap());
+                public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {temp.moviePoster.setImageBitmap(response.getBitmap());
                 }
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
                 }
-        });
-
+            });
         }
         fadeInAnimation(holder.itemView);
     }
@@ -104,12 +113,31 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
     }
 
     static class MovieView extends RecyclerView.ViewHolder{
+        /**
+         * The movie poster
+         */
         private ImageView moviePoster;
+        /**
+         * The movie title
+         */
         private TextView movieTitle;
+        /**
+         * The date of the movie
+         */
         private TextView movieDate;
+        /**
+         * The type of movie
+         */
         private TextView movieType;
+        /**
+         * The position of the movie
+         */
         private int position;
 
+        /**
+         * The movie view
+         * @param itemView the movie view.
+         */
         public MovieView(View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {

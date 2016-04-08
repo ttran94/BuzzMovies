@@ -1,6 +1,5 @@
 package com.example.taitran.buzzmovie.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,37 +13,58 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
-import org.w3c.dom.Text;
 
-/**
- * Created by andie on 2/14/2016.
- */
 public class EditProfileActivity extends Fragment implements AdapterView.OnItemSelectedListener, OnClickListener{
+    /**
+     * The user manager.
+     */
     private UserManagement userMan;
-    private TextView usernameTextView;
+
+    /**
+     * The text view for the email.
+     */
     private TextView emailTextView;
+    /**
+     * To edit the text.
+     */
     private EditText emailEditText;
-    private Button editEmailButton;
-    private Button editPassButton;
-    private Button editMajorButton;
-    private Button editBioButton;
+
+    /**
+     * Boolean for editing the email.
+     */
     private boolean editingEmail = false;
+    /**
+     * The text view for the major.
+     */
     private TextView majorTextView;
+    /**
+     * The spinner.
+     */
     private Spinner spinner;
+    /**
+     * Boolean for editing the major.
+     */
     private boolean editingMajor = false;
 
     private TextView bioTextView;
+    /**
+     * Edit the bio.
+     */
     private EditText bioEditText;
+    /**
+     * Boolean to edit the bio.
+     */
     private boolean editingBio = false;
 
-
+    /**
+     * Empty constructor.
+     */
     public EditProfileActivity() {
         // Required empty public constructor
     }
@@ -61,7 +81,7 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         userMan = new UserManager(getActivity());
-        usernameTextView = (TextView) getActivity().findViewById(R.id.displayUsernameText);
+        TextView usernameTextView = (TextView) getActivity().findViewById(R.id.displayUsernameText);
         usernameTextView.setText(userMan.getActiveUser().getUsername());
 
         emailTextView = (TextView) getActivity().findViewById(R.id.displayEmailText);
@@ -70,26 +90,26 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
         emailEditText = (EditText) getActivity().findViewById(R.id.editEmailText);
         emailEditText.setText(userMan.getActiveUser().getEmail());
 
-        editEmailButton = (Button) getActivity().findViewById(R.id.editEmailBtn);
+        Button editEmailButton = (Button) getActivity().findViewById(R.id.editEmailBtn);
         editEmailButton.setText(R.string.edit);
         editEmailButton.setOnClickListener(this);
 
         majorTextView = (TextView) getActivity().findViewById(R.id.displayMajor);
         majorTextView.setText("Major: " + userMan.getActiveUser().getMajor());
 
-        editPassButton = (Button) getActivity().findViewById(R.id.editPassBtn);
+        Button editPassButton = (Button) getActivity().findViewById(R.id.editPassBtn);
         editPassButton.setOnClickListener(this);
 
-        editMajorButton = (Button) getActivity().findViewById(R.id.editMajorBtn);
+        Button editMajorButton = (Button) getActivity().findViewById(R.id.editMajorBtn);
         editMajorButton.setText(R.string.edit);
         editMajorButton.setOnClickListener(this);
 
-        editBioButton = (Button) getActivity().findViewById(R.id.editBioBtn);
+        Button editBioButton = (Button) getActivity().findViewById(R.id.editBioBtn);
         editBioButton.setText(R.string.edit);
         editBioButton.setOnClickListener(this);
 
         spinner = (Spinner) getActivity().findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, userMan.getMajors());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, userMan.getMajors());
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -103,9 +123,9 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
 
     /**
      * redirect the user to EditPasswordActivity
-     * @param V reference to the password button
+     * @param v reference to the password button
      */
-    public void editPasswordButtonPressed(View V) {
+    public void editPasswordButtonPressed(View v) {
 
     }
 

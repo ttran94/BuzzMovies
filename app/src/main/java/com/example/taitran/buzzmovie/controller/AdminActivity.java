@@ -1,13 +1,8 @@
 package com.example.taitran.buzzmovie.controller;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,24 +11,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.taitran.buzzmovie.model.Database;
 import com.example.taitran.buzzmovie.model.FragmentAdapter;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AdminActivity extends AppCompatActivity {
 
-    private Toolbar mtoolbar;
-    private FragmentAdapter myadapter;
-    private ViewPager mpager;
-    private TabLayout mTab;
+    /**
+     * The database.
+     */
     private Database db;
+    /**
+     * User management for the admin.
+     */
     private UserManagement userMan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +32,16 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         db = new Database(this);
         userMan = new UserManager(this);
-        myadapter = new FragmentAdapter(getSupportFragmentManager());
+        FragmentAdapter myAdapter = new FragmentAdapter(getSupportFragmentManager());
         // add the fragment object to the adapter and attached it to the activity
-        myadapter.addFragment(new UsersActivity(), "Users");
-        myadapter.addFragment(new AddUser(), "Add Account");
-        mtoolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mtoolbar);
-        mpager = (ViewPager) findViewById(R.id.pager);
-        mTab = (TabLayout) findViewById(R.id.tab_layout);
-        mpager.setAdapter(myadapter);
-        mTab.setupWithViewPager(mpager);
+        myAdapter.addFragment(new UsersActivity(), "Users");
+        myAdapter.addFragment(new AddUser(), "Add Account");
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
+        TabLayout mTab = (TabLayout) findViewById(R.id.tab_layout);
+        mPager.setAdapter(myAdapter);
+        mTab.setupWithViewPager(mPager);
     }
 
 

@@ -1,10 +1,7 @@
 package com.example.taitran.buzzmovie.controller;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.util.Log;
 import android.widget.EditText;
@@ -12,13 +9,12 @@ import android.content.Context;
 import android.widget.Toast;
 import android.content.Intent;
 
-import com.example.taitran.buzzmovie.model.User;
 import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
-    private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +38,13 @@ public class LoginActivity extends AppCompatActivity {
 
         try {
             user.loginRequest(username.getText().toString(), password.getText().toString());
-            type = activeUser.getActiveUser().getType();
-            if(type.equals("User")) {
+            String type = activeUser.getActiveUser().getType();
+            if("User".equals(type)) {
                 Intent intent = new Intent(this, Dashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-            } else if (type.equals("Admin")) {
+            } else if ("Admin".equals(type)) {
                 Intent intent = new Intent(this, AdminActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -70,9 +66,9 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * redirect the user to welcome activity
      * if the button is pressed
-     * @param V reference to the cancel button
+     * @param v reference to the cancel button
      */
-    public void cancelButtonPressed(View V) {
+    public void cancelButtonPressed(View v) {
         Log.d("Login Activity", "Cancel button pressed");
         ((EditText) findViewById(R.id.userName)).setText("");
         ((EditText) findViewById(R.id.Pass)).setText((""));
@@ -84,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
         message.show();
     }
 
+    /**
+     * Log what text you clicked.
+     * @param v reference to the button
+     */
     public void logTextClicked(View v) {
         finish();
         Intent intent = new Intent(this, RegisterActivity.class);

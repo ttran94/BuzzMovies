@@ -2,7 +2,6 @@ package com.example.taitran.buzzmovie.controller;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
@@ -23,7 +21,9 @@ import com.example.taitran.buzzmovie.model.UserManager;
  */
 public class AddUser extends Fragment {
 
-
+    /**
+     * Empty constructor
+     */
     public AddUser() {
         // Required empty public constructor
     }
@@ -39,8 +39,8 @@ public class AddUser extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button regbt = (Button) getActivity().findViewById(R.id.submitBtn);
-        regbt.setOnClickListener(new View.OnClickListener() {
+        Button registerButton = (Button) getActivity().findViewById(R.id.submitBtn);
+        registerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

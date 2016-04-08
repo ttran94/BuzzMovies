@@ -13,22 +13,25 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.taitran.buzzmovie.model.Rating;
-import com.example.taitran.buzzmovie.model.Database;
 import com.example.taitran.buzzmovie.model.Movie;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 import com.example.taitran.buzzmovie.model.VolleySingleton;
 import com.example.taitran.buzzmovie.model.myAdapter;
 
-/**
- * Created by andie on 3/6/2016.
- */
+
 public class RatingActivity extends AppCompatActivity {
+    /**
+     * The movie
+     */
     private Movie movie;
-    private String title;
-    private String date;
-    private String type;
+    /**
+     * The position
+     */
     private int position;
+    /**
+     * The user manager
+     */
     private UserManagement userMan;
 
     @Override
@@ -39,9 +42,9 @@ public class RatingActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         position = (int)extras.get("position");
         movie = myAdapter.getMovieList().get(position);
-        title = movie.getTitle();
-        date = movie.getYear();
-        type = movie.getType();
+        String title = movie.getTitle();
+        String date = movie.getYear();
+        String type = movie.getType();
         String poster_url = movie.getPoster();
         userMan = new UserManager(this);
 
@@ -49,7 +52,7 @@ public class RatingActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.date)).setText(date);
         ((TextView)findViewById(R.id.type)).setText(type);
         //TODO put this in a method somewhere to avoid code re-use
-        if(poster_url != null && !poster_url.equals("N/A")) {
+        if(poster_url != null && !"N/A".equals(poster_url)) {
             VolleySingleton volleySingleton = VolleySingleton.getInstance(this);
             volleySingleton.getImage().get(poster_url, new ImageLoader.ImageListener() {
                 @Override
@@ -84,6 +87,10 @@ public class RatingActivity extends AppCompatActivity {
         message.show();
     }
 
+    /**
+     * Review button pressed
+     * @param v reference to the review button being pressed
+     */
     public void reviewsButtonPressed(View v) {
         Context context = v.getContext();
         Intent reviews = new Intent(context, ReviewListActivity.class);

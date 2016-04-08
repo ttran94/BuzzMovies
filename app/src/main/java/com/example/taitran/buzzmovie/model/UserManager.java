@@ -4,19 +4,27 @@ import android.content.Context;
 import android.database.Cursor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 /**
- * Created by taitr on 2/6/2016.
- * UserManagerFacde that handles all functionality for the user
+ * Created by Tai Tran on 2/6/2016.
+ * UserManagerFacade that handles all functionality for the user
  */
 public class UserManager implements UserAuthentication, UserManagement{
-    private static String[] majors
-            = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    /**
+     * The list of majors
+     */
+    private static String[] majors = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    /**
+     * The active user
+     */
     private static User activeUser;
+    /**
+     * The database
+     */
     private Database db;
 
+    /**
+     * Empty constructor
+     */
     public UserManager() {
 
     }

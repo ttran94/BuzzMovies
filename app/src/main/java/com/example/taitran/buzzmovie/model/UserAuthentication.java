@@ -1,8 +1,5 @@
 package com.example.taitran.buzzmovie.model;
 
-/**
- * Created by taitran on 2/6/2016.
- */
 public interface UserAuthentication {
     /**
      * check whether or not the credential is valid

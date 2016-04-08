@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.taitran.buzzmovie.model.Database;
-import com.example.taitran.buzzmovie.model.User;
-import com.example.taitran.buzzmovie.model.UserAuthentication;
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 import com.google.android.gms.appindexing.Action;
@@ -17,8 +15,10 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class WelcomeActivity extends AppCompatActivity {
+    /**
+     * Database
+     */
     private Database db;
-    private UserManagement getAUser;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -29,16 +29,16 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        getAUser = new UserManager(this);
+        UserManagement getAUser = new UserManager(this);
         getAUser.setActiveUser();
         String type = getAUser.getActiveUser().getType();
         if (type != null) {
-            if(type.equals("User")) {
+            if("User".equals(type)) {
                 Intent intent = new Intent(this, Dashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-            } else if (type.equals("Admin")) {
+            } else if ("Admin".equals(type)) {
                 Intent intent = new Intent(this, AdminActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -48,6 +48,10 @@ public class WelcomeActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    /**
+     * Login button clicked
+     * @param w reference to login button
+     */
     public void onLoginButtonClicked(View w) {
         Log.d("**MYAPP**", "Login button pressed!");
         Intent intent = new Intent(this, LoginActivity.class);
@@ -69,6 +73,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    /**
+     * Resume
+     */
     public void onResume() {
         super.onResume();
     }

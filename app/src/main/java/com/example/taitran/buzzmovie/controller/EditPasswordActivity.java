@@ -6,17 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
-/**
- * Created by John on 2/15/2016.
- */
+
 public class EditPasswordActivity extends AppCompatActivity {
 
 
@@ -26,6 +22,10 @@ public class EditPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_password);
     }
 
+    /**
+     * Method for when the cancel button is pressed.
+     * @param v reference for the view for the cancel button.
+     */
     public void cancelButtonPressed(View v) {
         Log.d("Edit Password Activity", "Cancel button pressed");
         Intent editActivity = new Intent(this, Dashboard.class);
@@ -38,6 +38,10 @@ public class EditPasswordActivity extends AppCompatActivity {
         message.show();
     }
 
+    /**
+     * Method for when the submit button is pressed
+     * @param v Reference for the view for the submit button.
+     */
     public void submitButtonPressed(View v) {
         Log.d("Edit Password Activity", "Submit button pressed");
         UserManagement userMan = new UserManager(this);

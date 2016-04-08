@@ -8,7 +8,12 @@
     <string name="edit">Edit</string>
     <string name="set">Set</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="logout">Logout</string>
+    <string name="search">Search</string>
+    <string name="editPassword">Edit Password</string>
+    <string name="title">Title</string>
+    <string name="Type">Type</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_search">search</string>
     <string name="title_activity_recommendation">Recommendation</string>

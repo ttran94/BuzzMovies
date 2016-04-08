@@ -19,7 +19,9 @@ import android.widget.TextView;
  */
 public class MenuDialog extends DialogFragment implements AdapterView.OnItemSelectedListener{
 
-    private Spinner typespinner;
+    /**
+     * All the types of media
+     */
     private static final String[] typeList = new String[]{"All", "Movie", "Series", "Episode"};
 
     @Override
@@ -27,11 +29,11 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.search_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AppCompatAlertDialogStyle));
-        typespinner = (Spinner) v.findViewById(R.id.typespinner);
+        Spinner typeSpinner = (Spinner) v.findViewById(R.id.typespinner);
 
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, typeList);
-        typespinner.setAdapter(typeAdapter);
-        typespinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, typeList);
+        typeSpinner.setAdapter(typeAdapter);
+        typeSpinner.setOnItemSelectedListener(this);
         builder.setTitle("Type");
         //When the settings are submitted
         builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {

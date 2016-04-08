@@ -1,14 +1,12 @@
 package com.example.taitran.buzzmovie.model;
 
-/**
- * Created by taitran on 2/6/2016.
- */
 public interface UserManagement {
     /**
      * get user info and add to database
      * @param email user's email
      * @param username user's name
      * @param password user's pass
+     * @param type of user
      */
     void addUser(String email, String username, String password, String type);
 
@@ -58,7 +56,7 @@ public interface UserManagement {
     void updateBio(String bio);
 
     /**
-     * set activeuser to null and log out
+     * set active user to null and log out
      * @param user object which contains user information
      */
     void logOut(User user);

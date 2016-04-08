@@ -21,8 +21,9 @@ import java.util.Arrays;
  * Uses user_status_dialog.xml layout
  */
 public class UserStatusDialog extends DialogFragment implements AdapterView.OnItemSelectedListener{
-
-    private Spinner statusSpinner;
+    /**
+     * News status
+     */
     private String newStatus;
 
     @Override
@@ -30,9 +31,9 @@ public class UserStatusDialog extends DialogFragment implements AdapterView.OnIt
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.user_status_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        statusSpinner = (Spinner) v.findViewById(R.id.statusspinner);
+        Spinner statusSpinner = (Spinner) v.findViewById(R.id.statusspinner);
 
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, Arrays.copyOfRange(UsersActivity.statuses, 1, 4));
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, Arrays.copyOfRange(UsersActivity.statuses, 1, 4));
         statusSpinner.setAdapter(statusAdapter);
         statusSpinner.setOnItemSelectedListener(this);
 
@@ -42,7 +43,7 @@ public class UserStatusDialog extends DialogFragment implements AdapterView.OnIt
         builder.setView(v).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                UserManager userman = new UserManager(getContext());
+                UserManager userman = new UserManager(getActivity());
                 userman.updateUserStatus(UsersActivity.usernameSelected, newStatus);
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

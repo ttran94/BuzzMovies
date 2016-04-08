@@ -9,9 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.content.Intent;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taitran.buzzmovie.model.Database;
@@ -22,10 +20,7 @@ import com.example.taitran.buzzmovie.model.UserManager;
 public class Dashboard extends AppCompatActivity{
 
     private UserManagement userMan;
-    private Toolbar mtoolbar;
-    private FragmentAdapter myadapter;
-    private ViewPager mpager;
-    private TabLayout mTab;
+
     private Database db;
 
     @Override
@@ -34,16 +29,16 @@ public class Dashboard extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         userMan = new UserManager();
-        myadapter = new FragmentAdapter(getSupportFragmentManager());
+        FragmentAdapter myAdapter = new FragmentAdapter(getSupportFragmentManager());
         // add the fragment object to the adapter and attached it to the activity
-        myadapter.addFragment(new EditProfileActivity(), "Profile");
-        myadapter.addFragment(new Recommendation(), "Recommendation");
-        mtoolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mtoolbar);
-        mpager = (ViewPager) findViewById(R.id.pager);
-        mTab = (TabLayout) findViewById(R.id.tab_layout);
-        mpager.setAdapter(myadapter);
-        mTab.setupWithViewPager(mpager);
+        myAdapter.addFragment(new EditProfileActivity(), "Profile");
+        myAdapter.addFragment(new Recommendation(), "Recommendation");
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
+        TabLayout mTab = (TabLayout) findViewById(R.id.tab_layout);
+        mPager.setAdapter(myAdapter);
+        mTab.setupWithViewPager(mPager);
     }
 
     @Override

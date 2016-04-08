@@ -1,7 +1,6 @@
 package com.example.taitran.buzzmovie.model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
@@ -16,40 +15,55 @@ import android.graphics.Color;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.taitran.buzzmovie.controller.R;
-import com.example.taitran.buzzmovie.controller.RatingActivity;
 
 import java.util.ArrayList;
 
-/**
- * Created by taitr on 2/28/2016.
- */
-public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
 
+public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
+    /**
+     * The image loader
+     */
     private ImageLoader image;
-    private VolleySingleton volleySingleton;
+    /**
+     * The layout inflater
+     */
     private LayoutInflater layout;
+    /**
+     * The movie list
+     */
     private static ArrayList<FilterList> movieList = new ArrayList<>();
 
+    /**
+     * The red adaptor constructor
+     * @param context the context for the adapter
+     */
     public RedAdapter(Context context) {
         layout = LayoutInflater.from(context);
-        volleySingleton = VolleySingleton.getInstance(context);
+        VolleySingleton volleySingleton = VolleySingleton.getInstance(context);
         image = volleySingleton.getImage();
     }
 
     @Override
     public MovieView onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layout.inflate(R.layout.filtereditem, parent, false);
-        MovieView viewHolder = new MovieView(view);
-        return viewHolder;
+        return new MovieView(view);
     }
 
+    /**
+     * Set the movie list
+     * @param movie the movie list you're setting
+     */
     public void setMovieList(ArrayList<FilterList> movie) {
         this.movieList = movie;
         notifyItemRangeChanged(0, movie.size());
     }
 
+    /**
+     * Return the movie list
+     * @return the movie list
+     */
     public static ArrayList<FilterList> getMovieList() {
-        return (ArrayList<FilterList>) movieList.clone();
+        return movieList;
     }
 
 
@@ -86,14 +100,39 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
     }
 
     static class MovieView extends RecyclerView.ViewHolder{
+        /**
+         * The movie poster
+         */
         private ImageView moviePoster;
+        /**
+         * The movie title
+         */
         private TextView movieTitle;
+        /**
+         * The date of the movie
+         */
         private TextView movieDate;
+        /**
+         * The type of movie
+         */
         private TextView movieType;
+        /**
+         * The url of the poster
+         */
         private String moviePosterURL;
+        /**
+         * The movie rating
+         */
         private RatingBar score;
+        /**
+         * The position of the movie.
+         */
         private int position;
 
+        /**
+         * The movie view
+         * @param itemView reference to the movie view
+         */
         public MovieView(View itemView) {
             super(itemView);
             moviePoster = (ImageView) itemView.findViewById(R.id.imageURL);

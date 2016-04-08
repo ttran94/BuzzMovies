@@ -1,16 +1,30 @@
 package com.example.taitran.buzzmovie.model;
 
-/**
- * Created by taitr on 2/6/2016.
- */
-
 
 public class User {
+    /**
+     * The username
+     */
     private String username;
+    /**
+     * The user's password
+     */
     private String password;
+    /**
+     * The user's email
+     */
     private String email;
+    /**
+     * The user's major
+     */
     private String major;
+    /**
+     * The user's bio
+     */
     private String bio;
+    /**
+     * The type of user
+     */
     private String type;
 
     /**
@@ -19,6 +33,7 @@ public class User {
      * @param email of the user
      * @param username of the user
      * @param password of the user
+     * @param type of user
      */
     public User(String email, String username,String password, String type) {
         this.username = username;
@@ -68,10 +83,10 @@ public class User {
 
     /**
      * check if the old password match then
-     * change the password to newpass
+     * change the password to new pass
      * @param oldPass user's old password
      * @param newPass user's new password
-     * @return whether or not setpassword is successful
+     * @return whether or not set password is successful
      */
     public boolean setPassword(String oldPass, String newPass) {
         if (passwordHandler(oldPass)) {

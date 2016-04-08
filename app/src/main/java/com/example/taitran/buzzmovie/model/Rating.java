@@ -1,15 +1,21 @@
 package com.example.taitran.buzzmovie.model;
 
-import com.example.taitran.buzzmovie.model.Movie;
-import com.example.taitran.buzzmovie.model.User;
-
-/**
- * Created by John on 3/7/2016.
- */
 public class Rating {
+    /**
+     * The rating score
+     */
     private float score; //score out of 5
+    /**
+     * The comment on the rating
+     */
     private String comment;
+    /**
+     * The user who rated the movie
+     */
     private String username;
+    /**
+     * The movie that gets rated
+     */
     private Movie movie;
 
     /**
@@ -19,8 +25,7 @@ public class Rating {
      * @param score rating score of that movie
      * @param comment of the user
      */
-    public Rating(String username, Movie movie, float score, String comment)
-    {
+    public Rating(String username, Movie movie, float score, String comment) {
         this.score = score;
         this.comment = comment;
         this.username = username;
@@ -31,8 +36,7 @@ public class Rating {
      * the score of a specific movie
      * @return the movie score
      */
-    public float getScore()
-    {
+    public float getScore() {
         return score;
     }
 
@@ -40,8 +44,7 @@ public class Rating {
      * the comment of a specific movie
      * @return the movie comment
      */
-    public String getComment()
-    {
+    public String getComment() {
         return comment;
     }
 
@@ -50,16 +53,14 @@ public class Rating {
      * the movie
      * @return user's username
      */
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
     /**
      * @return the movie object
      */
-    public Movie getMovie()
-    {
+    public Movie getMovie() {
         return movie;
     }
 }
