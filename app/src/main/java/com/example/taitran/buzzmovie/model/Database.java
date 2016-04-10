@@ -222,7 +222,7 @@ public class Database extends SQLiteOpenHelper{
      * @param email email of user
      * @param type of user
      */
-    protected void addUser(String username, String password, String email, String type) {
+    public void addUser(String username, String password, String email, String type) {
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues columnIndex = new ContentValues();
         columnIndex.put(this.username, username);
@@ -307,7 +307,7 @@ public class Database extends SQLiteOpenHelper{
      * @param major user's major
      * @param username user's name
      */
-    protected void setMajor(String major, String username) {
+    public void setMajor(String major, String username) {
         String[] selectArgs = new String[]{username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newMajor = new ContentValues();
