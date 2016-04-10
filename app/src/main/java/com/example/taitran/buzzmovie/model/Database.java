@@ -245,7 +245,7 @@ public class Database extends SQLiteOpenHelper{
      * @param user object which contains user's information
      * @param status of the user
      */
-    protected void addActiveUser(User user, String status) {
+    public void addActiveUser(User user, String status) {
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues columnIndex = new ContentValues();
         columnIndex.put(this.username, user.getUsername());
