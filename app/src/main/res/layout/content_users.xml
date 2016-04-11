@@ -7,7 +7,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.taitran.buzzmovie.controller.??"
     tools:showIn="@layout/activity_users"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:ignore="Overdraw">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -50,10 +51,10 @@
                 android:text="Status: "
                 android:textSize="19sp"
                 android:textColor="#37474F"
-                android:layout_toEndOf="@+id/spinner2"
                 android:layout_marginTop="3dp"
                 android:layout_marginStart="5dp"
-                android:id="@+id/textView5" />
+                android:id="@+id/textView5"
+                tools:ignore="HardcodedText" />
             <Spinner
                 android:layout_width="100dp"
                 android:layout_height="31dp"
@@ -70,7 +71,8 @@
                 android:id="@+id/filter"
                 android:onClick="filterButtonPressed"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-10dp"/>
+                android:layout_marginTop="-10dp"
+                tools:ignore="HardcodedText" />
 
         </RelativeLayout>
 

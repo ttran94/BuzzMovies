@@ -63,6 +63,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
      * Return the movie list
      * @return the movie list
      */
+    @SuppressWarnings("unused")
     public static ArrayList<FilterList> getMovieList() {
         return movieList;
     }
@@ -72,8 +73,10 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
     public void onBindViewHolder(MovieView holder, int position) {
         FilterList currentView = movieList.get(position);
         holder.movieTitle.setText(currentView.getTitle());
-        holder.movieDate.setText("Year: " + currentView.getYear());
-        holder.movieType.setText("Type: " + currentView.getType());
+        String year = "Year: " + currentView.getYear();
+        holder.movieDate.setText(year);
+        String type = "Type: " + currentView.getType();
+        holder.movieType.setText(type);
         holder.score.setRating(currentView.getScore());
         String thumbNail = currentView.getPoster();
         holder.position = position;

@@ -1,5 +1,6 @@
 package com.example.taitran.buzzmovie.controller;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -29,7 +30,7 @@ public class UserStatusDialog extends DialogFragment implements AdapterView.OnIt
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.user_status_dialog, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.user_status_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         Spinner statusSpinner = (Spinner) v.findViewById(R.id.statusspinner);
 

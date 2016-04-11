@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -8,7 +9,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="70dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
@@ -17,7 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="60dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ContentDescription" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +33,8 @@
                 android:layout_marginBottom="15dp"
                 android:padding="20dp"
                 android:onClick="onLoginButtonClicked"
-                android:text="LOGIN"/>
+                android:text="LOGIN"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/welcomeRegisterBtn"
@@ -40,7 +43,8 @@
                 android:layout_marginTop="15dp"
                 android:padding="20dp"
                 android:onClick="onRegisterButtonClicked"
-                android:text="REGISTER"/>
+                android:text="REGISTER"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </LinearLayout>

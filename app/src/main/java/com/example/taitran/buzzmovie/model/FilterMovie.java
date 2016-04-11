@@ -32,13 +32,15 @@ public class FilterMovie {
         db = new Database(context);
     }
 
-    /**
-     * Return the major
-     * @return major
-     */
-    public String getMajor() {
-        return major;
-    }
+// --Commented out by Inspection START (4/10/2016 10:29 PM):
+//    /**
+//     * Return the major
+//     * @return major
+//     */
+//    public String getMajor() {
+//        return major;
+//    }
+// --Commented out by Inspection STOP (4/10/2016 10:29 PM)
 
 // --Commented out by Inspection START (4/10/2016 9:55 PM):
 //    /**

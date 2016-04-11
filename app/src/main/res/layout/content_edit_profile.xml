@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:ignore="Overdraw">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -39,13 +41,13 @@
             android:id="@+id/profileview"
             android:layout_below="@+id/app_bar"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            tools:ignore="ContentDescription" />
         <RelativeLayout
             android:id="@+id/usernameLayout"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_below="@+id/profileview"
-            android:layout_alignLeft="@+id/title"
             android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true">
             <TextView
@@ -71,7 +73,8 @@
                 android:text="Email: "
                 android:textSize="22sp"
                 android:id="@+id/emailLabel"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:textColor="#424242"
@@ -79,9 +82,9 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="22sp"
-                android:layout_toRightOf="@+id/emailLabel"
+                android:layout_toEndOf="@+id/emailLabel"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:id="@+id/displayEmailText" />
 
             <EditText
@@ -90,23 +93,25 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="22sp"
-                android:layout_toRightOf="@+id/emailLabel"
+                android:layout_toEndOf="@+id/emailLabel"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="2dp"
                 android:visibility="invisible"
                 android:id="@+id/editEmailText"
                 android:inputType="textEmailAddress"
-                android:background="@color/primary_blue" />
+                android:background="@color/primary_blue"
+                tools:ignore="LabelFor" />
 
             <Button
 
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:id="@+id/editEmailBtn"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:text="Edit"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
 
         </RelativeLayout>
 
@@ -124,16 +129,17 @@
                 android:text="Password: \u25CF \u25CF \u25CF \u25CF \u25CF \u25CF"
                 android:id="@+id/displayPass"
                 android:layout_centerVertical="true"
-                />
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:id="@+id/editPassBtn"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -150,7 +156,8 @@
                 android:text="Major: "
                 android:id="@+id/displayMajor"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                tools:ignore="HardcodedText" />
 
             <Spinner
                 android:layout_width="200dp"
@@ -169,9 +176,10 @@
                 android:layout_height="40dp"
                 android:text="Edit"
                 android:id="@+id/editMajorBtn"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                tools:ignore="HardcodedText" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -189,21 +197,24 @@
                 android:id="@+id/bio"
                 android:layout_alignTop="@+id/editBioText"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:layout_width="230dp"
                 android:layout_height="fill_parent"
                 android:text=""
                 android:textSize="22sp"
-                android:layout_toRightOf="@+id/bio"
+                android:layout_toEndOf="@+id/bio"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="2dp"
                 android:visibility="invisible"
                 android:id="@+id/editBioText"
                 style="@style/HelloDarknessEditText"
                 android:padding="5dp"
-                android:gravity="top" />
+                android:gravity="top"
+                android:inputType="text"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:textColor="#424242"
@@ -211,12 +222,13 @@
                 android:layout_height="fill_parent"
                 android:text=""
                 android:textSize="22sp"
-                android:layout_toRightOf="@+id/bio"
+                android:layout_toEndOf="@+id/bio"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
                 android:id="@+id/displayBioText"
-                android:autoText="false" />
+                android:autoText="false"
+                tools:ignore="Deprecated,TextViewEdits" />
 
             <Button
                 android:layout_width="60dp"
@@ -225,7 +237,8 @@
                 android:id="@+id/editBioBtn"
                 android:layout_alignTop="@+id/editBioText"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                tools:ignore="HardcodedText" />
         </RelativeLayout>
 
 

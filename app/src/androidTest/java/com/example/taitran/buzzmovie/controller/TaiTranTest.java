@@ -20,6 +20,7 @@ import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+@SuppressWarnings("unused")
 @RunWith(AndroidJUnit4.class)
 public class TaiTranTest {
 

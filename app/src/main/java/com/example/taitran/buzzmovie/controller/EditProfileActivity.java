@@ -95,7 +95,8 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
         editEmailButton.setOnClickListener(this);
 
         majorTextView = (TextView) getActivity().findViewById(R.id.displayMajor);
-        majorTextView.setText("Major: " + userMan.getActiveUser().getMajor());
+        String major = ("Major: " + userMan.getActiveUser().getMajor());
+        majorTextView.setText(major);
 
         Button editPassButton = (Button) getActivity().findViewById(R.id.editPassBtn);
         editPassButton.setOnClickListener(this);
@@ -179,12 +180,13 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
             case R.id.editMajorBtn:
                 Button mButton = (Button) v;
                 if (!editingMajor) {
-                    majorTextView.setText("Major: ");
+                    majorTextView.setText(R.string.major);
                     spinner.setVisibility(View.VISIBLE);
                     mButton.setText(R.string.set);
                     editingMajor = true;
                 } else {
-                    majorTextView.setText("Major: " + userMan.getActiveUser().getMajor());
+                    String major = "Major: " + userMan.getActiveUser().getMajor();
+                    majorTextView.setText(major);
                     spinner.setVisibility(View.GONE);
                     mButton.setText(R.string.edit);
                     editingMajor = false;

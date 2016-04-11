@@ -6,9 +6,8 @@ import com.example.taitran.buzzmovie.model.User;
 import android.test.RenamingDelegatingContext;
 
 import org.junit.Test;
-/**
- * Created by Hassen on 4/8/16.
- */
+
+
 public class HassenJunitTest extends AndroidTestCase {
     private Database db;
 
@@ -27,6 +26,7 @@ public class HassenJunitTest extends AndroidTestCase {
 
     }
 
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void testIsUserLoggedIn() {
         assertEquals(false, db.isUserLoggedIn());

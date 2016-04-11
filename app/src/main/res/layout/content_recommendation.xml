@@ -52,7 +52,8 @@
             android:text="Major: "
             android:textSize="19sp"
             android:layout_marginTop="15dp"
-            android:id="@+id/textView6"/>
+            android:id="@+id/textView6"
+            tools:ignore="HardcodedText" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +62,8 @@
             android:layout_toEndOf="@+id/spinner2"
             android:layout_marginTop="15dp"
             android:layout_marginStart="5dp"
-            android:id="@+id/textView5" />
+            android:id="@+id/textView5"
+            tools:ignore="HardcodedText" />
         <Spinner
             android:layout_width="70dp"
             android:layout_height="31dp"
@@ -82,7 +84,8 @@
             android:background="@color/primary_darker_blue"
             android:onClick="filterButtonPressed"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            tools:ignore="HardcodedText" />
 
         <ListView
             android:layout_width="match_parent"

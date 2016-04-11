@@ -19,11 +19,13 @@
             android:id="@+id/searchBar"
             android:hint="Search for Movies"
             android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:background="@null"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:textColor="@color/primaryText"
-            android:textColorHint="@color/primaryText" />
+            android:textColorHint="@color/primaryText"
+            tools:ignore="HardcodedText" />
 
         <ImageButton
             android:layout_width="40dp"
@@ -36,7 +38,8 @@
             android:tintMode="src_atop"
             android:scaleType="centerInside"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/settingsBtn" />
+            android:layout_toStartOf="@+id/settingsBtn"
+            tools:ignore="ContentDescription" />
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="30dp"
@@ -49,7 +52,8 @@
             android:tintMode="src_atop"
             android:scaleType="centerInside"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/clrBtn" />
+            android:layout_toStartOf="@+id/clrBtn"
+            tools:ignore="ContentDescription" />
 
         <ImageButton
             android:layout_width="40dp"
@@ -63,7 +67,8 @@
             android:tintMode="src_atop"
             android:scaleType="centerInside"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

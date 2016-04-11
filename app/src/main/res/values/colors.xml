@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#2d2c28</color>
-    <color name="colorAccent">#FF4081</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary" tools:ignore="UnusedResources">#3F51B5</color>
+    <color name="colorPrimaryDark" tools:ignore="UnusedResources">#2d2c28</color>
+    <color name="colorAccent" tools:ignore="UnusedResources">#FF4081</color>
 
     <color name="primaryBackground">#FFFFFF</color>
     <color name="primaryText">#386346</color>
-    <color name="primaryButton">#609674</color>
-    <color name="accentLight">#997A82</color>
-    <color name="accentDark">#995159</color>
+    <color name="primaryButton" tools:ignore="UnusedResources">#609674</color>
+    <color name="accentLight" tools:ignore="UnusedResources">#997A82</color>
+    <color name="accentDark" tools:ignore="UnusedResources">#995159</color>
 
     <!--
     <color name="primaryBackground">#000000</color>
@@ -17,7 +17,7 @@
     <color name="accentLight">#0F6821</color>
     <color name="accentDark">#093F2E</color>
     -->
-    <color name="background_light">#81D4FA</color>
+    <color name="background_light" tools:ignore="UnusedResources">#81D4FA</color>
     <color name="transparent">#4FC3F7</color>
     <color name="primary">#03A9F4</color>
     <color name="primary_blue">#0D47A1</color>

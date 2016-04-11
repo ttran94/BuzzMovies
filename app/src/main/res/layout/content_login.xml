@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,7 +20,8 @@
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:layout_marginTop="-20dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ContentDescription" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -30,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Your Username"/>
+                android:hint="Your Username"
+                tools:ignore="HardcodedText" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -42,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:hint="Password"
+                tools:ignore="HardcodedText" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -54,7 +58,7 @@
             android:padding="12dp"
             android:text="Login"
             android:onClick="loginButtonPressed"
-            />
+            tools:ignore="HardcodedText" />
         <Button
             android:id="@+id/hello"
             android:layout_width="match_parent"
@@ -64,7 +68,7 @@
             android:padding="12dp"
             android:text="Cancel"
             android:onClick="cancelButtonPressed"
-            />
+            tools:ignore="HardcodedText" />
 
         <TextView android:id="@+id/logText"
             android:layout_width="match_parent"
@@ -73,6 +77,7 @@
             android:text="Need an account? Create one"
             android:gravity="center"
             android:textSize="16dip"
-            android:onClick="logTextClicked"/>
+            android:onClick="logTextClicked"
+            tools:ignore="HardcodedText,SpUsage" />
     </LinearLayout>
 </ScrollView>

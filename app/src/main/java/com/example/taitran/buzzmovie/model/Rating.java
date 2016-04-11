@@ -25,6 +25,7 @@ public class Rating {
      * @param score rating score of that movie
      * @param comment of the user
      */
+    @SuppressWarnings("unused")
     public Rating(String username, Movie movie, float score, String comment) {
         this.score = score;
         this.comment = comment;

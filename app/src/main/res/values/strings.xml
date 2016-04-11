@@ -1,23 +1,23 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Buzzmovie</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login" tools:ignore="UnusedResources">LoginActivity</string>
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="new_password">New Password</string>
     <string name="old_password">Old Password</string>
     <string name="edit">Edit</string>
     <string name="set">Set</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
+    <string name="cancel" tools:ignore="UnusedResources">Cancel</string>
+    <string name="ok" tools:ignore="UnusedResources">OK</string>
     <string name="logout">Logout</string>
     <string name="search">Search</string>
     <string name="editPassword">Edit Password</string>
     <string name="title">Title</string>
     <string name="Type">Type</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_search">search</string>
-    <string name="title_activity_recommendation">Recommendation</string>
+    <string name="major">Major: </string>
+    <string name="title_activity_main" tools:ignore="UnusedResources">MainActivity</string>
+    <string name="title_activity_search" tools:ignore="UnusedResources">search</string>
+    <string name="title_activity_recommendation" tools:ignore="UnusedResources">Recommendation</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" tools:ignore="UnusedResources">Hello blank fragment</string>
 </resources>

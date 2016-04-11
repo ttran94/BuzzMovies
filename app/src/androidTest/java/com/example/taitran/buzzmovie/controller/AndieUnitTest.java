@@ -15,14 +15,13 @@ import org.junit.Test;
  */
 
 
+@SuppressWarnings("unused")
 public class AndieUnitTest extends AndroidTestCase{
-    SQLiteDatabase db;
-    Database database;
-    Rating r1;
-    Rating r2;
-    Rating r3;
-    Movie sample_movie;
-    int m_id;
+    private SQLiteDatabase db;
+    private Database database;
+    private Rating r1;
+    private Movie sample_movie;
+    private int m_id;
 
     @Override
     public void setUp() throws Exception{
@@ -43,6 +42,7 @@ public class AndieUnitTest extends AndroidTestCase{
      * to the ratings table with a reference to the movie
      * @throws Exception
      */
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void test_new_movie() throws Exception {
         r1 = new Rating("user1", sample_movie, 4, "gr8");
@@ -78,10 +78,11 @@ public class AndieUnitTest extends AndroidTestCase{
      * and there should be only one instance of that movie in the movie table.
      * @throws Exception
      */
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void test_same_movie() throws Exception {
         test_new_movie();
-        r2 = new Rating("user2", sample_movie, 3, "okay");
+        Rating r2 = new Rating("user2", sample_movie, 3, "okay");
         database.addRating(r2);
         //db = database.getWritableDatabase();
         Cursor movie_cursor = db.rawQuery("SELECT " +
@@ -117,10 +118,11 @@ public class AndieUnitTest extends AndroidTestCase{
      * @throws Exception
      */
 
+    @SuppressWarnings("JUnit4AnnotatedMethodInJUnit3TestCase")
     @Test
     public void test_changed_review() throws Exception {
         test_new_movie();
-        r3 = new Rating("user1", sample_movie, 2, "meh");
+        Rating r3 = new Rating("user1", sample_movie, 2, "meh");
         database.addRating(r3);
         //db = database.getWritableDatabase();
         Cursor count_cursor = db.rawQuery("SELECT " +

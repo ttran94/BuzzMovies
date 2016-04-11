@@ -98,7 +98,6 @@ public class ReviewListActivity extends AppCompatActivity{
         });
         reviewListView = (ListView) findViewById(R.id.reviewList);
         reviewListView.setVisibility(View.VISIBLE);
-        ((RecyclerView) findViewById(R.id.filterList)).setVisibility(View.GONE);
         db = new Database(this);
         reviews = db.getRatings(movie, ratingSelected, majorSelected);
         reviewListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, reviews));

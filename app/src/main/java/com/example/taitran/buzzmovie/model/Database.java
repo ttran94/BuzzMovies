@@ -200,7 +200,7 @@ public class Database extends SQLiteOpenHelper{
         if (value <= 0) {
             isEmpty = true;
         }
-        data.close();
+        current.close();
         return isEmpty;
     }
 
@@ -394,6 +394,7 @@ public class Database extends SQLiteOpenHelper{
         Cursor cursor1 = db.rawQuery(movieSelectQuery, new String[]{movie_title, movie_type});
         cursor1.moveToFirst();
         m_id = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        cursor1.close();
         String userSelectQuery = String.format("SELECT * FROM %s WHERE %s = ?",
                 USER_TABLE, username);
         Cursor userTable = db.rawQuery(userSelectQuery, new String[]{rating.getUsername()});

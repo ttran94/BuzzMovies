@@ -1,5 +1,6 @@
 package com.example.taitran.buzzmovie.controller;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
  * Dialog View for presenting search settings
  * Uses search_dialog.xml layout
  */
+@SuppressWarnings("unused")
 public class MenuDialog extends DialogFragment implements AdapterView.OnItemSelectedListener{
 
     /**
@@ -27,7 +29,7 @@ public class MenuDialog extends DialogFragment implements AdapterView.OnItemSele
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.search_dialog, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.search_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AppCompatAlertDialogStyle));
         Spinner typeSpinner = (Spinner) v.findViewById(R.id.typespinner);
 
