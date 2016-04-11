@@ -1,6 +1,5 @@
 package com.example.taitran.buzzmovie.model;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +21,11 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
     /**
      * The image loader
      */
-    private ImageLoader image;
+    private final ImageLoader image;
     /**
      * The layout inflater
      */
-    private LayoutInflater layout;
+    private final LayoutInflater layout;
     /**
      * The list of movies
      */
@@ -53,6 +52,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
      * @param movie take in a list that contains movies
      */
     public void setMovieList(ArrayList<Movie> movie) {
+        //noinspection AccessStaticViaInstance
         this.movieList = movie;
         notifyItemRangeChanged(0, movie.size());
     }
@@ -65,15 +65,17 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         return movieList;
     }
 
-    /**
-     * Translation animation.
-     * @param holder The view for the translation.
-     */
-    private static void translation(RecyclerView.ViewHolder holder) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationY", -100, 0);
-        animator.setDuration(1000);
-        animator.start();
-    }
+// --Commented out by Inspection START (4/10/2016 9:56 PM):
+//    /**
+//     * Translation animation.
+//     * @param holder The view for the translation.
+//     */
+//    private static void translation(RecyclerView.ViewHolder holder) {
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationY", -100, 0);
+//        animator.setDuration(1000);
+//        animator.start();
+//    }
+// --Commented out by Inspection STOP (4/10/2016 9:56 PM)
 
     /**
      * Fade in animation
@@ -116,19 +118,19 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         /**
          * The movie poster
          */
-        private ImageView moviePoster;
+        private final ImageView moviePoster;
         /**
          * The movie title
          */
-        private TextView movieTitle;
+        private final TextView movieTitle;
         /**
          * The date of the movie
          */
-        private TextView movieDate;
+        private final TextView movieDate;
         /**
          * The type of movie
          */
-        private TextView movieType;
+        private final TextView movieType;
         /**
          * The position of the movie
          */

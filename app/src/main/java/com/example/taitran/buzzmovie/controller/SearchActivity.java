@@ -30,7 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String SAVED_MOVIE ="movies" ;
     private RequestQueue queue;
     private ArrayList<Movie> movieList;
-    public myAdapter myadapter;
+    private myAdapter myadapter;
     private RecyclerView viewList;
     private EditText searchEditText;
     /**

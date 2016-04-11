@@ -8,11 +8,14 @@ import java.util.ArrayList;
  * Created by Tai Tran on 2/6/2016.
  * UserManagerFacade that handles all functionality for the user
  */
+@SuppressWarnings("AccessStaticViaInstance")
 public class UserManager implements UserAuthentication, UserManagement{
+
+
     /**
      * The list of majors
      */
-    private static String[] majors = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
+    private static final String[] majors = new String[] {"CS", "EE", "ME", "ISYE", "Math", "Phys", "Chem", "ChemE"};
     /**
      * The active user
      */
@@ -82,7 +85,8 @@ public class UserManager implements UserAuthentication, UserManagement{
         }
         Cursor data = db.getUserData(username);
         if( data != null && data.moveToFirst() ) {
-            name = data.getString(data.getColumnIndex(db.username));
+            String username123 = db.username;
+            name = data.getString(data.getColumnIndex(username123));
             pass = data.getString(data.getColumnIndex(db.password));
             email = data.getString(data.getColumnIndex(db.email));
             major = data.getString(data.getColumnIndex(db.major));
@@ -149,7 +153,7 @@ public class UserManager implements UserAuthentication, UserManagement{
 
     @Override
     public boolean updatePassword(String oldPass, String newPass) {
-        boolean passCheck = activeUser.setPassword(activeUser.getPassword(), newPass);
+        boolean passCheck = activeUser.setPassword(oldPass, newPass);
         if (passCheck) {
             db.setPassword(newPass, activeUser.getUsername());
             return true;

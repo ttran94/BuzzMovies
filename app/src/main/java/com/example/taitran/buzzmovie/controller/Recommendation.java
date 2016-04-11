@@ -44,7 +44,7 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
     /**
      * Adapter
      */
-    public RedAdapter myAdapter;
+    private RedAdapter myAdapter;
     /**
      * Movie list
      */

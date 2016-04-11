@@ -1,19 +1,13 @@
 package com.example.taitran.buzzmovie.controller;
-import android.app.Instrumentation;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewAssertion;
-import android.support.test.espresso.assertion.ViewAssertions;
-import android.test.ActivityInstrumentationTestCase2;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import android.support.test.rule.ActivityTestRule;
-import static android.support.test.espresso.Espresso.onData;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -30,7 +24,7 @@ import static org.hamcrest.Matchers.not;
 public class TaiTranTest {
 
     @Rule
-    public ActivityTestRule<RegisterActivity> mActivityRule = new ActivityTestRule<>(RegisterActivity.class);
+    public final ActivityTestRule<RegisterActivity> mActivityRule = new ActivityTestRule<>(RegisterActivity.class);
 
 
 
@@ -82,7 +76,7 @@ public class TaiTranTest {
     @Test
     public void checkSuccessfullyRegistered() {
         onView(withId(R.id.regEmail)).perform(typeText("taitran123@gmail.com"), closeSoftKeyboard());
-        onView(withId(R.id.regUserName)).perform(typeText("taitran32131"), closeSoftKeyboard());
+        onView(withId(R.id.regUserName)).perform(typeText("taitran321312"), closeSoftKeyboard());
         onView(withId(R.id.regPass)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.submitBtn)).perform(click());
         onView(withText("Registration Success")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
@@ -92,7 +86,7 @@ public class TaiTranTest {
     @Test
     public void checkUsernameAleadyExists() {
         onView(withId(R.id.regEmail)).perform(typeText("taitran123@gmail.com"), closeSoftKeyboard());
-        onView(withId(R.id.regUserName)).perform(typeText("taitran32131"), closeSoftKeyboard());
+        onView(withId(R.id.regUserName)).perform(typeText("taitran321312"), closeSoftKeyboard());
         onView(withId(R.id.regPass)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.submitBtn)).perform(click());
         onView(withText("Username already exists")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));

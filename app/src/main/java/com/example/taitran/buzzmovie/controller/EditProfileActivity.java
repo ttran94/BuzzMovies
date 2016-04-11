@@ -121,14 +121,6 @@ public class EditProfileActivity extends Fragment implements AdapterView.OnItemS
 
     }
 
-    /**
-     * redirect the user to EditPasswordActivity
-     * @param v reference to the password button
-     */
-    public void editPasswordButtonPressed(View v) {
-
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
         userMan.updateMajor(((TextView)v).getText().toString());

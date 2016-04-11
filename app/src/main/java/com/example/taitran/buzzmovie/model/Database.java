@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * go to firefox and install SQL MANAGER addon then open the database.
  * or you can use whatever software that can open SQL db.
  */
+@SuppressWarnings("AccessStaticViaInstance")
 public class Database extends SQLiteOpenHelper{
     /**
      * The movie database
@@ -32,51 +33,51 @@ public class Database extends SQLiteOpenHelper{
     /**
      * User's name
      */
-    protected static final String username = "username";
+    static final String username = "username";
     /**
      * User's password
      */
-    protected static final String password = "password";
+    static final String password = "password";
     /**
      * User's email
      */
-    protected static final String email = "email";
+    static final String email = "email";
     /**
      * User's major
      */
-    protected static final String major = "major";
+    static final String major = "major";
     /**
      * User's bio
      */
-    protected static final String bio = "bio";
+    static final String bio = "bio";
     /**
      * User's status
      */
-    protected static  final String status = "status";
+    static  final String status = "status";
     /**
      * User's type
      */
-    protected static  final String user_type = "type";
+    static  final String user_type = "type";
     /**
      * User type
      */
-    protected static  final String normal = "User";
+    private static  final String normal = "User";
     /**
      * Admin type
      */
-    protected static  final String admin = "Admin";
+    private static  final String admin = "Admin";
     /**
      * User's unlocked
      */
-    protected static  final String unlocked = "Unlocked";
+    private static  final String unlocked = "Unlocked";
     /**
      * User is locked
      */
-    protected static  final String locked = "Locked";
+    static  final String locked = "Locked";
     /**
      * User is banned
      */
-    protected static  final String banned = "Banned";
+    static  final String banned = "Banned";
     /**
      * Active user
      */
@@ -191,7 +192,7 @@ public class Database extends SQLiteOpenHelper{
      * @param name username
      * @return true or false if empty
      */
-    protected boolean IsEmpty(String name) {
+    boolean IsEmpty(String name) {
         boolean isEmpty = false;
         SQLiteDatabase data = this.getReadableDatabase();
         Cursor current = data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[] { name });
@@ -209,7 +210,7 @@ public class Database extends SQLiteOpenHelper{
      * @param name username
      * @return cursor of table
      */
-    protected Cursor getUserData(String name) {
+    Cursor getUserData(String name) {
         SQLiteDatabase data = this.getReadableDatabase();
         return data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[]{name });
     }
@@ -322,7 +323,7 @@ public class Database extends SQLiteOpenHelper{
      * @param bio user's bio
      * @param username user's name
      */
-    protected void setBio(String bio, String username) {
+    void setBio(String bio, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newBio = new ContentValues();
@@ -336,7 +337,7 @@ public class Database extends SQLiteOpenHelper{
      * @param password user's major
      * @param username user's name
      */
-    protected void setPassword(String password, String username) {
+    void setPassword(String password, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newPassword = new ContentValues();
@@ -350,7 +351,7 @@ public class Database extends SQLiteOpenHelper{
      * @param email user's email
      * @param username user's name
      */
-    protected void setEmail(String email, String username) {
+    void setEmail(String email, String username) {
         String[] selectArgs = new String[] {username};
         SQLiteDatabase data = this.getWritableDatabase();
         ContentValues newEmail = new ContentValues();
@@ -481,7 +482,7 @@ public class Database extends SQLiteOpenHelper{
     /**
      * Queries the user table with some filter on the status of users to return
      * @param statusFilter search for users of a certain status
-     *                     - default (all), unlocked, locked, banned
+     * - default (all), unlocked, locked, banned
      * @return list of strings formatted as "username | email | status"
      */
     public ArrayList<String> getUserList(String statusFilter) {

@@ -59,7 +59,7 @@ public interface UserManagement {
      * set active user to null and log out
      * @param user object which contains user information
      */
-    void logOut(User user);
+    void logOut(@SuppressWarnings("SameParameterValue") User user);
 
     /**
      * update or set the rating for the movie

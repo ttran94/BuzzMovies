@@ -18,7 +18,7 @@ public class FilterMovie {
     /**
      * The database
      */
-    private Database db;
+    private final Database db;
 
     /**
      * Filtering the movies
@@ -40,13 +40,15 @@ public class FilterMovie {
         return major;
     }
 
-    /**
-     * Return the rating
-     * @return rating
-     */
-    public String getRating() {
-        return rating;
-    }
+// --Commented out by Inspection START (4/10/2016 9:55 PM):
+//    /**
+//     * Return the rating
+//     * @return rating
+//     */
+//    public String getRating() {
+//        return rating;
+//    }
+// --Commented out by Inspection STOP (4/10/2016 9:55 PM)
 
     /**
      * Update the major

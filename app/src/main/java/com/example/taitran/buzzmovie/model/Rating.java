@@ -4,19 +4,19 @@ public class Rating {
     /**
      * The rating score
      */
-    private float score; //score out of 5
+    private final float score; //score out of 5
     /**
      * The comment on the rating
      */
-    private String comment;
+    private final String comment;
     /**
      * The user who rated the movie
      */
-    private String username;
+    private final String username;
     /**
      * The movie that gets rated
      */
-    private Movie movie;
+    private final Movie movie;
 
     /**
      * get the info for the rating object

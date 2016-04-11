@@ -23,11 +23,11 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
     /**
      * The image loader
      */
-    private ImageLoader image;
+    private final ImageLoader image;
     /**
      * The layout inflater
      */
-    private LayoutInflater layout;
+    private final LayoutInflater layout;
     /**
      * The movie list
      */
@@ -54,6 +54,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
      * @param movie the movie list you're setting
      */
     public void setMovieList(ArrayList<FilterList> movie) {
+        //noinspection AccessStaticViaInstance
         this.movieList = movie;
         notifyItemRangeChanged(0, movie.size());
     }
@@ -75,7 +76,6 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         holder.movieType.setText("Type: " + currentView.getType());
         holder.score.setRating(currentView.getScore());
         String thumbNail = currentView.getPoster();
-        holder.moviePosterURL = thumbNail;
         holder.position = position;
         final MovieView temp = holder;
         if(thumbNail != null) {
@@ -103,30 +103,27 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         /**
          * The movie poster
          */
-        private ImageView moviePoster;
+        private final ImageView moviePoster;
         /**
          * The movie title
          */
-        private TextView movieTitle;
+        private final TextView movieTitle;
         /**
          * The date of the movie
          */
-        private TextView movieDate;
+        private final TextView movieDate;
         /**
          * The type of movie
          */
-        private TextView movieType;
-        /**
-         * The url of the poster
-         */
-        private String moviePosterURL;
+        private final TextView movieType;
         /**
          * The movie rating
          */
-        private RatingBar score;
+        private final RatingBar score;
         /**
          * The position of the movie.
          */
+        @SuppressWarnings("unused")
         private int position;
 
         /**

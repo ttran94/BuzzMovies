@@ -10,9 +10,8 @@ import android.test.RenamingDelegatingContext;
 
 //import org.Junit.Test;
 
-/**
- * Created by Hassen on 4/8/16.
- */
+
+@SuppressWarnings("unused")
 public class HassenJunitTest extends AndroidTestCase {
     private Database db;
 

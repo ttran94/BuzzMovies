@@ -5,7 +5,7 @@ public class User {
     /**
      * The username
      */
-    private String username;
+    private final String username;
     /**
      * The user's password
      */
@@ -25,7 +25,7 @@ public class User {
     /**
      * The type of user
      */
-    private String type;
+    private final String type;
 
     /**
      * a user constructor that will set up the user profile
@@ -110,14 +110,6 @@ public class User {
      */
     public String getType() {
         return type;
-    }
-
-    /**
-     * set user's type
-     * @param type of user
-     */
-    public void setType(String type) {
-        this.type = type;
     }
     /**
      * set the user's major

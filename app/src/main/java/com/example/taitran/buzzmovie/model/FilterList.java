@@ -5,23 +5,23 @@ public class FilterList {
     /**
      * The title
      */
-    private String title;
+    private final String title;
     /**
      * The year
      */
-    private String year;
+    private final String year;
     /**
      * The type
      */
-    private String type;
+    private final String type;
     /**
      * The poster
      */
-    private String poster;
+    private final String poster;
     /**
      * The score
      */
-    private float score;
+    private final float score;
 
     /**
      *

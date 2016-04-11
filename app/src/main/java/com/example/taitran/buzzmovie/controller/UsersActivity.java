@@ -27,27 +27,23 @@ public class UsersActivity extends Fragment {
     /**
      * Status spinner
      */
-    Spinner statusSpinner;
+    private Spinner statusSpinner;
     /**
      * Selected status
      */
-    String statusSelected;
+    private String statusSelected;
     /**
      * User list
      */
-    ListView usersListView;
+    private ListView usersListView;
     /**
      * User manager
      */
-    UserManager userMan;
+    private UserManager userMan;
     /**
      * User list
      */
-    ArrayList<String> userList;
-    /**
-     * Filter button
-     */
-    Button bFilter;
+    private ArrayList<String> userList;
     /**
      * Username selected
      */
@@ -70,7 +66,10 @@ public class UsersActivity extends Fragment {
         super.onActivityCreated(savedInstanceState);
         userMan = new UserManager(getActivity());
         statusSpinner = (Spinner) getActivity().findViewById(R.id.status_spinner);
-        bFilter = (Button) getActivity().findViewById(R.id.filter);
+        /*
+      Filter button
+     */
+        Button bFilter = (Button) getActivity().findViewById(R.id.filter);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, statuses);
         statusSpinner.setAdapter(adapter);
         statusSelected = "Default";
@@ -98,11 +97,11 @@ public class UsersActivity extends Fragment {
         });
 
          bFilter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    userList = userMan.getUserList(statusSelected);
-                    usersListView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.list_item, userList));
-                }
-            });
+             @Override
+             public void onClick(View v) {
+                 userList = userMan.getUserList(statusSelected);
+                 usersListView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.list_item, userList));
+             }
+         });
     }
 }

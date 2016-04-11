@@ -8,25 +8,25 @@ public class Movie implements Parcelable{
     /**
      * The title of the movie
      */
-    private String title;
+    private final String title;
     /**
      * The release year
      */
-    private String year;
+    private final String year;
     /**
      * The movie type
      */
-    private String type;
+    private final String type;
     /**
      * The movie poster
      */
-    private String poster;
+    private final String poster;
 
     /**
      * The movie
      * @param data the movie data
      */
-    public Movie(Parcel data) {
+    private Movie(Parcel data) {
         title = data.readString();
         year = data.readString();
         type = data.readString();
