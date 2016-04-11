@@ -5,11 +5,7 @@ import com.example.taitran.buzzmovie.model.Database;
 import com.example.taitran.buzzmovie.model.User;
 import android.test.RenamingDelegatingContext;
 
-//import org.junit.Test;
-
-
-//import org.Junit.Test;
-
+import org.junit.Test;
 /**
  * Created by Hassen on 4/8/16.
  */
@@ -31,8 +27,7 @@ public class HassenJunitTest extends AndroidTestCase {
 
     }
 
-
-    //@Test
+    @Test
     public void testIsUserLoggedIn() {
         assertEquals(false, db.isUserLoggedIn());
         db.addActiveUser(new User("test", "test", "test", "test"), "test");
@@ -40,4 +35,3 @@ public class HassenJunitTest extends AndroidTestCase {
     }
 
 }
-
