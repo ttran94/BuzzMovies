@@ -188,11 +188,11 @@ public class Database extends SQLiteOpenHelper{
     //Close the cursor after retrieve the data to prevent data leak.
 
     /**
-     * check if user name is empty
+     * check if user name exists
      * @param name username
      * @return true or false if empty
      */
-    boolean IsEmpty(String name) {
+    public boolean IsEmpty(String name) {
         boolean isEmpty = false;
         SQLiteDatabase data = this.getReadableDatabase();
         Cursor current = data.rawQuery("Select * from " + USER_TABLE + " where " + username + "=?", new String[] { name });
