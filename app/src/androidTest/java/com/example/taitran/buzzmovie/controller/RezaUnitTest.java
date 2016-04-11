@@ -27,12 +27,18 @@ public class RezaUnitTest extends AndroidTestCase{
 
     @Test
     public void test_isEmptyTrue() throws Exception {
-        assertEquals(true, database.IsEmpty("user1"));
+        Cursor user_cursor = db.rawQuery("SELECT * " +
+                "FROM User " +
+                "WHERE name=?", new String[]{"user1"});
+        assertEquals(true, user_cursor.moveToFirst());
     }
 
     @Test
     public void test_isEmptyFalse() throws Exception {
-        assertEquals(false, database.IsEmpty("user"));
+        Cursor user_cursor = db.rawQuery("SELECT * " +
+                "FROM User " +
+                "WHERE name=?", new String[]{"user1"});
+        assertEquals(false, user_cursor.moveToFirst());
     }
 
     @Override
