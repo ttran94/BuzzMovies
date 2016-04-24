@@ -79,5 +79,14 @@
             android:textSize="16dip"
             android:onClick="logTextClicked"
             tools:ignore="HardcodedText,SpUsage" />
+        <TextView android:id="@+id/forgotPw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Forgot Password?"
+            android:gravity="center"
+            android:textSize="16dip"
+            android:onClick="pwButton"
+            tools:ignore="HardcodedText,SpUsage" />
     </LinearLayout>
 </ScrollView>

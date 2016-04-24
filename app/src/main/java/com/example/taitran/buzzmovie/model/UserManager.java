@@ -25,6 +25,8 @@ public class UserManager implements UserAuthentication, UserManagement{
      */
     private Database db;
 
+    public static User newUser;
+
     /**
      * Empty constructor
      */
@@ -198,4 +200,22 @@ public class UserManager implements UserAuthentication, UserManagement{
         db.updateUserStatus(username, status);
     }
 
+    public User passwordRecovery(String user) {
+        Cursor userData = db.getPassword(user);
+        if(userData.moveToFirst()) {
+            String username = userData.getString(userData.getColumnIndex(db.username));
+            String password = userData.getString(userData.getColumnIndex(db.password));
+            String email = userData.getString(userData.getColumnIndex(db.email));
+            String type = userData.getString(userData.getColumnIndex(db.user_type));
+            newUser = new User(email, username, password, type);
+            userData.close();
+            return newUser;
+        }
+        userData.close();
+        return null;
+    }
+
+    public User getUser() {
+        return newUser;
+    }
 }

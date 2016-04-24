@@ -66,4 +66,13 @@ public interface UserManagement {
      * @param rating object that contains movie's rating
      */
     void setRating(Rating rating);
+
+    /**
+     * get password from the email or username
+     * @param user a string that can be either username or email
+     * @return a the user object for that email or username;
+     */
+    User passwordRecovery(String user);
+
+    User getUser();
 }

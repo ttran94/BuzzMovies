@@ -291,6 +291,16 @@ public class Database extends SQLiteOpenHelper{
     }
 
     /**
+     * get User data from data base
+     * @param user's string that can be either username or email
+     * @return a cursor object that contains the user information
+     */
+    public Cursor getPassword(String user) {
+        SQLiteDatabase data = this.getReadableDatabase();
+        return data.rawQuery("Select * from " + USER_TABLE + " WHERE " + username + "=? OR " + email + "=?", new String[] {user, user});
+    }
+
+    /**
      * set the active user to null and log the user out of the system
      * @param user object that we want to remove and set to null
      */
