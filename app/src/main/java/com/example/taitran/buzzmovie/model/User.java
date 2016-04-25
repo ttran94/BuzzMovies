@@ -96,6 +96,7 @@ public class User {
         return false;
     }
 
+
     /**
      * get the user's password'
      * @return user's password

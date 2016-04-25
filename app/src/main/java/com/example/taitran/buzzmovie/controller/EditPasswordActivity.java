@@ -56,8 +56,7 @@ public class EditPasswordActivity extends AppCompatActivity {
         } else if (!userMan.updatePassword(oldPass, newPass)) {
             text = "Wrong password";
         } else {
-            Intent intent = new Intent(this, EditProfileActivity.class);
-            startActivity(intent);
+            finish();
             text = "Success";
         }
         int duration = Toast.LENGTH_SHORT;

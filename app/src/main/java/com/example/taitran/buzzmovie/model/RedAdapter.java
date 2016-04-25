@@ -78,6 +78,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         String type = "Type: " + currentView.getType();
         holder.movieType.setText(type);
         holder.score.setRating(currentView.getScore());
+        holder.score.setStepSize(0.5f);
         String thumbNail = currentView.getPoster();
         holder.position = position;
         final MovieView temp = holder;

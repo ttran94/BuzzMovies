@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -166,4 +167,14 @@ public class SearchActivity extends AppCompatActivity {
         menuDialog.show(getFragmentManager().beginTransaction(), "Search Settings");
     }
 
+    public void backButtonPressed(View v) {
+        finish();
+        this.overridePendingTransition(R.anim.no_anim, R.anim.slide_out_down);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.no_anim, R.anim.slide_out_down);
+    }
 }

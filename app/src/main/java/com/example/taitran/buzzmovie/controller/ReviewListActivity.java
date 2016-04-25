@@ -111,4 +111,12 @@ public class ReviewListActivity extends AppCompatActivity{
         reviews = db.getRatings(movie, ratingSelected, majorSelected);
         reviewListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, reviews));
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.overridePendingTransition(R.anim.no_anim, R.anim.slide_out_down);
+    }
+
+
 }

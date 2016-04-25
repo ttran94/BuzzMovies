@@ -92,11 +92,16 @@ public class RatingActivity extends AppCompatActivity {
      * @param v reference to the review button being pressed
      */
     public void reviewsButtonPressed(View v) {
-        Context context = v.getContext();
-        Intent reviews = new Intent(context, ReviewListActivity.class);
+        Intent reviews = new Intent(this, ReviewListActivity.class);
         //send position of the movie in movieList for access in the activity
         reviews.putExtra("position", position);
-        context.startActivity(reviews);
+        startActivity(reviews);
+        this.overridePendingTransition(R.anim.slide_in_up, R.anim.no_anim);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.no_anim, R.anim.slide_out_down);
+    }
 }

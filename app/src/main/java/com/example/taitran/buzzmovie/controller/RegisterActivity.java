@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity{
 
         try {
             manager.addUser(email.getText().toString(), username.getText().toString(), password.getText().toString(), type);
+            finish();
             Intent login = new Intent(this, LoginActivity.class);
             startActivity(login);
         } catch (IllegalArgumentException e) {

@@ -449,9 +449,9 @@ public class Database extends SQLiteOpenHelper{
     public ArrayList<FilterList> getMovieList(String major, String rating) {
         ArrayList<FilterList> movieList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1", new String[] {rating, rating});
+        Cursor ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1  AND user_major = ?", new String[] {rating, rating, major});
         if("Default".equals(major) && !"Default".equals(rating)) {
-            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1 AND user_major = ?", new String[]{rating, rating, major});
+            ratingList = db.rawQuery("SELECT * FROM Ratings WHERE score >= ? AND score < ?+1", new String[]{rating, rating});
         } else if ("Default".equals(major) && "Default".equals(rating)) {
             ratingList = db.rawQuery("SELECT * FROM Ratings", null);
         } else if (!"Default".equals(major) && "Default".equals(rating)) {
@@ -477,7 +477,7 @@ public class Database extends SQLiteOpenHelper{
                         String movie_date = getMovie.getString(getMovie.getColumnIndex("date"));
                         String movie_type = getMovie.getString(getMovie.getColumnIndex("type"));
                         String movie_url = getMovie.getString(getMovie.getColumnIndex("poster"));
-                        float avg = avgScore.getInt(0);
+                        float avg = avgScore.getFloat(0);
                         FilterList selectedMovie = new FilterList(movie_title, movie_date, movie_type, movie_url, avg);
                         movieList.add(selectedMovie);
                         exist.add(movie_id);

@@ -1,5 +1,7 @@
 package com.example.taitran.buzzmovie.model;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.taitran.buzzmovie.controller.R;
 import com.example.taitran.buzzmovie.controller.RatingActivity;
+import com.example.taitran.buzzmovie.controller.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
      * The list of movies
      */
     private static ArrayList<Movie> movieList = new ArrayList<>();
-
+    private int previousPosition = 0;
     /**
      * set up VolleySingleton, image and layout for the activity
      * @param context get the activity class
@@ -65,17 +68,15 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
         return movieList;
     }
 
-// --Commented out by Inspection START (4/10/2016 9:56 PM):
-//    /**
-//     * Translation animation.
-//     * @param holder The view for the translation.
-//     */
-//    private static void translation(RecyclerView.ViewHolder holder) {
-//        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationY", -100, 0);
-//        animator.setDuration(1000);
-//        animator.start();
-//    }
-// --Commented out by Inspection STOP (4/10/2016 9:56 PM)
+    /**
+     * Translation animation.
+     * @param holder The view for the translation.
+     */
+    private static void translation(RecyclerView.ViewHolder holder) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationX", -150, 0);
+        animator.setDuration(500);
+        animator.start();
+    }
 
     /**
      * Fade in animation
@@ -108,7 +109,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
                 }
             });
         }
-        fadeInAnimation(holder.itemView);
+        translation(holder);
     }
 
     @Override
@@ -148,11 +149,12 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
+                    Activity activity = (Activity) context;
                     Intent ratingPage = new Intent(context, RatingActivity.class);
                     //send position of the movie in movieList for access in the activity
                     ratingPage.putExtra("position", position);
-
                     context.startActivity(ratingPage);
+                    activity.overridePendingTransition(R.anim.slide_in_up, R.anim.no_anim);
                 }
             });
 

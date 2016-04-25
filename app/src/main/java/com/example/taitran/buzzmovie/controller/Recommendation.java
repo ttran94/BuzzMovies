@@ -2,6 +2,7 @@ package com.example.taitran.buzzmovie.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.View.OnClickListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.taitran.buzzmovie.model.FilterList;
 import com.example.taitran.buzzmovie.model.FilterMovie;
@@ -53,7 +55,7 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
      * Recycle view
      */
     private RecyclerView viewList;
-
+    private TextView text;
     /**
      * Empty constructor
      */
@@ -75,6 +77,7 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
         super.onActivityCreated(savedInstanceState);
         Button filterButton = (Button) getActivity().findViewById(R.id.filterB);
         filterButton.setOnClickListener(this);
+        text = (TextView) getActivity().findViewById(R.id.recText);
         majorSpinner = (Spinner) getActivity().findViewById(R.id.spinner2);
         ratingSpinner = (Spinner) getActivity().findViewById(R.id.spinner3);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, majors);
@@ -88,6 +91,15 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
         viewList = ((RecyclerView) getActivity().findViewById(R.id.filterList));
         myAdapter = new RedAdapter(this.getContext());
         viewList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        movies = filterL.getMovieList();
+        if (movies.size() == 0) {
+            text.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            text.setVisibility(View.VISIBLE);
+        } else {
+            myAdapter.setMovieList(movies);
+            viewList.setAdapter(myAdapter);
+            text.setVisibility(View.GONE);
+        }
     }
 
 
@@ -111,8 +123,16 @@ public class Recommendation extends Fragment implements AdapterView.OnItemSelect
         switch (v.getId()) {
             case R.id.filterB:
                 movies = filterL.getMovieList();
-                myAdapter.setMovieList(movies);
-                viewList.setAdapter(myAdapter);
+                if (movies.size() == 0) {
+                    myAdapter.setMovieList(movies);
+                    viewList.setAdapter(myAdapter);
+                    text.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                    text.setVisibility(View.VISIBLE);
+                } else {
+                    myAdapter.setMovieList(movies);
+                    viewList.setAdapter(myAdapter);
+                    text.setVisibility(View.GONE);
+                }
                 break;
         }
     }

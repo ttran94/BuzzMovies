@@ -69,6 +69,12 @@ public class Dashboard extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        this.overridePendingTransition(R.anim.slide_in_up, R.anim.no_anim);
+        super.onPause();
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -40,7 +40,7 @@ public class PasswordRecovery extends AppCompatActivity {
                     "Your password : %s\n\nThank you for using Buzzmovie,\nBuzzmovie Support", getUser.getUsername(), getUser.getPassword());
             SendMail sm = new SendMail(this, getUser.getEmail().trim(), subject.trim(), setText.trim());
             sm.execute();
-            Toast.makeText(this, getUser.getEmail(), Toast.LENGTH_SHORT).show();
+            finish();
         } else {
                 user.setError("Your email/username either does not exist or invalid");
         }
