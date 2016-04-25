@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme.Blue"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.Blue">
+            android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,13 +23,13 @@
         <activity
             android:name=".AdminActivity"
             android:label="Admin Panel"
-            android:theme="@style/AppTheme.Blue" />
+            />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.Blue" />
+            />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppTheme.Blue" />
+            />
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard" />

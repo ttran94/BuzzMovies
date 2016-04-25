@@ -33,7 +33,6 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
      * The list of movies
      */
     private static ArrayList<Movie> movieList = new ArrayList<>();
-    private int previousPosition = 0;
     /**
      * set up VolleySingleton, image and layout for the activity
      * @param context get the activity class

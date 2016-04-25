@@ -1,5 +1,6 @@
 package com.example.taitran.buzzmovie.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
 
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
