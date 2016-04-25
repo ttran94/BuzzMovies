@@ -9,4 +9,5 @@ public interface UserAuthentication {
      * @param password take in user's password
      */
     void loginRequest(String name, String password);
+    public void updateUserStatus(String username, String status);
 }

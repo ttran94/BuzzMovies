@@ -94,7 +94,7 @@ public class TaiTranTest {
     @Test
     public void checkUsernameAleadyExists() {
         onView(withId(R.id.regEmail)).perform(typeText("taitran123@gmail.com"), closeSoftKeyboard());
-        onView(withId(R.id.regUserName)).perform(typeText("12342"), closeSoftKeyboard());
+        onView(withId(R.id.regUserName)).perform(typeText("ttran1249"), closeSoftKeyboard());
         onView(withId(R.id.regPass)).perform(typeText("123456"), closeSoftKeyboard());
         onView(withId(R.id.submitBtn)).perform(click());
         onView(withText("Username already exists")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
@@ -104,13 +104,13 @@ public class TaiTranTest {
         onView(withId(R.id.btn_login)).perform(click());
         onView(withText("Username does not exist.")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //password
-        onView(withId(R.id.userName)).perform(clearText(), typeText("12342"), closeSoftKeyboard());
-        onView(withId(R.id.Pass)).perform(clearText(), typeText("1234567"), closeSoftKeyboard());
+        onView(withId(R.id.userName)).perform(clearText(), typeText("ttran1249"), closeSoftKeyboard());
+        onView(withId(R.id.Pass)).perform(clearText(), typeText("12312342"), closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
         onView(withText("Incorrect password")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         ///login
-        onView(withId(R.id.userName)).perform(clearText(), typeText("12342"), closeSoftKeyboard());
-        onView(withId(R.id.Pass)).perform(clearText(), typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.userName)).perform(clearText(), typeText("ttran1249"), closeSoftKeyboard());
+        onView(withId(R.id.Pass)).perform(clearText(), typeText("12342"), closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
         onView(withText("Login Success")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //changed email
@@ -132,7 +132,7 @@ public class TaiTranTest {
         onView(withId(R.id.editMajorBtn)).perform(click());
         onView(withId(R.id.editPassBtn)).perform(click());
         //passwordmatch
-        onView(withId(R.id.oldPassText)).perform(clearText(), typeText("1234"), closeSoftKeyboard());
+        onView(withId(R.id.oldPassText)).perform(clearText(), typeText("12342"), closeSoftKeyboard());
         onView(withId(R.id.newPassText)).perform(clearText(), typeText("111"), closeSoftKeyboard());
         onView(withId(R.id.newPassVerifyText)).perform(clearText(), typeText("1111"), closeSoftKeyboard());
         onView(withId(R.id.pwPressed)).perform(click());
@@ -144,7 +144,7 @@ public class TaiTranTest {
         onView(withId(R.id.pwPressed)).perform(click());
         onView(withText("Wrong password")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //passwordchanged
-        onView(withId(R.id.oldPassText)).perform(clearText(), typeText("123456"), closeSoftKeyboard());
+        onView(withId(R.id.oldPassText)).perform(clearText(), typeText("12342"), closeSoftKeyboard());
         onView(withId(R.id.newPassText)).perform(clearText(), typeText("1234567"), closeSoftKeyboard());
         onView(withId(R.id.newPassVerifyText)).perform(clearText(), typeText("1234567"), closeSoftKeyboard());
         onView(withId(R.id.pwPressed)).perform(click());

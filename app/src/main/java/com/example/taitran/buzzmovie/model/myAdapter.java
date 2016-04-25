@@ -108,7 +108,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.MovieView>{
                 }
             });
         }
-        translation(holder);
+        fadeInAnimation(holder.itemView);
     }
 
     @Override

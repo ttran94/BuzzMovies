@@ -45,6 +45,13 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     }
 
     @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        progressDialog.dismiss();
+        Toast.makeText(context,"Message Sent",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     protected Void doInBackground(Void... params) {
         Properties props = new Properties();
 
@@ -85,11 +92,6 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        progressDialog.dismiss();
-        Toast.makeText(context,"Message Sent",Toast.LENGTH_LONG).show();
-    }
+
 
 }

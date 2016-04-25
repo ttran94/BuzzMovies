@@ -14,7 +14,8 @@ import com.example.taitran.buzzmovie.model.UserManagement;
 import com.example.taitran.buzzmovie.model.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private static int attemptCount = 0;
+    private String current = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,25 @@ public class LoginActivity extends AppCompatActivity {
             //this is where you would increment an attempted login
             //if the message is "incorrect password"
             //see UserManager -> loginRequest for more
+            if ("Incorrect password".equals(e.getMessage())) {
+                if(attemptCount == 3) {
+                    user.updateUserStatus(username.getText().toString(), "Locked");
+                }else {
+                    if (attemptCount == 0) {
+                        current = username.getText().toString();
+                        attemptCount++;
+                    } else {
+                        if (!current.equals(username.getText().toString())) {
+                            attemptCount = 0;
+                            current = username.getText().toString();
+                            attemptCount++;
+                        } else {
+                            attemptCount++;
+                        }
+                    }
+
+                }
+            }
         }
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;

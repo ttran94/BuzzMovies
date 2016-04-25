@@ -1,5 +1,6 @@
 package com.example.taitran.buzzmovie.model;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -49,6 +50,12 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
         return new MovieView(view);
     }
 
+    private static void translation(RecyclerView.ViewHolder holder) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(holder.itemView, "translationX", -150, 0);
+        animator.setDuration(500);
+        animator.start();
+    }
+
     /**
      * Set the movie list
      * @param movie the movie list you're setting
@@ -96,6 +103,7 @@ public class RedAdapter extends RecyclerView.Adapter<RedAdapter.MovieView>{
             });
 
         }
+        translation(holder);
     }
 
     @Override
